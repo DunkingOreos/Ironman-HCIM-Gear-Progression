@@ -15,15 +15,23 @@ body {
 h2 {
     color: #7ca7ff;
     margin-top: 40px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
     text-align: center;
+}
+.info {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+    font-size: 15px;
+    color: #cfdaf0;
+    line-height: 1.6;
 }
 .progression {
     display: flex;
     flex-direction: column;
     gap: 50px;
     max-width: 100%;
-    margin-left: 300px;
+    margin-left: 300px; 
 }
 .section {
     display: flex;
@@ -84,41 +92,38 @@ h2 {
 .item-box:hover .tooltip {
     display: block;
 }
-
-
 .context-menu {
     position: absolute;
     background: #0d1a2a;
-    border: 1px solid #203354;
+    border: 1px solid #2a3c5a;
     border-radius: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    display: none;
-    z-index: 1000;
-    min-width: 140px;
-}
-.context-menu-item {
-    padding: 8px 12px;
+    padding: 6px 12px;
     font-size: 14px;
     color: #e6eef8;
     cursor: pointer;
+    display: none;
+    z-index: 100;
 }
-.context-menu-item:hover {
-    background: #1b2a47;
+.context-menu:hover {
+    background: #182a48;
 }
 </style>
 </head>
 <body>
 
 <h2>DunkingOreos & Bear's Ironman Gear Progression — November 2025</h2>
-<div class="progression" id="progression"></div>
 
-<div id="contextMenu" class="context-menu">
-    <div id="viewWiki" class="context-menu-item">🔗 View on Wiki</div>
+<div class="info">
+    <p>This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. Users can track their progress by left clicking the item when you obtain it. For more information on the item itself you can right click and be taken to the OSRS Wiki.</p>
+    <p><b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point — some people can do Inferno at level 37 without needing overheads, some can beat the Colosseum without taking a single hit of damage — but we believe this progression set to be optimized and efficient for the <b>average player</b>.</p>
 </div>
+
+<div class="progression" id="progression"></div>
+<div class="context-menu" id="contextMenu">View on OSRS Wiki</div>
 
 <script>
 const arrowMargins = {
-    "2-2": "80px",
+    "2-2": "80px",  
     "2-3": "87px",
     "2-5": "70px",
     "3-2": "80px",
@@ -167,6 +172,7 @@ const imageOverrides = {
     "Ava's accumulator": "https://oldschool.runescape.wiki/images/Ava%27s_attractor.png",
     "Berserker ring (i)": "https://oldschool.runescape.wiki/images/Berserker_ring_%28i%29.png",
     "Ava's assembler": "https://oldschool.runescape.wiki/images/Ava%27s_assembler.png",
+    "Rune pouch": "https://oldschool.runescape.wiki/images/Rune_pouch.png",
     "Dual macuahuitl": "https://oldschool.runescape.wiki/images/Dual_macuahuitl.png",
     "Eclipse atlatl": "https://oldschool.runescape.wiki/images/Eclipse_atlatl.png",
     "Blue moon spear": "https://oldschool.runescape.wiki/images/Blue_moon_spear.png",
@@ -178,7 +184,6 @@ const imageOverrides = {
     "Bow of Faerdhinen (c)": "https://oldschool.runescape.wiki/images/Bow_of_faerdhinen_%28c%29.png",
     "Voidwaker": "https://oldschool.runescape.wiki/images/Voidwaker.png",
     "Dragon warhammer": "https://oldschool.runescape.wiki/images/Dragon_warhammer.png",
-    "Rune pouch": "https://oldschool.runescape.wiki/images/Rune_pouch.png?28dbb",
     "Arclight": "https://oldschool.runescape.wiki/images/Arclight.png",
     "Ring of suffering": "https://oldschool.runescape.wiki/images/Ring_of_suffering.png",
     "Necklace of anguish": "https://oldschool.runescape.wiki/images/Necklace_of_anguish.png",
@@ -221,7 +226,6 @@ const imageOverrides = {
     "Masori body": "https://oldschool.runescape.wiki/images/Masori_body.png",
     "Masori chaps": "https://oldschool.runescape.wiki/images/Masori_chaps.png"
 };
-const optionalItems = ["Voidwaker", "Dragon warhammer"];
 
 function getItemImage(name) {
     if (imageOverrides[name]) return imageOverrides[name];
@@ -229,52 +233,18 @@ function getItemImage(name) {
     return `https://oldschool.runescape.wiki/images/thumb/${safe}.png/40px-${safe}.png`;
 }
 
-function getWikiURL(name) {
-    const safe = name.replace(/ /g, "_");
-    return `https://oldschool.runescape.wiki/w/${safe}`;
-}
-
 function createItemBox(name) {
     const box = document.createElement('div');
     box.className = 'item-box';
-
     const img = document.createElement('img');
     img.src = getItemImage(name);
     img.alt = name;
     img.onerror = () => { img.src = 'https://via.placeholder.com/40?text=?'; };
-
     const tooltip = document.createElement('div');
     tooltip.className = 'tooltip';
     tooltip.textContent = name;
-
     box.appendChild(img);
     box.appendChild(tooltip);
-
-    if (optionalItems.includes(name)) {
-        const badge = document.createElement('div');
-        badge.textContent = 'Optional';
-        badge.style.position = 'absolute';
-        badge.style.bottom = '4px';
-        badge.style.right = '4px';
-        badge.style.fontSize = '10px';
-        badge.style.color = '#ffd98a';
-        badge.style.background = 'rgba(0,0,0,0.4)';
-        badge.style.padding = '1px 3px';
-        badge.style.borderRadius = '3px';
-        box.appendChild(badge);
-    }
-
-    box.addEventListener('click', (e) => {
-        e.preventDefault();
-        box.style.background = box.style.background === 'green' ? 'rgba(255,255,255,0.05)' : 'green';
-    });
-
-    // Custom right-click menu trigger
-    box.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        showContextMenu(e, name);
-    });
-
     return box;
 }
 
@@ -297,62 +267,80 @@ function renderProgression() {
 
         const sectionDiv = document.createElement('div');
         sectionDiv.className = 'section';
-
         const row1 = document.createElement('div');
         row1.className = 'row';
         const row2 = document.createElement('div');
         row2.className = 'row';
-
         items.forEach((item, i) => {
             if (i % 4 < 2) row1.appendChild(createItemBox(item));
             else row2.appendChild(createItemBox(item));
         });
-
         sectionDiv.appendChild(row1);
         if (row2.children.length > 0) sectionDiv.appendChild(row2);
-
         rowContainer.appendChild(sectionDiv);
         sectionsInRow++;
-
         if (sectionsInRow < maxPerRow && sIndex < sections.length - 1) {
             const arrow = document.createElement('div');
             arrow.className = 'arrow';
             arrow.textContent = '➡';
-
             const key = `${rowCount}-${sectionsInRow}`;
-            if (arrowMargins[key]) {
-                arrow.style.marginLeft = arrowMargins[key];
-            }
-
+            if (arrowMargins[key]) arrow.style.marginLeft = arrowMargins[key];
             rowContainer.appendChild(arrow);
         }
-
         if (sectionsInRow === maxPerRow) sectionsInRow = 0;
     });
 }
+renderProgression();
 
-let currentWikiItem = null;
+document.addEventListener("DOMContentLoaded", () => {
+    const saved = JSON.parse(localStorage.getItem("osrsProgress") || "{}");
+    for (const [itemName, isDone] of Object.entries(saved)) {
+        if (isDone) {
+            const box = [...document.querySelectorAll('.item-box')]
+                .find(b => b.querySelector('.tooltip').textContent === itemName);
+            if (box) box.style.background = 'green';
+        }
+    }
 
-function showContextMenu(e, itemName) {
-    const menu = document.getElementById('contextMenu');
-    currentWikiItem = itemName;
-    menu.style.display = 'block';
-    menu.style.left = `${e.pageX}px`;
-    menu.style.top = `${e.pageY}px`;
-}
-
-document.addEventListener('click', () => {
-    document.getElementById('contextMenu').style.display = 'none';
+    document.querySelectorAll('.item-box').forEach(box => {
+        box.addEventListener('click', e => {
+            e.preventDefault();
+            const name = box.querySelector('.tooltip').textContent;
+            const saved = JSON.parse(localStorage.getItem("osrsProgress") || "{}");
+            const isGreen = box.style.background === 'green';
+            box.style.background = isGreen ? 'rgba(255,255,255,0.05)' : 'green';
+            saved[name] = !isGreen;
+            localStorage.setItem("osrsProgress", JSON.stringify(saved));
+        });
+    });
 });
 
-document.getElementById('viewWiki').addEventListener('click', () => {
-    if (currentWikiItem) {
-        window.open(getWikiURL(currentWikiItem), '_blank');
-        document.getElementById('contextMenu').style.display = 'none';
+const contextMenu = document.getElementById("contextMenu");
+let currentItem = null;
+
+document.addEventListener("contextmenu", e => {
+    const box = e.target.closest(".item-box");
+    if (box) {
+        e.preventDefault();
+        currentItem = box.querySelector('.tooltip').textContent;
+        contextMenu.style.display = "block";
+        contextMenu.style.left = e.pageX + "px";
+        contextMenu.style.top = e.pageY + "px";
+    } else {
+        contextMenu.style.display = "none";
     }
 });
 
-renderProgression();
+document.addEventListener("click", () => {
+    contextMenu.style.display = "none";
+});
+
+contextMenu.addEventListener("click", () => {
+    if (currentItem) {
+        const query = encodeURIComponent(currentItem);
+        window.open(`https://oldschool.runescape.wiki/w/${query}`, "_blank");
+    }
+});
 </script>
 </body>
 </html>
