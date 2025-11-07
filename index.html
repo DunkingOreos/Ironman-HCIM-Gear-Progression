@@ -19,19 +19,23 @@ h2 {
     text-align: center;
 }
 .info {
-    text-align: center;
     max-width: 900px;
     margin: 0 auto 80px auto;
+    text-align: left;
     font-size: 15px;
     color: #cfdaf0;
     line-height: 1.6;
+}
+.chart-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    text-align: left;
 }
 .progression {
     display: flex;
     flex-direction: column;
     gap: 50px;
     max-width: 100%;
-    margin-left: 300px; 
 }
 .section {
     display: flex;
@@ -115,10 +119,13 @@ h2 {
 
 <div class="info">
     <p>This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. Users can track their progress by left clicking the item when you obtain it. For more information on the item itself you can right click and be taken to the OSRS Wiki.</p>
-    <p><b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point — some people can do Inferno at level 37 without needing overheads, some can beat the Colosseum without taking a single hit of damage — but we believe this progression set to be optimized and efficient for the <b>average player</b>.</p>
+    <p><b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point, some people can do Inferno at level 37 without needing overheads, some can beat the Colosseum without taking a single hit of damage, but we believe this progression set to be optimized and efficient for the <b>average player</b>.</p>
 </div>
 
+<div class="chart-container">
 <div class="progression" id="progression"></div>
+</div>
+
 <div class="context-menu" id="contextMenu">View on OSRS Wiki</div>
 
 <script>
@@ -162,6 +169,8 @@ const sections = [
     ["Scythe of vitur","Avernic defender"],
     ["Tumeken's shadow","Masori body","Masori chaps"]
 ];
+
+const optionalItems = ["Voidwaker", "Dragon warhammer"];
 
 const imageOverrides = {
     "Helm of Neitiznot": "https://oldschool.runescape.wiki/images/Helm_of_neitiznot.png",
@@ -245,6 +254,21 @@ function createItemBox(name) {
     tooltip.textContent = name;
     box.appendChild(img);
     box.appendChild(tooltip);
+
+    if (optionalItems.includes(name)) {
+        const badge = document.createElement('div');
+        badge.textContent = 'Optional';
+        badge.style.position = 'absolute';
+        badge.style.bottom = '4px';
+        badge.style.right = '4px';
+        badge.style.fontSize = '10px';
+        badge.style.color = '#ffd98a';
+        badge.style.background = 'rgba(0, 0, 0, 0)';
+        badge.style.padding = '1px 3px';
+        badge.style.borderRadius = '3px';
+        box.appendChild(badge);
+    }
+
     return box;
 }
 
