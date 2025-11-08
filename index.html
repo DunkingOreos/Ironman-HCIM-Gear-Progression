@@ -130,53 +130,46 @@ h2 {
 
 <script>
 const arrowMargins = {
-    "2-2": "80px",
-    "2-3": "87px",
-    "2-5": "70px",
-    "3-2": "80px",
-    "3-3": "87px",
-    "3-5": "70px",
-    "4-2": "80px",
-    "4-3": "87px",
-    "4-5": "70px"
-};
+   
+    };
 
 const maxPerRow = 6;
 
 const sections = [
     ["Rune scimitar","Dorgeshuun crossbow","Staff of air","Ardougne cloak 1"],
-    ["Protect from Magic","Protect from Missiles","Eagle Eye","Mystic Might","Protect from Melee"],
-    ["Helm of Neitiznot","Dragon scimitar","Rune crossbow","Ava's accumulator","Dragon dagger"],
-    ["Barrows gloves","Dragon defender"],
-    ["Slayer helmet (i)","Bigger and Badder","Black d'hide body","Black d'hide chaps","Hot Stuff"],
-    ["Fire cape","Piety","Tank body","Tank legs","Berserker ring (i)","Amulet of fury","Colossal blade","Zombie axe"],
+    ["Eagle Eye","Mystic Might"],
+    ["Helm of Neitiznot","Dragon scimitar","Ava's accumulator","Dragon dagger"],
+    ["Rune crossbow","Ancient staff","Barrows gloves","Dragon defender"],
+    ["Slayer helmet (i)","Bigger and Badder","Hot Stuff","Black d'hide body","Black d'hide chaps","Mixed hide boots"],
+    ["Fire cape","Tank body","Berserker ring (i)","Amulet of fury","Tank legs","Zombie axe","Colossal blade","Crystal shield"],
     ["Blood moon armour set","Eclipse moon armour set","Blue moon armour set"],
-    ["Deadeye","Mystic Vigour"],
+    ["Deadeye","Mystic Vigour","Piety","Twinflame staff"],
     ["Crystal helm","Crystal body","Crystal legs","Bow of Faerdhinen (c)"],
-    ["Ava's assembler","Imbued zamorak cape","Arclight","Rune pouch"],
-    ["Voidwaker","Dragon warhammer"],
-    ["Ring of suffering","Necklace of anguish","Tormented bracelet","Amulet of torture","Scorching bow","Purging staff","Emberlight","Burning claws"],
+    ["Ava's assembler","Imbued zamorak cape","Ancient icon","Rune pouch"],
+    ["Greater Challenge","It's Dark in Here","Arclight","Voidwaker","Reptile Got Ripped","Dragon warhammer",],
+    ["Ring of suffering","Necklace of anguish","Tormented bracelet","Amulet of torture","Scorching bow","Burning claws","Dragon boots","Abyssal whip"],
     ["Void ranger helm","Elite void top","Void knight gloves","Elite void robe"],
-    ["Avernic treads","Eye of Ayak","Mokhaiotl cloth"],
+    ["Avernic treads","Eye of Ayak","Mokhaiotl cloth","Occult necklace"],
     ["Serpentine helm","Toxic Blowpipe"],
     ["Osmumten's fang","Lightbearer","Thread of elidinis"],
-    ["Rigour","Augury"],
+    ["Rigour","Augury","Purging staff","Emberlight"],
     ["Oathplate helm","Oathplate chest","Rite of vile transference","Oathplate legs"],
     ["Inferno Cape","Dizana's quiver"],
-    ["Amulet of rancour","Ferocious Gloves"],
+    ["Amulet of rancour","Ferocious Gloves","Avernic treads (max)"],
     ["Ultor ring","Magus ring"],
-    ["Twisted bow","Dragon claws","Ancestral robe top","Ancestral robe bottom"],
-    ["Scythe of vitur","Avernic defender"],
-    ["Tumeken's shadow","Masori body","Masori chaps"]
+    ["Chambers of Xeric","Theatre of Blood","Tombs of Amascut"]
 ];
 
-const optionalItems = ["Voidwaker", "Dragon warhammer"];
+const optionalItems = ["Colossal blade","Crystal shield","Twinflame staff","Voidwaker","Dragon warhammer","Reptile Got Ripped"];
 
 const imageOverrides = {
+    "Ancient staff": "https://oldschool.runescape.wiki/images/Ancient_staff.png",
     "Helm of Neitiznot": "https://oldschool.runescape.wiki/images/Helm_of_neitiznot.png",
     "Hot Stuff": "https://oldschool.runescape.wiki/images/Tok-Xil_%28Construction%29_icon.png",
+    "Mixed hide boots": "https://oldschool.runescape.wiki/images/Mixed_hide_boots.png?",
     "Tank body": "https://oldschool.runescape.wiki/images/Dharok%27s_platebody.png",
     "Tank legs": "https://oldschool.runescape.wiki/images/Dharok%27s_platelegs.png",
+    "Crystal shield": "https://oldschool.runescape.wiki/images/thumb/Crystal_shield_detail.png/130px-Crystal_shield_detail.png",
     "Slayer helmet (i)": "https://oldschool.runescape.wiki/images/Slayer_helmet_%28i%29.png",
     "Ava's accumulator": "https://oldschool.runescape.wiki/images/Ava%27s_attractor.png",
     "Berserker ring (i)": "https://oldschool.runescape.wiki/images/Berserker_ring_%28i%29.png",
@@ -187,12 +180,17 @@ const imageOverrides = {
     "Blue moon armor set": "https://oldschool.runescape.wiki/images/Blue_moon_armour_set.png",
     "Deadeye": "https://oldschool.runescape.wiki/images/Deadeye.png",
     "Mystic Vigour": "https://oldschool.runescape.wiki/images/Mystic_Vigour.png",
+    "Twinflame staff": "https://oldschool.runescape.wiki/images/Twinflame_staff.png",
     "Crystal helm": "https://oldschool.runescape.wiki/images/Crystal_helm.png",
     "Crystal body": "https://oldschool.runescape.wiki/images/Crystal_body.png",
     "Crystal legs": "https://oldschool.runescape.wiki/images/Crystal_legs.png",
     "Bow of Faerdhinen (c)": "https://oldschool.runescape.wiki/images/Bow_of_faerdhinen_%28c%29.png",
+    "Greater Challenge": "https://oldschool.runescape.wiki/images/Greater_demon_icon.png",
+    "It's Dark in Here": "https://oldschool.runescape.wiki/images/Black_demon_icon.png",
     "Voidwaker": "https://oldschool.runescape.wiki/images/Voidwaker.png",
     "Dragon warhammer": "https://oldschool.runescape.wiki/images/Dragon_warhammer.png",
+    "Reptile Got Ripped": "https://oldschool.runescape.wiki/images/Lizardmen_icon.png",
+    "Ancient icon": "https://oldschool.runescape.wiki/images/Ancient_icon.png",
     "Arclight": "https://oldschool.runescape.wiki/images/Arclight.png",
     "Ring of suffering": "https://oldschool.runescape.wiki/images/Ring_of_suffering.png",
     "Necklace of anguish": "https://oldschool.runescape.wiki/images/Necklace_of_anguish.png",
@@ -202,6 +200,8 @@ const imageOverrides = {
     "Purging staff": "https://oldschool.runescape.wiki/images/Purging_staff.png",
     "Emberlight": "https://oldschool.runescape.wiki/images/Emberlight.png",
     "Burning claws": "https://oldschool.runescape.wiki/images/Burning_claws.png",
+    "Dragon boots": "https://oldschool.runescape.wiki/images/Dragon_boots.png",
+    "Abyssal whip": "https://oldschool.runescape.wiki/images/Abyssal_whip.png",
     "Void ranger helm": "https://oldschool.runescape.wiki/images/Void_ranger_helm.png",
     "Elite void top": "https://oldschool.runescape.wiki/images/Elite_void_top.png",
     "Void knight gloves": "https://oldschool.runescape.wiki/images/Void_knight_gloves.png",
@@ -210,6 +210,7 @@ const imageOverrides = {
     "Avernic treads": "https://oldschool.runescape.wiki/images/Avernic_treads.png",
     "Eye of Ayak": "https://oldschool.runescape.wiki/images/Eye_of_ayak.png",
     "Mokhaiotl cloth": "https://oldschool.runescape.wiki/images/Mokhaiotl_cloth.png",
+    "Occult necklace": "https://oldschool.runescape.wiki/images/Occult_necklace.png",
     "Serpentine helm": "https://oldschool.runescape.wiki/images/Serpentine_helm.png",
     "Toxic Blowpipe": "https://oldschool.runescape.wiki/images/Toxic_blowpipe.png",
     "Osmumten's fang": "https://oldschool.runescape.wiki/images/Osmumten%27s_fang.png",
@@ -225,17 +226,12 @@ const imageOverrides = {
     "Dizana's quiver": "https://oldschool.runescape.wiki/images/Dizana%27s_quiver.png",
     "Amulet of rancour": "https://oldschool.runescape.wiki/images/Amulet_of_rancour.png",
     "Ferocious Gloves": "https://oldschool.runescape.wiki/images/Ferocious_gloves.png",
+    "Avernic treads (max)": "https://oldschool.runescape.wiki/images/thumb/Avernic_treads_%28max%29_detail.png/140px-Avernic_treads_%28max%29_detail.png",
     "Ultor ring": "https://oldschool.runescape.wiki/images/Ultor_ring.png",
     "Magus ring": "https://oldschool.runescape.wiki/images/Magus_ring.png",
-    "Twisted bow": "https://oldschool.runescape.wiki/images/Twisted_bow.png",
-    "Dragon claws": "https://oldschool.runescape.wiki/images/Dragon_claws.png",
-    "Ancestral robe top": "https://oldschool.runescape.wiki/images/Ancestral_robe_top.png",
-    "Ancestral robe bottom": "https://oldschool.runescape.wiki/images/Ancestral_robe_bottom.png",
-    "Scythe of vitur": "https://oldschool.runescape.wiki/images/Scythe_of_vitur.png",
-    "Avernic defender": "https://oldschool.runescape.wiki/images/Avernic_defender.png",
-    "Tumeken's shadow": "https://oldschool.runescape.wiki/images/Tumeken%27s_shadow.png",
-    "Masori body": "https://oldschool.runescape.wiki/images/Masori_body.png",
-    "Masori chaps": "https://oldschool.runescape.wiki/images/Masori_chaps.png"
+    "Chambers of Xeric": "https://oldschool.runescape.wiki/images/thumb/Chambers_of_Xeric_logo.png/250px-Chambers_of_Xeric_logo.png",
+    "Theatre of Blood": "https://oldschool.runescape.wiki/images/thumb/Theatre_of_Blood_logo.png/250px-Theatre_of_Blood_logo.png",
+    "Tombs of Amascut": "https://oldschool.runescape.wiki/images/thumb/Tombs_of_Amascut.png/300px-Tombs_of_Amascut.png"
 };
 
 function getItemImage(name) {
@@ -297,14 +293,30 @@ function renderProgression() {
         row1.className = 'row';
         const row2 = document.createElement('div');
         row2.className = 'row';
-        items.forEach((item, i) => {
-            if (i % 4 < 2) row1.appendChild(createItemBox(item));
-            else row2.appendChild(createItemBox(item));
-        });
+
+       items.forEach((item, i) => {
+    if (sIndex === 4) {
+        if (i < 3) row1.appendChild(createItemBox(item));
+        else row2.appendChild(createItemBox(item));
+    } 
+    else if (sIndex === 10) {
+        if (i < 3) row1.appendChild(createItemBox(item));
+        else row2.appendChild(createItemBox(item));
+    }
+    else if (sIndex === sections.length - 1) {
+        row1.appendChild(createItemBox(item));
+    }
+    else {
+        if (i % 4 < 2) row1.appendChild(createItemBox(item));
+        else row2.appendChild(createItemBox(item));
+    }
+});
+
         sectionDiv.appendChild(row1);
         if (row2.children.length > 0) sectionDiv.appendChild(row2);
         rowContainer.appendChild(sectionDiv);
         sectionsInRow++;
+
         if (sectionsInRow < maxPerRow && sIndex < sections.length - 1) {
             const arrow = document.createElement('div');
             arrow.className = 'arrow';
@@ -313,6 +325,7 @@ function renderProgression() {
             if (arrowMargins[key]) arrow.style.marginLeft = arrowMargins[key];
             rowContainer.appendChild(arrow);
         }
+
         if (sectionsInRow === maxPerRow) sectionsInRow = 0;
     });
 }
