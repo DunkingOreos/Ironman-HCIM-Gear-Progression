@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DunkingOreos & Bear's Ironman Gear Progression — November 2025</title>
+<title>DunkingOreos &amp; Bear's Ironman Gear Progression — November 2025</title>
 <style>
 body {
     margin: 0;
@@ -164,12 +163,13 @@ h2 {
 </head>
 <body>
 
-<h2>DunkingOreos & Bear's Ironman Gear Progression — November 2025</h2>
+<h2>DunkingOreos &amp; Bear's Ironman Gear Progression — November 2025</h2>
 
 <div class="info">
     <p>This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. Users can track their progress by left clicking the item when you obtain it. For more information on the item itself you can right click and select "View on OSRS Wiki" and for tips or recommendations select the "View Tips" option.</p>
     <p><b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point, some people can do Inferno at level 37 without needing overheads, some can beat the Colosseum without taking a single hit of damage, but we believe this progression set to be optimized and efficient for the <b>average player</b>.</p>
 </div>
+
 
 <div class="chart-container">
 <div class="progression" id="progression"></div>
@@ -200,13 +200,14 @@ const sections = [
     ["Eagle Eye","Mystic Might"],
     ["Helm of Neitiznot","Dragon scimitar","Ava's accumulator","Dragon dagger"],
     ["Rune crossbow","Ancient staff","Barrows gloves","Dragon defender"],
-    ["Slayer helmet (i)","Bigger and Badder","Hot Stuff","Black d'hide body","Black d'hide chaps","Mixed hide boots"],
-    ["Fire cape","Tank body","Berserker ring (i)","Amulet of fury","Tank legs","Zombie axe","Colossal blade","Crystal shield"],
+    ["Bigger and Badder","Black mask (i)","Rune pouch","Black d'hide body","Black d'hide chaps","Spoils of war"],
+    ["Crystal shield","Imbued zamorak cape","Ava's assembler","Hot Stuff","Bolt pouch","Mixed hide boots"],
+    ["Fire cape","Tank body","Berserker ring (i)","Amulet of fury","Tank legs","Zombie axe","Colossal blade"],
     ["Blood moon armour set","Eclipse moon armour set","Blue moon armour set"],
     ["Deadeye","Mystic Vigour","Piety","Twinflame staff"],
     ["Crystal helm","Crystal body","Crystal legs","Bow of Faerdhinen (c)"],
-    ["Ava's assembler","Imbued zamorak cape","Ancient icon","Rune pouch"],
-    ["Greater Challenge","It's Dark in Here","Arclight","Voidwaker","Reptile Got Ripped","Dragon warhammer",],
+    ["Reptile Got Ripped","Dragon warhammer","Ancient icon"],
+    ["Greater Challenge","It's Dark in Here","Arclight","Voidwaker"],
     ["Ring of suffering","Necklace of anguish","Tormented bracelet","Amulet of torture","Scorching bow","Burning claws","Dragon boots","Abyssal whip"],
     ["Void ranger helm","Elite void top","Void knight gloves","Elite void robe"],
     ["Avernic treads","Eye of Ayak","Mokhaiotl cloth","Occult necklace"],
@@ -222,424 +223,261 @@ const sections = [
 
 const tips = {
     "Rune scimitar": {
-        quests: [
-            "Fight Arena (Takes you from level 1 to 29 Attack)",
-            "Tree Gnome Village (Takes you from level 29 to 35 Attack)",
-            "The Grand Tree (Takes you from level 35 to 41 Attack)"
-        ],
-        recommendations: "To obtain the rune scimitar, it's recommended to safespot fire giants or Zamorak warriors and kill them using magic."
+        Requirements: [{ prefix: "Level 40 Attack", text: null, link: null }],
+        Recommendations: [
+            "Use water spells and safespot fire giants (1/128 chance) <b>OR</b> any magic spell and safespot Zamorak warriors (1/50 chance)",
+            "Completion of <a href='https://oldschool.runescape.wiki/w/Fight_Arena' target='_blank'>Fight Arena</a> to get from level 1 to 29 Attack.",
+            "Completion of <a href='https://oldschool.runescape.wiki/w/Tree_Gnome_Village' target='_blank'>Tree Gnome Village</a> to get from level 29 to 35 Attack.",
+            "Completion of <a href='https://oldschool.runescape.wiki/w/The_Grand_Tree' target='_blank'>The Grand Tree</a> to get from level 35 to 41 Attack."
+        ]
     },
     "Dorgeshuun crossbow": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 28 Ranged", text: null, link: null },
+            { prefix: "Completion of ", text: "The Lost Tribe", link: "https://oldschool.runescape.wiki/w/The_Lost_Tribe" }
+        ],
+        Recommendations: [
+            "Complete the quest <a href='https://oldschool.runescape.wiki/w/Shadow_of_the_Storm' target='_blank'>Shadow of the Storm</a> and use the XP reward on Ranged to get from level 1-27 Ranged.",
+            "You will then only need to train for 824 XP to hit level 28."
+        ]
     },
     "Staff of air": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "None", text: null, link: null }],
+        Recommendations: [
+            "Complete the Stronghold of Security (First 3 floors give 10k gp) and purchase from Zaff in Varrock."
+        ]
     },
     "Ardougne cloak 1": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "Completion of ", text: "The Ardougne Easy Diary", link: "https://oldschool.runescape.wiki/w/Ardougne_Diary#Easy" }],
+        Recommendations: ["None"]
     },
     "Eagle Eye": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "Level 44 Prayer", text: null, link: null }],
+        Recommendations: [
+            "Kill ~94 Lava dragons and use bones on the Chaos Altar. If you don't want to go to the Wilderness, then complete the following quests:",
+            "<a href='https://oldschool.runescape.wiki/w/The_Restless_Ghost' target='_blank'>The Restless Ghost</a> to get from level 1 to 9 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Recruitment_Drive' target='_blank'>Recruitment Drive</a> to get from level 9 to 14 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Priest_in_Peril' target='_blank'>Priest in Peril</a> to get from level 14 to 18 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Holy_Grail' target='_blank'>Holy Grail</a> to get from level 18 to 30 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Ghosts_Ahoy' target='_blank'>Ghosts Ahoy</a> to get from level 30 to 32 Prayer and unlock the ability to use the Ectofunctus.",
+            "<a href='https://oldschool.runescape.wiki/w/Spirits_of_the_Elid' target='_blank'>Spirits of the Elid</a> to get from level 32 to 36 Prayer.",
+            "After these quests, kill blue dragons in Taverley Dungeon for 107 dragon bones and use at the Ectofunctus."
+        ]
     },
     "Mystic Might": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "Level 45 Prayer", text: null, link: null }],
+        Recommendations: [
+            "Kill ~104 Lava dragons and use bones on the Chaos Altar. If you don't want to go to the Wilderness, then complete the following quests:",
+            "<a href='https://oldschool.runescape.wiki/w/The_Restless_Ghost' target='_blank'>The Restless Ghost</a> to get from level 1 to 9 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Recruitment_Drive' target='_blank'>Recruitment Drive</a> to get from level 9 to 14 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Priest_in_Peril' target='_blank'>Priest in Peril</a> to get from level 14 to 18 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Holy_Grail' target='_blank'>Holy Grail</a> to get from level 18 to 30 Prayer.",
+            "<a href='https://oldschool.runescape.wiki/w/Ghosts_Ahoy' target='_blank'>Ghosts Ahoy</a> to get from level 30 to 32 Prayer and unlock the ability to use the Ectofunctus.",
+            "<a href='https://oldschool.runescape.wiki/w/Spirits_of_the_Elid' target='_blank'>Spirits of the Elid</a> to get from level 32 to 36 Prayer.",
+            "After these quests, kill blue dragons in Taverley Dungeon for 128 dragon bones and use at the Ectofunctus."
+        ]
     },
     "Helm of Neitiznot": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 55 Defence", text: null, link: null },
+            { prefix: "Completion of ", text: "The Fremennik Isles", link: "https://oldschool.runescape.wiki/w/The_Fremennik_Isles" }
+        ],
+        Recommendations: ["None"]
     },
     "Dragon scimitar": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 60 Attack", text: null, link: null },
+            { prefix: "Completion of ", text: "Monkey Madness 1", link: "https://oldschool.runescape.wiki/w/Monkey_Madness_I" }
+        ],
+        Recommendations: [
+            "Use Monkey Madness 1 combat training and focus on Attack and Defence, then train Attack to level 60 via Gemstone Crab"
+        ]
     },
     "Ava's accumulator": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 50 Ranged", text: null, link: null },
+            { prefix: "Completion of ", text: "Animal Magnetism", link: "https://oldschool.runescape.wiki/w/Animal_Magnetism" }
+        ],
+        Recommendations: [
+            "There is no point in buying the attractor, just bring the 75 steel arrows and 999 gp to instantly get the accumulator"
+        ]
     },
     "Dragon dagger": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 60 Attack", text: null, link: null },
+            { prefix: "Completion of ", text: "Lost City", link: "https://oldschool.runescape.wiki/w/Lost_City" }
+        ],
+        Recommendations: [
+            "Go for this item AFTER getting the Dragon scimitar as it has the same Attack requirement.",
+            "This will be our spec weapon for a VERY long time to come, recommend getting a weapon poison from killing Ankou for added DPS"
+        ]
     },
     "Rune crossbow": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "Level 61 Ranged", text: null, link: null }],
+        Recommendations: [
+            "Use magic spells and kill the Crazy archaeologist in the wilderness.",
+            "If you don't want to go to wilderness then you will need to get runite limbs from either Steel dragons (1/16 chance) or Iron dragons (1/25 chance), then get level 69 Fletching and a yew log to fletch your own"
+        ]
     },
     "Ancient staff": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 50 Attack", text: null, link: null },
+            { prefix: "Level 50 Magic", text: null, link: null },
+            { prefix: "Completion of ", text: "Desert Treasure 1", link: "https://oldschool.runescape.wiki/w/Desert_Treasure_I" }
+        ],
+        Recommendations: [
+            "Fareed - Bring runes for water blast, ice gloves, gas mask",
+            "Damis - Safespot in North corner (tag a bat and use it to body block), use air blast.",
+            "Dessous - Prayer flick between melee/range (if taking damage keep protect melee up and eat. Stay above 19 hp), use air blast.",
+            "Kamil - Use Fire blast when magic is restored and fire bolt once magic drops too low. After killing trolls tele out, restore stats then go back.",
+            "Bring super restores from Zogre Flesh Eaters and prayer potions from Underground Pass. Need climbing boots AND spiked boots.",
+            "Any sweet will suffice for this portion (chocolate bar, slice of cake, 2/3 cake, full cake).",
+            "Pyramid - Bring antipoisons, waterskin, 1 prayer pot (in case bad rng with getting kicked out), and food (mummy max hit is 24.)"
+        ]
     },
     "Barrows gloves": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "Completion of ", text: "Recipe for Disaster", link: "https://oldschool.runescape.wiki/w/Recipe_for_Disaster" }],
+        Recommendations: [
+            "1st Fight - Max hit 16. Bring recoils, air blast, karambwans",
+            "2nd Fight - Max hit 28. Bring snares, water blast, ice gloves, lobsters",
+            "3rd Fight - Max hit 20. Use fire bolt and restore when magic drops too low, lobsters",
+            "4th Fight - Max hit 19. Nothing special, lobsters",
+            "5th Fight - Max hit 40. Use blast spells, wear rune platebody/legs, dragonfire shield, combo eat with swordfish/karambwans",
+            "6th Fight - Max hit 25. Bring snares, green d'hide"
+        ]
     },
     "Dragon defender": {
-        quests: [],
-        recommendations: ""
-    },
-    "Slayer helmet (i)": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            { prefix: "Level 60 Defence", text: null, link: null },
+            { prefix: "Combined Attack and Strength level of at least 130", text: null, link: null }
+        ],
+        Recommendations: [
+            "Get level 65 Attack and Strength and then train Defence while going for the defenders"
+        ]
     },
     "Bigger and Badder": {
-        quests: [],
-        recommendations: ""
+        Requirements: [{ prefix: "50 Slayer reward points", text: null, link: null }],
+        Recommendations: [
+            "Unlock this as quickly as possible in order to start getting superior slayer monsters which give more XP and a chance of the <a href='https://oldschool.runescape.wiki/w/Imbued_heart' target='_blank'>Imbued heart</a>"
+        ]
     },
-    "Hot Stuff": {
-        quests: [],
-        recommendations: ""
-    },
-    "Black d'hide body": {
-        quests: [],
-        recommendations: ""
-    },
-    "Black d'hide chaps": {
-        quests: [],
-        recommendations: ""
-    },
-    "Mixed hide boots": {
-        quests: [],
-        recommendations: ""
-    },
-    "Fire cape": {
-        quests: [],
-        recommendations: ""
-    },
-    "Tank body": {
-        quests: [],
-        recommendations: ""
-    },
-    "Berserker ring (i)": {
-        quests: [],
-        recommendations: ""
-    },
-    "Amulet of fury": {
-        quests: [],
-        recommendations: ""
-    },
-    "Tank legs": {
-        quests: [],
-        recommendations: ""
-    },
-    "Zombie axe": {
-        quests: [],
-        recommendations: ""
-    },
-    "Colossal blade": {
-        quests: [],
-        recommendations: ""
-    },
-    "Crystal shield": {
-        quests: [],
-        recommendations: ""
-    },
-    "Blood moon armour set": {
-        quests: [],
-        recommendations: ""
-    },
-    "Eclipse moon armour set": {
-        quests: [],
-        recommendations: ""
-    },
-    "Blue moon armour set": {
-        quests: [],
-        recommendations: ""
-    },
-    "Deadeye": {
-        quests: [],
-        recommendations: ""
-    },
-    "Mystic Vigour": {
-        quests: [],
-        recommendations: ""
-    },
-    "Piety": {
-        quests: [],
-        recommendations: ""
-    },
-    "Twinflame staff": {
-        quests: [],
-        recommendations: ""
-    },
-    "Crystal helm": {
-        quests: [],
-        recommendations: ""
-    },
-    "Crystal body": {
-        quests: [],
-        recommendations: ""
-    },
-    "Crystal legs": {
-        quests: [],
-        recommendations: ""
-    },
-    "Bow of Faerdhinen (c)": {
-        quests: [],
-        recommendations: ""
-    },
-    "Ava's assembler": {
-        quests: [],
-        recommendations: ""
-    },
-    "Imbued zamorak cape": {
-        quests: [],
-        recommendations: ""
-    },
-    "Ancient icon": {
-        quests: [],
-        recommendations: ""
+    "Black mask (i)": {
+        Requirements: [
+            { prefix: "Level 58 Slayer", text: null, link: null },
+            { prefix: "Completion of ", text: "Cabin Fever", link: "https://oldschool.runescape.wiki/w/Cabin_Fever" }
+        ],
+        Recommendations: [
+            "Complete <a href='https://oldschool.runescape.wiki/w/Making_Friends_with_My_Arm' target='_blank'>Making Friends with My Arm</a> in order to have access to the <a href='https://oldschool.runescape.wiki/w/Fire_of_Eternal_Light' target='_blank'>Fire of Eternal Light</a> for the Mos Le'Harmless Cave.",
+            "Imbue using a <a href='https://oldschool.runescape.wiki/w/Scroll_of_imbuing' target='_blank'>Scroll of imbuing</a> from the PVP arena",
+            "Create the Slayer helm whenever you have the slayer reward points to do so"
+        ]
     },
     "Rune pouch": {
-        quests: [],
-        recommendations: ""
+        Requirements: [
+            {
+                prefix: "75 <a href='https://oldschool.runescape.wiki/w/Last_Man_Standing' target='_blank'>Last Man Standing</a> points <b>OR</b> 150 telekinetic, 150 graveyard, 1500 enchantment, and 200 alchemist <a href='https://oldschool.runescape.wiki/w/Pizazz_points' target='_blank'>Pizazz points</a> <b>OR</b> 750 Slayer reward points",
+                text: null,
+                link: null
+            }
+        ],
+        Recommendations: [
+            "Kill bots in LMS on an Australian world or get pizzazz points through the Mage Training Arena. Do NOT spend 750 Slayer reward points on this."
+        ]
     },
-    "Greater Challenge": {
-        quests: [],
-        recommendations: ""
+    "Black d'hide body": {
+        Requirements: [
+            { prefix: "Level 70 Ranged", text: null, link: null },
+            { prefix: "Level 40 Defence", text: null, link: null }
+        ],
+        Recommendations: ["Complete HARD clues which should be dropped during slayer"]
     },
-    "It's Dark in Here": {
-        quests: [],
-        recommendations: ""
+    "Black d'hide chaps": {
+        Requirements: [{ prefix: "Level 70 Ranged", text: null, link: null }],
+        Recommendations: ["Complete HARD clues which should be dropped during slayer"]
     },
-    "Arclight": {
-        quests: [],
-        recommendations: ""
-    },
-    "Voidwaker": {
-        quests: [],
-        recommendations: ""
-    },
-    "Reptile Got Ripped": {
-        quests: [],
-        recommendations: ""
-    },
-    "Dragon warhammer": {
-        quests: [],
-        recommendations: ""
-    },
-    "Ring of suffering": {
-        quests: [],
-        recommendations: ""
-    },
-    "Necklace of anguish": {
-        quests: [],
-        recommendations: ""
-    },
-    "Tormented bracelet": {
-        quests: [],
-        recommendations: ""
-    },
-    "Amulet of torture": {
-        quests: [],
-        recommendations: ""
-    },
-    "Scorching bow": {
-        quests: [],
-        recommendations: ""
-    },
-    "Burning claws": {
-        quests: [],
-        recommendations: ""
-    },
-    "Dragon boots": {
-        quests: [],
-        recommendations: ""
-    },
-    "Abyssal whip": {
-        quests: [],
-        recommendations: ""
-    },
-    "Void ranger helm": {
-        quests: [],
-        recommendations: ""
-    },
-    "Elite void top": {
-        quests: [],
-        recommendations: ""
-    },
-    "Void knight gloves": {
-        quests: [],
-        recommendations: ""
-    },
-    "Elite void robe": {
-        quests: [],
-        recommendations: ""
-    },
-    "Avernic treads": {
-        quests: [],
-        recommendations: ""
-    },
-    "Eye of Ayak": {
-        quests: [],
-        recommendations: ""
-    },
-    "Mokhaiotl cloth": {
-        quests: [],
-        recommendations: ""
-    },
-    "Occult necklace": {
-        quests: [],
-        recommendations: ""
-    },
-    "Serpentine helm": {
-        quests: [],
-        recommendations: ""
-    },
-    "Toxic Blowpipe": {
-        quests: [],
-        recommendations: ""
-    },
-    "Osmumten's fang": {
-        quests: [],
-        recommendations: ""
-    },
-    "Lightbearer": {
-        quests: [],
-        recommendations: ""
-    },
-    "Thread of elidinis": {
-        quests: [],
-        recommendations: ""
-    },
-    "Rigour": {
-        quests: [],
-        recommendations: ""
-    },
-    "Augury": {
-        quests: [],
-        recommendations: ""
-    },
-    "Purging staff": {
-        quests: [],
-        recommendations: ""
-    },
-    "Emberlight": {
-        quests: [],
-        recommendations: ""
-    },
-    "Oathplate helm": {
-        quests: [],
-        recommendations: ""
-    },
-    "Oathplate chest": {
-        quests: [],
-        recommendations: ""
-    },
-    "Rite of vile transference": {
-        quests: [],
-        recommendations: ""
-    },
-    "Oathplate legs": {
-        quests: [],
-        recommendations: ""
-    },
-    "Inferno Cape": {
-        quests: [],
-        recommendations: ""
-    },
-    "Dizana's quiver": {
-        quests: [],
-        recommendations: ""
-    },
-    "Amulet of rancour": {
-        quests: [],
-        recommendations: ""
-    },
-    "Ferocious Gloves": {
-        quests: [],
-        recommendations: ""
-    },
-    "Avernic treads (max)": {
-        quests: [],
-        recommendations: ""
-    },
-    "Ultor ring": {
-        quests: [],
-        recommendations: ""
-    },
-    "Magus ring": {
-        quests: [],
-        recommendations: ""
+"Spoils of war": {
+    Requirements: [
+        { prefix: "Total level 500+", text: null, link: null },
+        { prefix: "40+ Combat", text: null, link: null }
+    ],
+    Recommendations: [
+        "Join Soul Wars worlds where there are 'point boosting' <b>OR</b> duo with an alt account/friend.",
+        "Use a <a href='https://oldschool.runescape.wiki/w/Salve_amulet_(ei)' target='_blank'>Salve amulet (ei)</a> from completing the <a href='https://oldschool.runescape.wiki/w/Haunted_Mine' target='_blank'>Haunted Mine</a> quest to increase DPS.",
+        "Open crates to get adamant and runite bolts."
+    ]
+},
+"Crystal shield": {
+    Requirements: [
+        { prefix: "Level 70 Defence", text: null, link: null },
+        { prefix: "Level 50 Agility", text: null, link: null },
+        { prefix: "Completion of ", text: "Roving Elves", link: "https://oldschool.runescape.wiki/w/Roving_Elves" }
+    ],
+    Recommendations: [
+        "Choose the shield after completing Roving Elves, we can get a crystal weapon seed to make the bow later on"
+    ]
+},
+"Imbued zamorak cape": {
+    Requirements: [
+        { prefix: "Level 75 Magic", text: null, link: null },
+        { prefix: "Completion of ", text: "Mage Arena II", link: "https://oldschool.runescape.wiki/w/Mage_Arena_II" }
+    ],
+    Recommendations: [
+        `Get at least 77+ Magic so that you can use a Wizard's mind bomb and boost to level 80 Magic and use <a href="https://oldschool.runescape.wiki/w/Charge" target="_blank">Charge</a> so that your god spells can hit up to 30 instead of 20.`
+    ]
+},
+"Ava's assembler": {
+    Requirements: [
+        { prefix: "Level 70 Ranged", text: null, link: null },
+        { prefix: "Completion of ", text: "Dragon Slayer II", link: "https://oldschool.runescape.wiki/w/Dragon_Slayer_II" }
+    ],
+    Recommendations: [
+        "Just grind out Vorkath until the head drops (1/50 chance) but guaranteed on the 50th kill."
+    ]
+},
+"Bolt pouch": {
+    Requirements: [
+        { prefix: "Partial completion of ", text: "The Giant Dwarf", link: "https://oldschool.runescape.wiki/w/The_Giant_Dwarf" }
+    ],
+    Recommendations: [
+        "Use whenever bringing more than 1 set of bolts to a boss."
+    ]
+},
+"Mixed hide boots": {
+    Requirements: [
+        { prefix: "Level 60 Ranged", text: null, link: null },
+        { prefix: "Level 50 Defence", text: null, link: null },
+        { prefix: "Level 69 Crafting**", text: null, link: null },
+        { prefix: "Level 72 Hunter", text: null, link: null }
+    ],
+    Recommendations: [
+        "Optional item due to the higher Crafting and Hunter level requirements, but they are solid boots for the foreseeable future.","**The Crafting level can be bypassed by paying 17,500 gp to Pellem at the Hunter Guild."
+    ]
+},
+    "Hot Stuff": {
+        Requirements: [{ prefix: "100 Slayer reward points", text: null, link: null }],
+        Recommendations: ["None"]
     }
+
 };
 
-const optionalItems = ["Colossal blade","Crystal shield","Twinflame staff","Voidwaker","Dragon warhammer","Reptile Got Ripped"];
+const optionalItems = ["Bolt pouch","Mixed hide boots","Colossal blade","Twinflame staff","Voidwaker","Reptile Got Ripped"];
 
 const imageOverrides = {
-    "Ancient staff": "https://oldschool.runescape.wiki/images/Ancient_staff.png",
     "Helm of Neitiznot": "https://oldschool.runescape.wiki/images/Helm_of_neitiznot.png",
     "Hot Stuff": "https://oldschool.runescape.wiki/images/Tok-Xil_%28Construction%29_icon.png",
-    "Mixed hide boots": "https://oldschool.runescape.wiki/images/Mixed_hide_boots.png?",
     "Tank body": "https://oldschool.runescape.wiki/images/Dharok%27s_platebody.png",
     "Tank legs": "https://oldschool.runescape.wiki/images/Dharok%27s_platelegs.png",
-    "Crystal shield": "https://oldschool.runescape.wiki/images/thumb/Crystal_shield_detail.png/130px-Crystal_shield_detail.png",
-    "Slayer helmet (i)": "https://oldschool.runescape.wiki/images/Slayer_helmet_%28i%29.png",
-    "Ava's accumulator": "https://oldschool.runescape.wiki/images/Ava%27s_attractor.png",
-    "Berserker ring (i)": "https://oldschool.runescape.wiki/images/Berserker_ring_%28i%29.png",
-    "Ava's assembler": "https://oldschool.runescape.wiki/images/Ava%27s_assembler.png",
-    "Rune pouch": "https://oldschool.runescape.wiki/images/Rune_pouch.png",
-    "Blood moon armor set": "https://oldschool.runescape.wiki/images/Blood_moon_armour_set.png",
-    "Eclipse moon armor set": "https://oldschool.runescape.wiki/images/Eclipse_moon_armour_set.png",
-    "Blue moon armor set": "https://oldschool.runescape.wiki/images/Blue_moon_armour_set.png",
-    "Deadeye": "https://oldschool.runescape.wiki/images/Deadeye.png",
-    "Mystic Vigour": "https://oldschool.runescape.wiki/images/Mystic_Vigour.png",
-    "Twinflame staff": "https://oldschool.runescape.wiki/images/Twinflame_staff.png",
-    "Crystal helm": "https://oldschool.runescape.wiki/images/Crystal_helm.png",
-    "Crystal body": "https://oldschool.runescape.wiki/images/Crystal_body.png",
-    "Crystal legs": "https://oldschool.runescape.wiki/images/Crystal_legs.png",
     "Bow of Faerdhinen (c)": "https://oldschool.runescape.wiki/images/Bow_of_faerdhinen_%28c%29.png",
     "Greater Challenge": "https://oldschool.runescape.wiki/images/Greater_demon_icon.png",
     "It's Dark in Here": "https://oldschool.runescape.wiki/images/Black_demon_icon.png",
-    "Voidwaker": "https://oldschool.runescape.wiki/images/Voidwaker.png",
-    "Dragon warhammer": "https://oldschool.runescape.wiki/images/Dragon_warhammer.png",
     "Reptile Got Ripped": "https://oldschool.runescape.wiki/images/Lizardmen_icon.png",
-    "Ancient icon": "https://oldschool.runescape.wiki/images/Ancient_icon.png",
-    "Arclight": "https://oldschool.runescape.wiki/images/Arclight.png",
-    "Ring of suffering": "https://oldschool.runescape.wiki/images/Ring_of_suffering.png",
-    "Necklace of anguish": "https://oldschool.runescape.wiki/images/Necklace_of_anguish.png",
-    "Tormented bracelet": "https://oldschool.runescape.wiki/images/Tormented_bracelet.png",
-    "Amulet of torture": "https://oldschool.runescape.wiki/images/Amulet_of_torture.png",
-    "Scorching bow": "https://oldschool.runescape.wiki/images/Scorching_bow.png",
-    "Purging staff": "https://oldschool.runescape.wiki/images/Purging_staff.png",
-    "Emberlight": "https://oldschool.runescape.wiki/images/Emberlight.png",
-    "Burning claws": "https://oldschool.runescape.wiki/images/Burning_claws.png",
-    "Dragon boots": "https://oldschool.runescape.wiki/images/Dragon_boots.png",
-    "Abyssal whip": "https://oldschool.runescape.wiki/images/Abyssal_whip.png",
-    "Void ranger helm": "https://oldschool.runescape.wiki/images/Void_ranger_helm.png",
-    "Elite void top": "https://oldschool.runescape.wiki/images/Elite_void_top.png",
-    "Void knight gloves": "https://oldschool.runescape.wiki/images/Void_knight_gloves.png",
-    "Elite void robe": "https://oldschool.runescape.wiki/images/Elite_void_robe.png",
-    "Imbued zamorak cape": "https://oldschool.runescape.wiki/images/Imbued_zamorak_cape.png",
-    "Avernic treads": "https://oldschool.runescape.wiki/images/Avernic_treads.png",
     "Eye of Ayak": "https://oldschool.runescape.wiki/images/Eye_of_ayak.png",
-    "Mokhaiotl cloth": "https://oldschool.runescape.wiki/images/Mokhaiotl_cloth.png",
-    "Occult necklace": "https://oldschool.runescape.wiki/images/Occult_necklace.png",
-    "Serpentine helm": "https://oldschool.runescape.wiki/images/Serpentine_helm.png",
     "Toxic Blowpipe": "https://oldschool.runescape.wiki/images/Toxic_blowpipe.png",
-    "Osmumten's fang": "https://oldschool.runescape.wiki/images/Osmumten%27s_fang.png",
-    "Lightbearer": "https://oldschool.runescape.wiki/images/Lightbearer.png",
-    "Thread of elidinis": "https://oldschool.runescape.wiki/images/Thread_of_elidinis.png",
-    "Rigour": "https://oldschool.runescape.wiki/images/Rigour.png",
-    "Augury": "https://oldschool.runescape.wiki/images/Augury.png",
-    "Oathplate helm": "https://oldschool.runescape.wiki/images/Oathplate_helm.png",
-    "Oathplate chest": "https://oldschool.runescape.wiki/images/Oathplate_chest.png",
-    "Oathplate legs": "https://oldschool.runescape.wiki/images/Oathplate_legs.png",
-    "Rite of vile transference": "https://oldschool.runescape.wiki/images/Rite_of_vile_transference.png",
     "Inferno Cape": "https://oldschool.runescape.wiki/images/Infernal_cape.png",
-    "Dizana's quiver": "https://oldschool.runescape.wiki/images/Dizana%27s_quiver.png",
-    "Amulet of rancour": "https://oldschool.runescape.wiki/images/Amulet_of_rancour.png",
     "Ferocious Gloves": "https://oldschool.runescape.wiki/images/Ferocious_gloves.png",
-    "Avernic treads (max)": "https://oldschool.runescape.wiki/images/thumb/Avernic_treads_%28max%29_detail.png/140px-Avernic_treads_%28max%29_detail.png",
-    "Ultor ring": "https://oldschool.runescape.wiki/images/Ultor_ring.png",
-    "Magus ring": "https://oldschool.runescape.wiki/images/Magus_ring.png",
     "Chambers of Xeric": "https://oldschool.runescape.wiki/images/thumb/Chambers_of_Xeric_logo.png/250px-Chambers_of_Xeric_logo.png",
     "Theatre of Blood": "https://oldschool.runescape.wiki/images/thumb/Theatre_of_Blood_logo.png/250px-Theatre_of_Blood_logo.png",
-    "Tombs of Amascut": "https://oldschool.runescape.wiki/images/thumb/Tombs_of_Amascut.png/300px-Tombs_of_Amascut.png"
-};
+    };
 
 function getItemImage(name) {
     if (imageOverrides[name]) return imageOverrides[name];
@@ -679,63 +517,62 @@ function createItemBox(name) {
 
 function renderProgression() {
     const container = document.getElementById('progression');
+    const maxPerRow = 6;
     let rowContainer = null;
     let sectionsInRow = 0;
     let rowCount = 0;
 
     sections.forEach((items, sIndex) => {
-        if (sectionsInRow === 0) {
-            rowContainer = document.createElement('div');
-            rowContainer.style.display = 'flex';
-            rowContainer.style.gap = '10px';
-            rowContainer.style.alignItems = 'flex-start';
-            rowContainer.style.marginBottom = '50px';
-            container.appendChild(rowContainer);
-            rowCount++;
-        }
+    if (sectionsInRow === 0) {
+        rowContainer = document.createElement('div');
+        rowContainer.style.display = 'flex';
+        rowContainer.style.gap = '10px';
+        rowContainer.style.alignItems = 'flex-start';
+        rowContainer.style.marginBottom = '50px';
+        container.appendChild(rowContainer);
+        rowCount++;
+    }
 
-        const sectionDiv = document.createElement('div');
-        sectionDiv.className = 'section';
-        const row1 = document.createElement('div');
-        row1.className = 'row';
-        const row2 = document.createElement('div');
-        row2.className = 'row';
+    const sectionDiv = document.createElement('div');
+    sectionDiv.className = 'section';
 
-       items.forEach((item, i) => {
-    if (sIndex === 4) {
-        if (i < 3) row1.appendChild(createItemBox(item));
-        else row2.appendChild(createItemBox(item));
-    } 
-    else if (sIndex === 10) {
-        if (i < 3) row1.appendChild(createItemBox(item));
-        else row2.appendChild(createItemBox(item));
+    const row1 = document.createElement('div');
+    row1.className = 'row';
+    const row2 = document.createElement('div');
+    row2.className = 'row';
+
+    // Determine splitting logic
+    if (items.length === 2 || sIndex === sections.length - 1) {
+        // Two items OR last section → all on row1
+        items.forEach(item => {
+            row1.appendChild(createItemBox(item));
+        });
+    } else {
+        // Default: split in half
+        const mid = Math.ceil(items.length / 2);
+        items.forEach((item, i) => {
+            const box = createItemBox(item);
+            if (i < mid) row1.appendChild(box);
+            else row2.appendChild(box);
+        });
     }
-    else if (sIndex === sections.length - 1) {
-        row1.appendChild(createItemBox(item));
+
+    sectionDiv.appendChild(row1);
+    if (row2.children.length > 0) sectionDiv.appendChild(row2);
+    rowContainer.appendChild(sectionDiv);
+    sectionsInRow++;
+
+    if (sectionsInRow < maxPerRow && sIndex < sections.length - 1) {
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow';
+        arrow.textContent = '➡';
+        rowContainer.appendChild(arrow);
     }
-    else {
-        if (i % 4 < 2) row1.appendChild(createItemBox(item));
-        else row2.appendChild(createItemBox(item));
-    }
+
+    if (sectionsInRow === maxPerRow) sectionsInRow = 0;
 });
-
-        sectionDiv.appendChild(row1);
-        if (row2.children.length > 0) sectionDiv.appendChild(row2);
-        rowContainer.appendChild(sectionDiv);
-        sectionsInRow++;
-
-        if (sectionsInRow < maxPerRow && sIndex < sections.length - 1) {
-            const arrow = document.createElement('div');
-            arrow.className = 'arrow';
-            arrow.textContent = '➡';
-            const key = `${rowCount}-${sectionsInRow}`;
-            if (arrowMargins[key]) arrow.style.marginLeft = arrowMargins[key];
-            rowContainer.appendChild(arrow);
-        }
-
-        if (sectionsInRow === maxPerRow) sectionsInRow = 0;
-    });
 }
+
 renderProgression();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -786,84 +623,125 @@ viewWikiOption.addEventListener("click", () => {
         contextMenu.style.display = "none";
     }
 });
-viewTipsOption.addEventListener("click", () => {
-    if (currentItem && tips[currentItem]) {
-        const modalHeader = document.getElementById("modalHeader");
-        const modalBody = document.getElementById("modalBody");
+viewTipsOption.addEventListener("click", (event) => {
+    event.stopPropagation();
 
-        const itemTips = tips[currentItem];
+    if (!currentItem || !tips[currentItem]) return;
 
-        modalHeader.textContent = `Tips for ${currentItem}`;
-        modalHeader.style.textAlign = 'center'; 
+    const modalHeader = document.getElementById("modalHeader");
+    const modalBody = document.getElementById("modalBody");
+    const itemTips = tips[currentItem];
 
+    // Clear previous content
+    modalHeader.innerHTML = '';
+    modalHeader.style.textAlign = 'center';
+    modalBody.innerHTML = '';
 
-        modalBody.innerHTML = '';
+    // Item image
+    const img = document.createElement('img');
+    img.src = getItemImage(currentItem);
+    img.alt = currentItem;
+    img.style.width = '64px';
+    img.style.height = '64px';
+    img.style.display = 'block';
+    img.style.margin = '0 auto';
+    img.onerror = () => { img.src = 'https://via.placeholder.com/64?text=?'; };
+    modalHeader.appendChild(img);
 
+    // Spacer
+    const spacer = document.createElement('div');
+    spacer.style.height = '15px';
+    modalHeader.appendChild(spacer);
 
-        const questsTitle = document.createElement('div');
-        questsTitle.style.textAlign = 'center';
-        questsTitle.style.fontWeight = 'bold';
-        questsTitle.style.fontSize = '18px';
-        questsTitle.style.marginBottom = '5px';
-        questsTitle.textContent = 'Quests:';
-        modalBody.appendChild(questsTitle);
+    // --- Requirements ---
+    if (itemTips.Requirements && itemTips.Requirements.length > 0) {
+        const reqTitle = document.createElement('div');
+        reqTitle.textContent = 'Requirements:';
+        reqTitle.style.textAlign = 'center';
+        reqTitle.style.fontWeight = 'bold';
+        reqTitle.style.fontSize = '18px';
+        reqTitle.style.marginBottom = '5px';
+        modalBody.appendChild(reqTitle);
 
+        itemTips.Requirements.forEach(req => {
+            const div = document.createElement('div');
+            div.style.textAlign = 'left';
+            div.style.fontSize = '14px';
+            div.style.lineHeight = '1.6';
+            div.style.marginLeft = '20px';
 
-        const questsContent = document.createElement('div');
-        questsContent.style.textAlign = 'left';
-        questsContent.style.fontSize = '14px';
-        questsContent.style.lineHeight = '1.6';
-        questsContent.style.marginLeft = '20px';
+            if (req.prefix) div.innerHTML = req.prefix;  // Render HTML if present
+            if (req.text && req.link) {
+                const a = document.createElement('a');
+                a.href = req.link;
+                a.target = "_blank";
+                a.textContent = req.text;
+                a.style.color = "#7ca7ff";
+                a.style.textDecoration = "underline";
+                div.appendChild(a);
+            }
 
-        itemTips.quests.forEach(quest => {
-            const questItem = document.createElement('div');
-            questItem.textContent = quest;
-            questsContent.appendChild(questItem);
+            // Style any <a> tags already inside prefix HTML
+            div.querySelectorAll('a').forEach(a => {
+                a.style.color = "#7ca7ff";
+                a.style.textDecoration = "underline";
+            });
+
+            modalBody.appendChild(div);
         });
-        modalBody.appendChild(questsContent);
 
-
-        modalBody.innerHTML += `<div style="height: 10px;"></div>`;
-
-        const recommendationsTitle = document.createElement('div');
-        recommendationsTitle.style.textAlign = 'center';
-        recommendationsTitle.style.fontWeight = 'bold';
-        recommendationsTitle.style.fontSize = '18px';
-        recommendationsTitle.style.marginBottom = '5px';
-        recommendationsTitle.textContent = 'General Recommendations:';
-        modalBody.appendChild(recommendationsTitle);
-
-
-        const recommendationsContent = document.createElement('div');
-        recommendationsContent.style.textAlign = 'left';
-        recommendationsContent.style.fontSize = '14px';
-        recommendationsContent.style.lineHeight = '1.6';
-        recommendationsContent.style.marginLeft = '20px';
-        recommendationsContent.textContent = itemTips.recommendations;
-        modalBody.appendChild(recommendationsContent);
-
- 
-        document.getElementById("myModal").style.display = "block";
-        contextMenu.style.display = "none";
+        modalBody.innerHTML += `<div style="height: 20px;"></div>`;
     }
+
+    // --- Recommendations ---
+    if (itemTips.Recommendations && itemTips.Recommendations.length > 0) {
+        const recTitle = document.createElement('div');
+        recTitle.textContent = 'General Recommendations:';
+        recTitle.style.textAlign = 'center';
+        recTitle.style.fontWeight = 'bold';
+        recTitle.style.fontSize = '18px';
+        recTitle.style.marginBottom = '5px';
+        modalBody.appendChild(recTitle);
+
+        const ul = document.createElement('ul');
+        ul.style.marginLeft = '20px';
+        ul.style.fontSize = '14px';
+        ul.style.lineHeight = '1.6';
+        ul.style.textAlign = 'left';
+
+        itemTips.Recommendations.forEach(rec => {
+            const li = document.createElement('li');
+            li.innerHTML = rec; // Render HTML
+            li.querySelectorAll('a').forEach(a => {
+                a.style.color = "#7ca7ff";
+                a.style.textDecoration = "underline";
+            });
+            ul.appendChild(li);
+        });
+
+        modalBody.appendChild(ul);
+        modalBody.innerHTML += `<div style="height: 20px;"></div>`;
+    }
+
+    document.getElementById("myModal").style.display = "block";
+    contextMenu.style.display = "none";
 });
 
+
+
+document.getElementById("myModal").addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
+document.addEventListener("click", () => {
+    document.getElementById("myModal").style.display = "none";
+    contextMenu.style.display = "none";
+});
 
 document.getElementById("closeModal").addEventListener("click", () => {
     document.getElementById("myModal").style.display = "none";
 });
 
-document.addEventListener("click", (event) => {
-    if (!document.getElementById("myModal").contains(event.target) && !contextMenu.contains(event.target)) {
-        document.getElementById("myModal").style.display = "none";
-        contextMenu.style.display = "none";
-    }
-});
-
-document.addEventListener("click", () => {
-    contextMenu.style.display = "none";
-
-});
 </script>
-</body>
-</html>
+
+</body></html>
