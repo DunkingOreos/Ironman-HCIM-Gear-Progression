@@ -111,8 +111,54 @@ h2 {
     display: none;
     z-index: 100;
 }
-.context-menu:hover {
-    background: #182a48;
+.context-menu div {
+    padding: 8px;
+    cursor: pointer;
+    background: transparent;  
+    transition: background 0.2s; 
+}
+.context-menu div:hover {
+    background: #7ca7ff;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1c2a38;
+    color: #e6eef8;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 500px;
+    min-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    text-align: center;
+}
+.modal-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.modal-body {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.modal-footer {
+    text-align: right;
+}
+.modal-footer button {
+    background-color: #7ca7ff;
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.modal-footer button:hover {
+    background-color: #6495ed;
 }
 </style>
 </head>
@@ -121,7 +167,7 @@ h2 {
 <h2>DunkingOreos & Bear's Ironman Gear Progression — November 2025</h2>
 
 <div class="info">
-    <p>This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. Users can track their progress by left clicking the item when you obtain it. For more information on the item itself you can right click and be taken to the OSRS Wiki.</p>
+    <p>This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. Users can track their progress by left clicking the item when you obtain it. For more information on the item itself you can right click and select "View on OSRS Wiki" and for tips or recommendations select the "View Tips" option.</p>
     <p><b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point, some people can do Inferno at level 37 without needing overheads, some can beat the Colosseum without taking a single hit of damage, but we believe this progression set to be optimized and efficient for the <b>average player</b>.</p>
 </div>
 
@@ -129,7 +175,18 @@ h2 {
 <div class="progression" id="progression"></div>
 </div>
 
-<div class="context-menu" id="contextMenu">View on OSRS Wiki</div>
+<div class="context-menu" id="contextMenu">
+    <div id="viewWiki">View on OSRS Wiki</div>
+    <div id="viewTips">View Tips</div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-header" id="modalHeader"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+        <button id="closeModal">Close</button>
+    </div>
+</div>
 
 <script>
 const arrowMargins = {
@@ -162,6 +219,353 @@ const sections = [
     ["Ultor ring","Magus ring"],
     ["Chambers of Xeric","Theatre of Blood","Tombs of Amascut"]
 ];
+
+const tips = {
+    "Rune scimitar": {
+        quests: [
+            "Fight Arena (Takes you from level 1 to 29 Attack)",
+            "Tree Gnome Village (Takes you from level 29 to 35 Attack)",
+            "The Grand Tree (Takes you from level 35 to 41 Attack)"
+        ],
+        recommendations: "To obtain the rune scimitar, it's recommended to safespot fire giants or Zamorak warriors and kill them using magic."
+    },
+    "Dorgeshuun crossbow": {
+        quests: [],
+        recommendations: ""
+    },
+    "Staff of air": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ardougne cloak 1": {
+        quests: [],
+        recommendations: ""
+    },
+    "Eagle Eye": {
+        quests: [],
+        recommendations: ""
+    },
+    "Mystic Might": {
+        quests: [],
+        recommendations: ""
+    },
+    "Helm of Neitiznot": {
+        quests: [],
+        recommendations: ""
+    },
+    "Dragon scimitar": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ava's accumulator": {
+        quests: [],
+        recommendations: ""
+    },
+    "Dragon dagger": {
+        quests: [],
+        recommendations: ""
+    },
+    "Rune crossbow": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ancient staff": {
+        quests: [],
+        recommendations: ""
+    },
+    "Barrows gloves": {
+        quests: [],
+        recommendations: ""
+    },
+    "Dragon defender": {
+        quests: [],
+        recommendations: ""
+    },
+    "Slayer helmet (i)": {
+        quests: [],
+        recommendations: ""
+    },
+    "Bigger and Badder": {
+        quests: [],
+        recommendations: ""
+    },
+    "Hot Stuff": {
+        quests: [],
+        recommendations: ""
+    },
+    "Black d'hide body": {
+        quests: [],
+        recommendations: ""
+    },
+    "Black d'hide chaps": {
+        quests: [],
+        recommendations: ""
+    },
+    "Mixed hide boots": {
+        quests: [],
+        recommendations: ""
+    },
+    "Fire cape": {
+        quests: [],
+        recommendations: ""
+    },
+    "Tank body": {
+        quests: [],
+        recommendations: ""
+    },
+    "Berserker ring (i)": {
+        quests: [],
+        recommendations: ""
+    },
+    "Amulet of fury": {
+        quests: [],
+        recommendations: ""
+    },
+    "Tank legs": {
+        quests: [],
+        recommendations: ""
+    },
+    "Zombie axe": {
+        quests: [],
+        recommendations: ""
+    },
+    "Colossal blade": {
+        quests: [],
+        recommendations: ""
+    },
+    "Crystal shield": {
+        quests: [],
+        recommendations: ""
+    },
+    "Blood moon armour set": {
+        quests: [],
+        recommendations: ""
+    },
+    "Eclipse moon armour set": {
+        quests: [],
+        recommendations: ""
+    },
+    "Blue moon armour set": {
+        quests: [],
+        recommendations: ""
+    },
+    "Deadeye": {
+        quests: [],
+        recommendations: ""
+    },
+    "Mystic Vigour": {
+        quests: [],
+        recommendations: ""
+    },
+    "Piety": {
+        quests: [],
+        recommendations: ""
+    },
+    "Twinflame staff": {
+        quests: [],
+        recommendations: ""
+    },
+    "Crystal helm": {
+        quests: [],
+        recommendations: ""
+    },
+    "Crystal body": {
+        quests: [],
+        recommendations: ""
+    },
+    "Crystal legs": {
+        quests: [],
+        recommendations: ""
+    },
+    "Bow of Faerdhinen (c)": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ava's assembler": {
+        quests: [],
+        recommendations: ""
+    },
+    "Imbued zamorak cape": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ancient icon": {
+        quests: [],
+        recommendations: ""
+    },
+    "Rune pouch": {
+        quests: [],
+        recommendations: ""
+    },
+    "Greater Challenge": {
+        quests: [],
+        recommendations: ""
+    },
+    "It's Dark in Here": {
+        quests: [],
+        recommendations: ""
+    },
+    "Arclight": {
+        quests: [],
+        recommendations: ""
+    },
+    "Voidwaker": {
+        quests: [],
+        recommendations: ""
+    },
+    "Reptile Got Ripped": {
+        quests: [],
+        recommendations: ""
+    },
+    "Dragon warhammer": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ring of suffering": {
+        quests: [],
+        recommendations: ""
+    },
+    "Necklace of anguish": {
+        quests: [],
+        recommendations: ""
+    },
+    "Tormented bracelet": {
+        quests: [],
+        recommendations: ""
+    },
+    "Amulet of torture": {
+        quests: [],
+        recommendations: ""
+    },
+    "Scorching bow": {
+        quests: [],
+        recommendations: ""
+    },
+    "Burning claws": {
+        quests: [],
+        recommendations: ""
+    },
+    "Dragon boots": {
+        quests: [],
+        recommendations: ""
+    },
+    "Abyssal whip": {
+        quests: [],
+        recommendations: ""
+    },
+    "Void ranger helm": {
+        quests: [],
+        recommendations: ""
+    },
+    "Elite void top": {
+        quests: [],
+        recommendations: ""
+    },
+    "Void knight gloves": {
+        quests: [],
+        recommendations: ""
+    },
+    "Elite void robe": {
+        quests: [],
+        recommendations: ""
+    },
+    "Avernic treads": {
+        quests: [],
+        recommendations: ""
+    },
+    "Eye of Ayak": {
+        quests: [],
+        recommendations: ""
+    },
+    "Mokhaiotl cloth": {
+        quests: [],
+        recommendations: ""
+    },
+    "Occult necklace": {
+        quests: [],
+        recommendations: ""
+    },
+    "Serpentine helm": {
+        quests: [],
+        recommendations: ""
+    },
+    "Toxic Blowpipe": {
+        quests: [],
+        recommendations: ""
+    },
+    "Osmumten's fang": {
+        quests: [],
+        recommendations: ""
+    },
+    "Lightbearer": {
+        quests: [],
+        recommendations: ""
+    },
+    "Thread of elidinis": {
+        quests: [],
+        recommendations: ""
+    },
+    "Rigour": {
+        quests: [],
+        recommendations: ""
+    },
+    "Augury": {
+        quests: [],
+        recommendations: ""
+    },
+    "Purging staff": {
+        quests: [],
+        recommendations: ""
+    },
+    "Emberlight": {
+        quests: [],
+        recommendations: ""
+    },
+    "Oathplate helm": {
+        quests: [],
+        recommendations: ""
+    },
+    "Oathplate chest": {
+        quests: [],
+        recommendations: ""
+    },
+    "Rite of vile transference": {
+        quests: [],
+        recommendations: ""
+    },
+    "Oathplate legs": {
+        quests: [],
+        recommendations: ""
+    },
+    "Inferno Cape": {
+        quests: [],
+        recommendations: ""
+    },
+    "Dizana's quiver": {
+        quests: [],
+        recommendations: ""
+    },
+    "Amulet of rancour": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ferocious Gloves": {
+        quests: [],
+        recommendations: ""
+    },
+    "Avernic treads (max)": {
+        quests: [],
+        recommendations: ""
+    },
+    "Ultor ring": {
+        quests: [],
+        recommendations: ""
+    },
+    "Magus ring": {
+        quests: [],
+        recommendations: ""
+    }
+};
 
 const optionalItems = ["Colossal blade","Crystal shield","Twinflame staff","Voidwaker","Dragon warhammer","Reptile Got Ripped"];
 
@@ -358,6 +762,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const contextMenu = document.getElementById("contextMenu");
+const viewWikiOption = document.getElementById("viewWiki");
+const viewTipsOption = document.getElementById("viewTips");
+
 let currentItem = null;
 
 document.addEventListener("contextmenu", e => {
@@ -372,19 +779,91 @@ document.addEventListener("contextmenu", e => {
         contextMenu.style.display = "none";
     }
 });
-
-document.addEventListener("click", () => {
-    contextMenu.style.display = "none";
-});
-
-contextMenu.addEventListener("click", () => {
+viewWikiOption.addEventListener("click", () => {
     if (currentItem) {
         const query = encodeURIComponent(currentItem);
         window.open(`https://oldschool.runescape.wiki/w/${query}`, "_blank");
+        contextMenu.style.display = "none";
     }
+});
+viewTipsOption.addEventListener("click", () => {
+    if (currentItem && tips[currentItem]) {
+        const modalHeader = document.getElementById("modalHeader");
+        const modalBody = document.getElementById("modalBody");
+
+        const itemTips = tips[currentItem];
+
+        modalHeader.textContent = `Tips for ${currentItem}`;
+        modalHeader.style.textAlign = 'center'; 
+
+
+        modalBody.innerHTML = '';
+
+
+        const questsTitle = document.createElement('div');
+        questsTitle.style.textAlign = 'center';
+        questsTitle.style.fontWeight = 'bold';
+        questsTitle.style.fontSize = '18px';
+        questsTitle.style.marginBottom = '5px';
+        questsTitle.textContent = 'Quests:';
+        modalBody.appendChild(questsTitle);
+
+
+        const questsContent = document.createElement('div');
+        questsContent.style.textAlign = 'left';
+        questsContent.style.fontSize = '14px';
+        questsContent.style.lineHeight = '1.6';
+        questsContent.style.marginLeft = '20px';
+
+        itemTips.quests.forEach(quest => {
+            const questItem = document.createElement('div');
+            questItem.textContent = quest;
+            questsContent.appendChild(questItem);
+        });
+        modalBody.appendChild(questsContent);
+
+
+        modalBody.innerHTML += `<div style="height: 10px;"></div>`;
+
+        const recommendationsTitle = document.createElement('div');
+        recommendationsTitle.style.textAlign = 'center';
+        recommendationsTitle.style.fontWeight = 'bold';
+        recommendationsTitle.style.fontSize = '18px';
+        recommendationsTitle.style.marginBottom = '5px';
+        recommendationsTitle.textContent = 'General Recommendations:';
+        modalBody.appendChild(recommendationsTitle);
+
+
+        const recommendationsContent = document.createElement('div');
+        recommendationsContent.style.textAlign = 'left';
+        recommendationsContent.style.fontSize = '14px';
+        recommendationsContent.style.lineHeight = '1.6';
+        recommendationsContent.style.marginLeft = '20px';
+        recommendationsContent.textContent = itemTips.recommendations;
+        modalBody.appendChild(recommendationsContent);
+
+ 
+        document.getElementById("myModal").style.display = "block";
+        contextMenu.style.display = "none";
+    }
+});
+
+
+document.getElementById("closeModal").addEventListener("click", () => {
+    document.getElementById("myModal").style.display = "none";
+});
+
+document.addEventListener("click", (event) => {
+    if (!document.getElementById("myModal").contains(event.target) && !contextMenu.contains(event.target)) {
+        document.getElementById("myModal").style.display = "none";
+        contextMenu.style.display = "none";
+    }
+});
+
+document.addEventListener("click", () => {
+    contextMenu.style.display = "none";
+
 });
 </script>
 </body>
 </html>
-
-
