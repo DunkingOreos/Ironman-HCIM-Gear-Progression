@@ -196,19 +196,19 @@ const arrowMargins = {
 const maxPerRow = 6;
 
 const sections = [
-    ["Rune scimitar","Dorgeshuun crossbow","Staff of air","Ardougne cloak 1"],
+    ["Staff of air","Ardougne cloak 1","Dorgeshuun crossbow","Rune scimitar"],
     ["Eagle Eye","Mystic Might"],
-    ["Helm of Neitiznot","Dragon scimitar","Ava's accumulator","Dragon dagger"],
+    ["Ava's accumulator","Helm of Neitiznot","Dragon scimitar","Dragon dagger"],
     ["Rune crossbow","Ancient staff","Barrows gloves","Dragon defender"],
-    ["Bigger and Badder","Black mask (i)","Rune pouch","Black d'hide body","Black d'hide chaps","Spoils of war"],
-    ["Crystal shield","Imbued zamorak cape","Ava's assembler","Hot Stuff","Bolt pouch","Mixed hide boots"],
-    ["Fire cape","Tank body","Berserker ring (i)","Amulet of fury","Tank legs","Zombie axe","Colossal blade"],
+    ["Rune pouch","Bigger and Badder","Black mask (i)","Black d'hide body","Black d'hide chaps","Adamant bolts"],
+    ["Crystal shield","Imbued zamorak cape","Mixed hide boots","Ava's assembler","Hot Stuff","Bolt pouch"],
+    ["Fire cape","Tank body","Tank legs","Colossal blade","Berserker ring (i)","Zombie axe","Amulet of fury",],
     ["Blood moon armour set","Eclipse moon armour set","Blue moon armour set"],
     ["Deadeye","Mystic Vigour","Piety","Twinflame staff"],
-    ["Crystal helm","Crystal body","Crystal legs","Bow of Faerdhinen (c)"],
-    ["Reptile Got Ripped","Dragon warhammer","Ancient icon"],
+    ["Crystal helm","Crystal body","Bow of Faerdhinen (c)","Crystal legs"],
+    ["Dragon warhammer","Ancient icon"],
     ["Greater Challenge","It's Dark in Here","Arclight","Voidwaker"],
-    ["Ring of suffering","Necklace of anguish","Tormented bracelet","Amulet of torture","Scorching bow","Burning claws","Dragon boots","Abyssal whip"],
+    ["Ring of suffering","Necklace of anguish","Scorching bow","Burning claws","Tormented bracelet","Amulet of torture","Dragon boots","Abyssal whip"],
     ["Void ranger helm","Elite void top","Void knight gloves","Elite void robe"],
     ["Avernic treads","Eye of Ayak","Mokhaiotl cloth","Occult necklace"],
     ["Serpentine helm","Toxic Blowpipe"],
@@ -395,7 +395,7 @@ const tips = {
         Requirements: [{ prefix: "Level 70 Ranged", text: null, link: null }],
         Recommendations: ["Complete HARD clues which should be dropped during slayer"]
     },
-"Spoils of war": {
+"Adamant bolts": {
     Requirements: [
         { prefix: "Total level 500+", text: null, link: null },
         { prefix: "40+ Combat", text: null, link: null }
@@ -450,21 +450,59 @@ const tips = {
         { prefix: "Level 72 Hunter", text: null, link: null }
     ],
     Recommendations: [
-        "Optional item due to the higher Crafting and Hunter level requirements, but they are solid boots for the foreseeable future.","**The Crafting level can be bypassed by paying 17,500 gp to Pellem at the Hunter Guild."
+        "**The Crafting level can be bypassed by paying 17,500 gp to Pellem at the Hunter Guild."
     ]
 },
     "Hot Stuff": {
         Requirements: [{ prefix: "100 Slayer reward points", text: null, link: null }],
         Recommendations: ["None"]
-    }
+    },
+"Fire cape": {
+    Requirements: [
+        { prefix: "Defeat ", text: "TzTok-Jad", link: "https://oldschool.runescape.wiki/w/TzTok-Jad" }
+    ],
+    Recommendations: [
+        `Review recommended gear and inventory setup here: <a href='https://oldschool.runescape.wiki/w/TzHaar_Fight_Cave/Strategies#Early-game_iron' target='_blank'>Fight Caves Strategies (Iron)</a>`,
+        "Bring Ancient staff, an Imbued god cape, and a Rune pouch filled with blood spells for emergency healing."
+    ]
+},
+
+"Tank body": {
+    Requirements: [
+        { prefix: "Level 70 Defence", text: null, link: null }
+    ],
+    Recommendations: [
+       "Looking for Dharok, Guthan, or Torag chest slot armor. ",
+       "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
+    ]
+},
+"Tank legs": {
+    Requirements: [
+        { prefix: "Level 70 Defence", text: null, link: null }
+    ],
+    Recommendations: [
+       "Looking for Dharok, Guthan, or Torag leg slot armor. ",
+       "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
+    ]
+},
+"Colossal blade": {
+    Requirements: [
+        { prefix: "Level 60 Attack", text: null, link: null },
+        { prefix: "5000 ", text: "Foundry Reputation", link: "https://oldschool.runescape.wiki/w/Giants'_Foundry" }
+    ],
+    Recommendations: [
+	"Very useful item to use during Eclipse Moon's Clones phase."
+    ]
+},
 
 };
 
-const optionalItems = ["Bolt pouch","Mixed hide boots","Colossal blade","Twinflame staff","Voidwaker","Reptile Got Ripped"];
+const optionalItems = ["Bolt pouch","Colossal blade","Twinflame staff","Voidwaker","Reptile Got Ripped"];
 
 const imageOverrides = {
     "Helm of Neitiznot": "https://oldschool.runescape.wiki/images/Helm_of_neitiznot.png",
     "Hot Stuff": "https://oldschool.runescape.wiki/images/Tok-Xil_%28Construction%29_icon.png",
+    "Adamant bolts": "https://oldschool.runescape.wiki/images/Adamant_bolts_5.png",
     "Tank body": "https://oldschool.runescape.wiki/images/Dharok%27s_platebody.png",
     "Tank legs": "https://oldschool.runescape.wiki/images/Dharok%27s_platelegs.png",
     "Bow of Faerdhinen (c)": "https://oldschool.runescape.wiki/images/Bow_of_faerdhinen_%28c%29.png",
@@ -541,14 +579,11 @@ function renderProgression() {
     const row2 = document.createElement('div');
     row2.className = 'row';
 
-    // Determine splitting logic
     if (items.length === 2 || sIndex === sections.length - 1) {
-        // Two items OR last section → all on row1
         items.forEach(item => {
             row1.appendChild(createItemBox(item));
         });
     } else {
-        // Default: split in half
         const mid = Math.ceil(items.length / 2);
         items.forEach((item, i) => {
             const box = createItemBox(item);
@@ -632,12 +667,10 @@ viewTipsOption.addEventListener("click", (event) => {
     const modalBody = document.getElementById("modalBody");
     const itemTips = tips[currentItem];
 
-    // Clear previous content
     modalHeader.innerHTML = '';
     modalHeader.style.textAlign = 'center';
     modalBody.innerHTML = '';
 
-    // Item image
     const img = document.createElement('img');
     img.src = getItemImage(currentItem);
     img.alt = currentItem;
@@ -648,12 +681,10 @@ viewTipsOption.addEventListener("click", (event) => {
     img.onerror = () => { img.src = 'https://via.placeholder.com/64?text=?'; };
     modalHeader.appendChild(img);
 
-    // Spacer
     const spacer = document.createElement('div');
     spacer.style.height = '15px';
     modalHeader.appendChild(spacer);
 
-    // --- Requirements ---
     if (itemTips.Requirements && itemTips.Requirements.length > 0) {
         const reqTitle = document.createElement('div');
         reqTitle.textContent = 'Requirements:';
@@ -670,7 +701,7 @@ viewTipsOption.addEventListener("click", (event) => {
             div.style.lineHeight = '1.6';
             div.style.marginLeft = '20px';
 
-            if (req.prefix) div.innerHTML = req.prefix;  // Render HTML if present
+            if (req.prefix) div.innerHTML = req.prefix;  
             if (req.text && req.link) {
                 const a = document.createElement('a');
                 a.href = req.link;
@@ -681,7 +712,6 @@ viewTipsOption.addEventListener("click", (event) => {
                 div.appendChild(a);
             }
 
-            // Style any <a> tags already inside prefix HTML
             div.querySelectorAll('a').forEach(a => {
                 a.style.color = "#7ca7ff";
                 a.style.textDecoration = "underline";
@@ -693,7 +723,6 @@ viewTipsOption.addEventListener("click", (event) => {
         modalBody.innerHTML += `<div style="height: 20px;"></div>`;
     }
 
-    // --- Recommendations ---
     if (itemTips.Recommendations && itemTips.Recommendations.length > 0) {
         const recTitle = document.createElement('div');
         recTitle.textContent = 'General Recommendations:';
@@ -711,7 +740,7 @@ viewTipsOption.addEventListener("click", (event) => {
 
         itemTips.Recommendations.forEach(rec => {
             const li = document.createElement('li');
-            li.innerHTML = rec; // Render HTML
+            li.innerHTML = rec;
             li.querySelectorAll('a').forEach(a => {
                 a.style.color = "#7ca7ff";
                 a.style.textDecoration = "underline";
