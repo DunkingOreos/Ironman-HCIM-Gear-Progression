@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DunkingOreos &amp; Bear's Ironman Gear Progression — November 2025</title>
+<title>DunkingOreos & Bear's Ironman Gear Progression — November 2025</title>
 <style>
 body {
     margin: 0;
@@ -27,8 +28,8 @@ h2 {
 }
 .chart-container {
     display: flex;
-    justify-content: center; 
-    align-items: center;      
+    justify-content: center;
+    align-items: center;
     max-width: 1600px;
     margin: 0 auto;
     text-align: left;
@@ -113,8 +114,8 @@ h2 {
 .context-menu div {
     padding: 8px;
     cursor: pointer;
-    background: transparent;  
-    transition: background 0.2s; 
+    background: transparent;
+    transition: background 0.2s;
 }
 .context-menu div:hover {
     background: #7ca7ff;
@@ -162,17 +163,26 @@ h2 {
 </style>
 </head>
 <body>
-
-<h2>DunkingOreos &amp; Bear's Ironman Gear Progression — November 2025</h2>
+<h2>DunkingOreos & Bear's Ironman Gear Progression — November 2025</h2>
 
 <div class="info">
-    <p>This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. Users can track their progress by left clicking the item when you obtain it. For more information on the item itself you can right click and select "View on OSRS Wiki" and for tips or recommendations select the "View Tips" option.</p>
-    <p><b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point, some people can do Inferno at level 37 without needing overheads, some can beat the Colosseum without taking a single hit of damage, but we believe this progression set to be optimized and efficient for the <b>average player</b>.</p>
+    <p>
+        This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. 
+        Users can track their progress by left clicking the item when you obtain it. 
+        For more information on the item itself you can right click and select "View on OSRS Wiki" 
+        and for tips or recommendations select the "View Tips" option.
+    </p>
+
+    <p>
+        <b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point, 
+        some people can do Inferno at level 37 without needing overheads, 
+        some can beat the Colosseum without taking a single hit of damage, 
+        but we believe this progression set to be optimized and efficient for the <b>average player</b>.
+    </p>
 </div>
 
-
 <div class="chart-container">
-<div class="progression" id="progression"></div>
+    <div class="progression" id="progression"></div>
 </div>
 
 <div class="context-menu" id="contextMenu">
@@ -189,11 +199,17 @@ h2 {
 </div>
 
 <script>
-const arrowMargins = {
-   
-    };
-
-const maxPerRow = 6;
+const container=document.getElementById('progression');
+const contextMenu=document.getElementById("contextMenu");
+const viewWikiOption=document.getElementById("viewWiki");
+const viewTipsOption=document.getElementById("viewTips");
+const modal=document.getElementById("myModal");
+const modalHeader=document.getElementById("modalHeader");
+const modalBody=document.getElementById("modalBody");
+const closeModal=document.getElementById("closeModal");
+let currentItem=null;
+let pressTimer=null;
+const isMobile=()=>/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const sections = [
     ["Staff of air","Ardougne cloak 1","Dorgeshuun crossbow","Rune scimitar"],
@@ -220,917 +236,709 @@ const sections = [
     ["Ultor ring","Magus ring"],
     ["Chambers of Xeric","Theatre of Blood","Tombs of Amascut"]
 ];
-
 const tips = {
-    "Rune scimitar": {
-        Requirements: [{ prefix: "Level 40 Attack", text: null, link: null }],
-        Recommendations: [
-            "Use water spells and safespot fire giants (1/128 chance) <b>OR</b> any magic spell and safespot Zamorak warriors (1/50 chance)",
-            "Completion of <a href='https://oldschool.runescape.wiki/w/Fight_Arena' target='_blank'>Fight Arena</a> to get from level 1 to 29 Attack.",
-            "Completion of <a href='https://oldschool.runescape.wiki/w/Tree_Gnome_Village' target='_blank'>Tree Gnome Village</a> to get from level 29 to 35 Attack.",
-            "Completion of <a href='https://oldschool.runescape.wiki/w/The_Grand_Tree' target='_blank'>The Grand Tree</a> to get from level 35 to 41 Attack."
-        ]
-    },
-    "Dorgeshuun crossbow": {
-        Requirements: [
-            { prefix: "Level 28 Ranged", text: null, link: null },
-            { prefix: "Completion of ", text: "The Lost Tribe", link: "https://oldschool.runescape.wiki/w/The_Lost_Tribe" }
-        ],
-        Recommendations: [
-            "Complete the quest <a href='https://oldschool.runescape.wiki/w/Shadow_of_the_Storm' target='_blank'>Shadow of the Storm</a> and use the XP reward on Ranged to get from level 1-27 Ranged.",
-            "You will then only need to train for 824 XP to hit level 28."
-        ]
-    },
-    "Staff of air": {
-        Requirements: [{ prefix: "None", text: null, link: null }],
-        Recommendations: [
-            "Complete the Stronghold of Security (First 3 floors give 10k gp) and purchase from Zaff in Varrock."
-        ]
-    },
-    "Ardougne cloak 1": {
-        Requirements: [{ prefix: "Completion of ", text: "The Ardougne Easy Diary", link: "https://oldschool.runescape.wiki/w/Ardougne_Diary#Easy" }],
-        Recommendations: ["None"]
-    },
-    "Eagle Eye": {
-        Requirements: [{ prefix: "Level 44 Prayer", text: null, link: null }],
-        Recommendations: [
-            "Kill ~94 Lava dragons and use bones on the Chaos Altar. If you don't want to go to the Wilderness, then complete the following quests:",
-            "<a href='https://oldschool.runescape.wiki/w/The_Restless_Ghost' target='_blank'>The Restless Ghost</a> to get from level 1 to 9 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Recruitment_Drive' target='_blank'>Recruitment Drive</a> to get from level 9 to 14 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Priest_in_Peril' target='_blank'>Priest in Peril</a> to get from level 14 to 18 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Holy_Grail' target='_blank'>Holy Grail</a> to get from level 18 to 30 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Ghosts_Ahoy' target='_blank'>Ghosts Ahoy</a> to get from level 30 to 32 Prayer and unlock the ability to use the Ectofunctus.",
-            "<a href='https://oldschool.runescape.wiki/w/Spirits_of_the_Elid' target='_blank'>Spirits of the Elid</a> to get from level 32 to 36 Prayer.",
-            "After these quests, kill blue dragons in Taverley Dungeon for 107 dragon bones and use at the Ectofunctus."
-        ]
-    },
-    "Mystic Might": {
-        Requirements: [{ prefix: "Level 45 Prayer", text: null, link: null }],
-        Recommendations: [
-            "Kill ~104 Lava dragons and use bones on the Chaos Altar. If you don't want to go to the Wilderness, then complete the following quests:",
-            "<a href='https://oldschool.runescape.wiki/w/The_Restless_Ghost' target='_blank'>The Restless Ghost</a> to get from level 1 to 9 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Recruitment_Drive' target='_blank'>Recruitment Drive</a> to get from level 9 to 14 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Priest_in_Peril' target='_blank'>Priest in Peril</a> to get from level 14 to 18 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Holy_Grail' target='_blank'>Holy Grail</a> to get from level 18 to 30 Prayer.",
-            "<a href='https://oldschool.runescape.wiki/w/Ghosts_Ahoy' target='_blank'>Ghosts Ahoy</a> to get from level 30 to 32 Prayer and unlock the ability to use the Ectofunctus.",
-            "<a href='https://oldschool.runescape.wiki/w/Spirits_of_the_Elid' target='_blank'>Spirits of the Elid</a> to get from level 32 to 36 Prayer.",
-            "After these quests, kill blue dragons in Taverley Dungeon for 128 dragon bones and use at the Ectofunctus."
-        ]
-    },
-    "Helm of Neitiznot": {
-        Requirements: [
-            { prefix: "Level 55 Defence", text: null, link: null },
-            { prefix: "Completion of ", text: "The Fremennik Isles", link: "https://oldschool.runescape.wiki/w/The_Fremennik_Isles" }
-        ],
-        Recommendations: ["None"]
-    },
-    "Dragon scimitar": {
-        Requirements: [
-            { prefix: "Level 60 Attack", text: null, link: null },
-            { prefix: "Completion of ", text: "Monkey Madness 1", link: "https://oldschool.runescape.wiki/w/Monkey_Madness_I" }
-        ],
-        Recommendations: [
-            "Use Monkey Madness 1 combat training and focus on Attack and Defence, then train Attack to level 60 via Gemstone Crab"
-        ]
-    },
-    "Ava's accumulator": {
-        Requirements: [
-            { prefix: "Level 50 Ranged", text: null, link: null },
-            { prefix: "Completion of ", text: "Animal Magnetism", link: "https://oldschool.runescape.wiki/w/Animal_Magnetism" }
-        ],
-        Recommendations: [
-            "There is no point in buying the attractor, just bring the 75 steel arrows and 999 gp to instantly get the accumulator"
-        ]
-    },
-    "Dragon dagger": {
-        Requirements: [
-            { prefix: "Level 60 Attack", text: null, link: null },
-            { prefix: "Completion of ", text: "Lost City", link: "https://oldschool.runescape.wiki/w/Lost_City" }
-        ],
-        Recommendations: [
-            "Go for this item AFTER getting the Dragon scimitar as it has the same Attack requirement.",
-            "This will be our spec weapon for a VERY long time to come, recommend getting a weapon poison from killing Ankou for added DPS"
-        ]
-    },
-    "Rune crossbow": {
-        Requirements: [{ prefix: "Level 61 Ranged", text: null, link: null }],
-        Recommendations: [
-            "Use magic spells and kill the Crazy archaeologist in the wilderness.",
-            "If you don't want to go to wilderness then you will need to get runite limbs from either Steel dragons (1/16 chance) or Iron dragons (1/25 chance), then get level 69 Fletching and a yew log to fletch your own"
-        ]
-    },
-    "Ancient staff": {
-        Requirements: [
-            { prefix: "Level 50 Attack", text: null, link: null },
-            { prefix: "Level 50 Magic", text: null, link: null },
-            { prefix: "Completion of ", text: "Desert Treasure 1", link: "https://oldschool.runescape.wiki/w/Desert_Treasure_I" }
-        ],
-        Recommendations: [
-            "Fareed - Bring runes for water blast, ice gloves, gas mask",
-            "Damis - Safespot in North corner (tag a bat and use it to body block), use air blast.",
-            "Dessous - Prayer flick between melee/range (if taking damage keep protect melee up and eat. Stay above 19 hp), use air blast.",
-            "Kamil - Use Fire blast when magic is restored and fire bolt once magic drops too low. After killing trolls tele out, restore stats then go back. Bring super restores from Zogre Flesh Eaters and prayer potions from Underground Pass. Need climbing boots AND spiked boots. Any sweet will suffice for this portion (chocolate bar, slice of cake, 2/3 cake, full cake).",
-            "Pyramid - Bring antipoisons, waterskin, 1 prayer pot (in case bad rng with getting kicked out), and food (mummy max hit is 24.)"
-        ]
-    },
-    "Barrows gloves": {
-        Requirements: [{ prefix: "Completion of ", text: "Recipe for Disaster", link: "https://oldschool.runescape.wiki/w/Recipe_for_Disaster" }],
-        Recommendations: [
-            "1st Fight - Max hit 16. Bring recoils, air blast, karambwans",
-            "2nd Fight - Max hit 28. Bring snares, water blast, ice gloves, lobsters",
-            "3rd Fight - Max hit 20. Use fire bolt and restore when magic drops too low, lobsters",
-            "4th Fight - Max hit 19. Nothing special, lobsters",
-            "5th Fight - Max hit 40. Use blast spells, wear rune platebody/legs, dragonfire shield, combo eat with swordfish/karambwans",
-            "6th Fight - Max hit 25. Bring snares, green d'hide"
-        ]
-    },
-    "Dragon defender": {
-        Requirements: [
-            { prefix: "Level 60 Defence", text: null, link: null },
-            { prefix: "Combined Attack and Strength level of at least 130", text: null, link: null }
-        ],
-        Recommendations: [
-            "Get level 65 Attack and Strength and then train Defence while going for the defenders"
-        ]
-    },
-    "Bigger and Badder": {
-        Requirements: [{ prefix: "50 Slayer reward points", text: null, link: null }],
-        Recommendations: [
-            "Unlock this as quickly as possible in order to start getting superior slayer monsters which give more XP and a chance of the <a href='https://oldschool.runescape.wiki/w/Imbued_heart' target='_blank'>Imbued heart</a>"
-        ]
-    },
-    "Black mask (i)": {
-        Requirements: [
-            { prefix: "Level 58 Slayer", text: null, link: null },
-            { prefix: "Completion of ", text: "Cabin Fever", link: "https://oldschool.runescape.wiki/w/Cabin_Fever" }
-        ],
-        Recommendations: [
-            "Complete <a href='https://oldschool.runescape.wiki/w/Making_Friends_with_My_Arm' target='_blank'>Making Friends with My Arm</a> in order to have access to the <a href='https://oldschool.runescape.wiki/w/Fire_of_Eternal_Light' target='_blank'>Fire of Eternal Light</a> for the Mos Le'Harmless Cave.",
-            "Imbue using a <a href='https://oldschool.runescape.wiki/w/Scroll_of_imbuing' target='_blank'>Scroll of imbuing</a> from the PVP arena",
-            "Create the Slayer helm whenever you have the slayer reward points to do so"
-        ]
-    },
-    "Rune pouch": {
-        Requirements: [
-            {
-                prefix: "75 <a href='https://oldschool.runescape.wiki/w/Last_Man_Standing' target='_blank'>Last Man Standing</a> points <b>OR</b> 150 telekinetic, 150 graveyard, 1500 enchantment, and 200 alchemist <a href='https://oldschool.runescape.wiki/w/Pizazz_points' target='_blank'>Pizazz points</a> <b>OR</b> 750 Slayer reward points",
-                text: null,
-                link: null
-            }
-        ],
-        Recommendations: [
-            "Kill bots in LMS on an Australian world or get pizzazz points through the Mage Training Arena. Do NOT spend 750 Slayer reward points on this."
-        ]
-    },
-    "Black d'hide body": {
-        Requirements: [
-            { prefix: "Level 70 Ranged", text: null, link: null },
-            { prefix: "Level 40 Defence", text: null, link: null }
-        ],
-        Recommendations: ["Complete HARD clues which should be dropped during slayer"]
-    },
-    "Black d'hide chaps": {
-        Requirements: [{ prefix: "Level 70 Ranged", text: null, link: null }],
-        Recommendations: ["Complete HARD clues which should be dropped during slayer"]
-    },
-"Adamant bolts": {
-    Requirements: [
-        { prefix: "Total level 500+", text: null, link: null },
-        { prefix: "40+ Combat", text: null, link: null }
-    ],
-    Recommendations: [
-        "Join Soul Wars worlds where there are 'point boosting' <b>OR</b> duo with an alt account/friend.",
-        "Use a <a href='https://oldschool.runescape.wiki/w/Salve_amulet_(ei)' target='_blank'>Salve amulet (ei)</a> from completing the <a href='https://oldschool.runescape.wiki/w/Haunted_Mine' target='_blank'>Haunted Mine</a> quest to increase DPS.",
-        "Open crates to get adamant and runite bolts."
-    ]
-},
-"Crystal shield": {
-    Requirements: [
-        { prefix: "Level 70 Defence", text: null, link: null },
-        { prefix: "Level 50 Agility", text: null, link: null },
-        { prefix: "Completion of ", text: "Roving Elves", link: "https://oldschool.runescape.wiki/w/Roving_Elves" }
-    ],
-    Recommendations: [
-        "Choose the shield after completing Roving Elves, we can get a crystal weapon seed to make the bow later on"
-    ]
-},
-"Imbued zamorak cape": {
-    Requirements: [
-        { prefix: "Level 75 Magic", text: null, link: null },
-        { prefix: "Completion of ", text: "Mage Arena II", link: "https://oldschool.runescape.wiki/w/Mage_Arena_II" }
-    ],
-    Recommendations: [
-        'At level 75 Magic, you can go to the <a href="https://oldschool.runescape.wiki/w/Nightmare_Zone" target="_blank">Nightmare Zone</a> and use a Super Magic Potion to boost over level 80, cast <a href="https://oldschool.runescape.wiki/w/Charge" target="_blank">Charge</a>, and then head to the wilderness. <b>Important note:</b> Charge only lasts for 7 minutes, so you should find the demon before you boost in order to maximize the time.',
-        '<b>OR</b> Get at least 77+ Magic so that you can use a Wizard\'s mind bomb and boost to level 80 Magic to case Charge.'
-    ]
-},
 
-"Ava's assembler": {
-    Requirements: [
-        { prefix: "Level 70 Ranged", text: null, link: null },
-        { prefix: "Completion of ", text: "Dragon Slayer II", link: "https://oldschool.runescape.wiki/w/Dragon_Slayer_II" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Vorkath/Strategies' target='_blank'>Vorkath</a> until the head drops (1/50 chance) but guaranteed on the 50th kill."
-    ]
-},
+ "Rune scimitar": {Requirements:[
+    {prefix:"Level 40 Attack",text:null,link:null}
+  ], Recommendations:[
+    "Use water spells and safespot fire giants (1/128 chance) <b>OR</b> any magic spell and safespot Zamorak warriors (1/50 chance)",
+    "Completion of <a href='https://oldschool.runescape.wiki/w/Fight_Arena' target='_blank'>Fight Arena</a> to get from level 1 to 29 Attack.",
+    "Completion of <a href='https://oldschool.runescape.wiki/w/Tree_Gnome_Village' target='_blank'>Tree Gnome Village</a> to get from level 29 to 35 Attack.",
+    "Completion of <a href='https://oldschool.runescape.wiki/w/The_Grand_Tree' target='_blank'>The Grand Tree</a> to get from level 35 to 41 Attack."
+  ]},
 
-"Bolt pouch": {
-    Requirements: [
-        { prefix: "Partial completion of ", text: "The Giant Dwarf", link: "https://oldschool.runescape.wiki/w/The_Giant_Dwarf" }
-    ],
-    Recommendations: [
-        "Use whenever bringing more than 1 set of bolts to a boss."
-    ]
-},
+ "Dorgeshuun crossbow": {Requirements:[
+    {prefix:"Level 28 Ranged",text:null,link:null},
+    {prefix:"Completion of ",text:"The Lost Tribe",link:"https://oldschool.runescape.wiki/w/The_Lost_Tribe"}
+  ], Recommendations:[
+    "Complete the quest <a href='https://oldschool.runescape.wiki/w/Shadow_of_the_Storm' target='_blank'>Shadow of the Storm</a> and use the XP reward on Ranged to get from level 1-27 Ranged.",
+    "You will then only need to train for 824 XP to hit level 28."
+  ]},
 
-"Mixed hide boots": {
-    Requirements: [
-        { prefix: "Level 60 Ranged", text: null, link: null },
-        { prefix: "Level 50 Defence", text: null, link: null },
-        { prefix: "Level 69 Crafting", text: null, link: null },
-        { prefix: "Level 72 Hunter", text: null, link: null }
-    ],
-    Recommendations: [
-        "<b>The Crafting level can be bypassed by paying 17,500 gp to Pellem at the Hunter Guild.</b>"
-    ]
-},
+ "Staff of air": {Requirements:[
+    {prefix:"None",text:null,link:null}
+  ], Recommendations:[
+    "Complete the Stronghold of Security (First 3 floors give 10k gp) and purchase from Zaff in Varrock."
+  ]},
 
-"Hot Stuff": {
-    Requirements: [{ prefix: "100 Slayer reward points", text: null, link: null }],
-    Recommendations: ["None"]
-},
+ "Ardougne cloak 1": {Requirements:[
+    {prefix:"Completion of ",text:"The Ardougne Easy Diary",link:"https://oldschool.runescape.wiki/w/Ardougne_Diary#Easy"}
+  ], Recommendations:[
+    "None"
+  ]},
 
-"Fire cape": {
-    Requirements: [
-        { prefix: "Defeat ", text: "TzTok-Jad", link: "https://oldschool.runescape.wiki/w/TzTok-Jad" }
-    ],
-    Recommendations: [
-        `Review recommended gear and inventory setup for the <a href='https://oldschool.runescape.wiki/w/TzHaar_Fight_Cave/Strategies#Early-game_iron' target='_blank'>Fight Caves</a>`,
-        "Bring Ancient staff, an Imbued god cape, and a Rune pouch filled with blood spells for emergency healing."
-    ]
-},
+ "Eagle Eye": {Requirements:[
+    {prefix:"Level 44 Prayer",text:null,link:null}
+  ], Recommendations:[
+    "Kill ~94 Lava dragons and use bones on the Chaos Altar. If you don't want to go to the Wilderness, then complete the following quests:",
+    "<a href='https://oldschool.runescape.wiki/w/The_Restless_Ghost' target='_blank'>The Restless Ghost</a> to get from level 1 to 9 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Recruitment_Drive' target='_blank'>Recruitment Drive</a> to get from level 9 to 14 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Priest_in_Peril' target='_blank'>Priest in Peril</a> to get from level 14 to 18 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Holy_Grail' target='_blank'>Holy Grail</a> to get from level 18 to 30 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Ghosts_Ahoy' target='_blank'>Ghosts Ahoy</a> to get from level 30 to 32 Prayer and unlock the ability to use the Ectofunctus.",
+    "<a href='https://oldschool.runescape.wiki/w/Spirits_of_the_Elid' target='_blank'>Spirits of the Elid</a> to get from level 32 to 36 Prayer.",
+    "After these quests, kill blue dragons in Taverley Dungeon for 107 dragon bones and use at the Ectofunctus."
+  ]},
 
-"Tank body": {
-    Requirements: [
-        { prefix: "Level 70 Defence", text: null, link: null }
-    ],
-    Recommendations: [
-        "Looking for Dharok, Guthan, or Torag chest slot armor.",
-        "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
-    ]
-},
+ "Mystic Might": {Requirements:[
+    {prefix:"Level 45 Prayer",text:null,link:null}
+  ], Recommendations:[
+    "Kill ~104 Lava dragons and use bones on the Chaos Altar. If you don't want to go to the Wilderness, then complete the following quests:",
+    "<a href='https://oldschool.runescape.wiki/w/The_Restless_Ghost' target='_blank'>The Restless Ghost</a> to get from level 1 to 9 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Recruitment_Drive' target='_blank'>Recruitment Drive</a> to get from level 9 to 14 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Priest_in_Peril' target='_blank'>Priest in Peril</a> to get from level 14 to 18 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Holy_Grail' target='_blank'>Holy Grail</a> to get from level 18 to 30 Prayer.",
+    "<a href='https://oldschool.runescape.wiki/w/Ghosts_Ahoy' target='_blank'>Ghosts Ahoy</a> to get from level 30 to 32 Prayer and unlock the ability to use the Ectofunctus.",
+    "<a href='https://oldschool.runescape.wiki/w/Spirits_of_the_Elid' target='_blank'>Spirits of the Elid</a> to get from level 32 to 36 Prayer.",
+    "After these quests, kill blue dragons in Taverley Dungeon for 128 dragon bones and use at the Ectofunctus."
+  ]},
 
-"Tank legs": {
-    Requirements: [
-        { prefix: "Level 70 Defence", text: null, link: null }
-    ],
-    Recommendations: [
-        "Looking for Dharok, Guthan, or Torag leg slot armor.",
-        "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
-    ]
-},
+ "Helm of Neitiznot": {Requirements:[
+    {prefix:"Level 55 Defence",text:null,link:null},
+    {prefix:"Completion of ",text:"The Fremennik Isles",link:"https://oldschool.runescape.wiki/w/The_Fremennik_Isles"}
+  ], Recommendations:[
+    "None"
+  ]},
 
-"Colossal blade": {
-    Requirements: [
-        { prefix: "Level 60 Attack", text: null, link: null },
-        { prefix: "5000 ", text: "Foundry Reputation", link: "https://oldschool.runescape.wiki/w/Giants'_Foundry" }
-    ],
-    Recommendations: [
-        "Very useful item to use during Eclipse Moon's Clones phase."
-    ]
-},
+ "Dragon scimitar": {Requirements:[
+    {prefix:"Level 60 Attack",text:null,link:null},
+    {prefix:"Completion of ",text:"Monkey Madness 1",link:"https://oldschool.runescape.wiki/w/Monkey_Madness_I"}
+  ], Recommendations:[
+    "Use Monkey Madness 1 combat training and focus on Attack and Defence, then train Attack to level 60 via Gemstone Crab"
+  ]},
 
-"Berserker ring (i)": {
-    Requirements: [{ prefix: "None", text: null, link: null }],
-    Recommendations: [
-        "Bring super antipoisons, tank gear, and blood spells to <a href='https://oldschool.runescape.wiki/w/Dagannoth_Rex#/media/File:Dagannoth_Rex_safespot.png' target='_blank'>safespot Dagannoth Rex</a>.",
-"Imbue using a <a href='https://oldschool.runescape.wiki/w/Scroll_of_imbuing' target='_blank'>Scroll of imbuing</a> from the PVP arena"
-    ]
-},
+ "Ava's accumulator": {Requirements:[
+    {prefix:"Level 50 Ranged",text:null,link:null},
+    {prefix:"Completion of ",text:"Animal Magnetism",link:"https://oldschool.runescape.wiki/w/Animal_Magnetism"}
+  ], Recommendations:[
+    "There is no point in buying the attractor, just bring the 75 steel arrows and 999 gp to instantly get the accumulator"
+  ]},
 
-"Zombie axe": {
-    Requirements: [
-        { prefix: "Level 65 Attack", text: null, link: null },
-        { prefix: "Level 70 Smithing", text: null, link: null },
-        { prefix: "Partial completion of ", text: "Defender of Varrock", link: "https://oldschool.runescape.wiki/w/Defender_of_Varrock" }
-    ],
-    Recommendations: [
-        "Use burst or barrage spells to increase DPS and KPH when going for the axe."
-    ]
-},
+ "Dragon dagger": {Requirements:[
+    {prefix:"Level 60 Attack",text:null,link:null},
+    {prefix:"Completion of ",text:"Lost City",link:"https://oldschool.runescape.wiki/w/Lost_City"}
+  ], Recommendations:[
+    "Go for this item AFTER getting the Dragon scimitar as it has the same Attack requirement.",
+    "This will be our spec weapon for a VERY long time to come, recommend getting a weapon poison from killing Ankou for added DPS"
+  ]},
 
-"Amulet of fury": {
-    Requirements: [
-        { prefix: "Level 90 Crafting", text: null, link: null },
-        { prefix: "Level 87 Magic", text: null, link: null },
-        { prefix: "1 Onyx", text: null, link: null }
-    ],
-    Recommendations: [
-        "Purchase an Onyx at <a href='https://oldschool.runescape.wiki/w/TzHaar-Hur-Lek%27s_Ore_and_Gem_Store' target='_blank'>TzHaar-Hur-Lek's Ore and Gem Store</a> while having any pair of <a href='https://oldschool.runescape.wiki/w/Karamja_Diary' target='_blank'>Karamja gloves</a> in your inventory for 260,000 Tokkul.",
-        "Get to level 85 Crafting and use an <a href='https://oldschool.runescape.wiki/w/Spicy_stew' target='_blank'>orange stew</a> to boost to 90 Crafting and make the Onyx amulet.",
-        "Get to level 84 Magic and use a Wizard's mind domb to boost to 87 Magic."
-    ]
-},
-"Blood moon armour set": {
-    Requirements: [
-        { prefix: "Level 75 Strength", text: null, link: null },
-        { prefix: "Level 50 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "Perilous Moons", link: "https://oldschool.runescape.wiki/w/Perilous_Moons" }
-    ],
-    Recommendations: [
-        "Use a slash weapon (Zombie axe <b>OR</b> Dragon Scimitar) and your Dragon dagger specs should be utilized on this boss to increase DPS as much as possible.",
-        "Use the <a href='https://oldschool.runescape.wiki/w/File:Blood_Moon_step_under_technique_16-9.mp4' target='_blank'>Step Under Technique</a> to negate the Curse of the Moon healing effect significantly, decreasing the time to kill.",
-        "Dodge the <a href='https://oldschool.runescape.wiki/w/File:Blood_Moon_-_dodging_blood_jaguars.mp4' target='_blank'>blood jaguars</a> to reduce another healing effect of the boss."
-    ]
-},
-"Eclipse moon armour set": {
-    Requirements: [
-        { prefix: "Level 75 Ranged", text: null, link: null },
-        { prefix: "Level 50 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "Perilous Moons", link: "https://oldschool.runescape.wiki/w/Perilous_Moons" }
-    ],
-    Recommendations: [
-        "Use Zombie axe during the main phases of the boss, but do not worry about DPS during the main phases.",
-        "For the main DPS use your Colossal blade (or other slow attack speed weapon like the Zombie axe) during the <a href='https://oldschool.runescape.wiki/w/File:Eclipse_Moon_-_Mimic_attack.mp4' target='_blank'>Clone phase</a>. Just click the circle under the clone as it appears to not misclick the direction."
-    ]
-},
-"Blue moon armour set": {
-    Requirements: [
-        { prefix: "Level 75 Magic", text: null, link: null },
-        { prefix: "Level 50 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "Perilous Moons", link: "https://oldschool.runescape.wiki/w/Perilous_Moons" }
-    ],
-    Recommendations: [
-        "Just sit back and relax with the Zombie axe on crush.",
-	"During the Weapon Freeze, if you fail to break the ice block you can take up to 28 damage, so utilize a <a href='https://oldschool.runescape.wiki/w/File:Blue_Moon_-_Weapon_Freeze_attack.mp4' target='_blank'>double hit technique</a>.", 
-        "During the Frost Storm the boss can heal up to 100 hp, so determine if its worth lighting the braziers to negate this affect."
-    ]
-},
-"Deadeye": {
-    Requirements: [
-        { prefix: "Level 62 Prayer", text: null, link: null }
-    ],
-    Recommendations: [
-         "Kill the Royal Titans, but prioritize looting <a href='https://oldschool.runescape.wiki/w/Eldric_the_Ice_King' target='_blank'>Eldric the Ice King</a> <b>first</b> for the Deadeye Prayer Scroll, since Deadeye will be useful when going for the Mystic vigour prayer scroll and optionally the Twinflame staff pieces.",
-"Use bone shards from the Perilous Moons grind to level your Prayer. Highly suggest using a <a href='https://oldschool.runescape.wiki/w/Jug_of_blessed_sunfire_wine' target='_blank'>Jug of Blessed Sunfire Wine</a> when offering the bone shards to increase XP. You can get 80 Sunfire Splinters every 2-3 minutes by farming <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies#/media/File:Wave_Break_Down_-_Cheat_Sheet.png' target='_blank'>Wave 1</a> of the Colosseum."
-       
-    ]
-},
-"Mystic Vigour": {
-    Requirements: [
-        { prefix: "Level 63 Prayer", text: null, link: null }
-    ],
-    Recommendations: [
-         "Kill the Royal Titans, and loot <a href='https://oldschool.runescape.wiki/w/Branda_the_Fire_Queen' target='_blank'>Branda the Fire Queen</a> <b>AFTER</b> you have the Deadeye Prayer Scroll, since Deadeye will be useful when going for the Mystic vigour prayer scroll and optionally the Twinflame staff pieces.",
-"Use bone shards from the Perilous Moons grind to level your Prayer. Highly suggest using a <a href='https://oldschool.runescape.wiki/w/Jug_of_blessed_sunfire_wine' target='_blank'>Jug of Blessed Sunfire Wine</a> when offering the bone shards to increase XP. You can get 80 Sunfire Splinters every 2-3 minutes by farming <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies#/media/File:Wave_Break_Down_-_Cheat_Sheet.png' target='_blank'>Wave 1</a> of the Colosseum."
-       
-    ]
-},
-"Piety": {
-    Requirements: [
-        { prefix: "Level 70 Prayer", text: null, link: null },
-        { prefix: "Level 70 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "King's Ransom", link: "https://oldschool.runescape.wiki/w/King%27s_Ransom" },
-        { prefix: "Completion of ", text: "Knight Waves Training Grounds", link: "https://oldschool.runescape.wiki/w/Knight_Waves_Training_Grounds" }
-    ],
-    Recommendations: [
-        "Utilize the flinching method by standing near one of the target dummies and waiting for the Knights' HP bar to disappear. Then, attack and step back into the safespot.",
-"Use a Zombie axe for all of the fights, just change the attack style: 1st, 2nd, 3rd, 6th, 8th knights: <b>SLASH</b> and 4th, 5th, 7th knights: <b>CRUSH</b>",
-        "Use bone shards from the Perilous Moons grind to level your Prayer. Highly suggest using a <a href='https://oldschool.runescape.wiki/w/Jug_of_blessed_sunfire_wine' target='_blank'>Jug of Blessed Sunfire Wine</a> when offering the bone shards to increase XP. You can get 80 Sunfire Splinters every 2-3 minutes by farming <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies#/media/File:Wave_Break_Down_-_Cheat_Sheet.png' target='_blank'>Wave 1</a> of the Colosseum."
-    ]
-},
-"Twinflame staff": {
-    Requirements: [
-        { prefix: "Level 60 Magic", text: null, link: null }
-    ],
-    Recommendations: [
-        "Item is optional because you have a chance of getting it while grinding for the Deadeye and Mystic Vigour prayer scrolls.",
-        "It is a nice weapon to have when using magic against enemies that have <a href='https://oldschool.runescape.wiki/w/Elemental_weakness#List_of_NPCs_with_elemental_weaknesses' target='_blank'>Elemental weaknesses</a>."
-    ]
-},
+ "Rune crossbow": {Requirements:[
+    {prefix:"Level 61 Ranged",text:null,link:null}
+  ], Recommendations:[
+    "Use magic spells and kill the Crazy archaeologist in the wilderness.",
+    "If you don't want to go to wilderness then you will need to get runite limbs from either Steel dragons (1/16 chance) or Iron dragons (1/25 chance), then get level 69 Fletching and a yew log to fletch your own"
+  ]},
 
-"Crystal helm": {
-    Requirements: [
-        { prefix: "Level 70 Defence", text: null, link: null },
-        { prefix: "Level 50 Agility", text: null, link: null },
-        { prefix: "Completion of ", text: "Song of the Elves", link: "https://oldschool.runescape.wiki/w/Song_of_the_Elves" },
-        { prefix: "1 Armour seed + 50 Crystal shards", text: null, link: null }
-    ],
-    Recommendations: [
-            "It's recommended to craft the Crystal helm only after you have made the Crystal body and Crystal legs, as the Slayer helm is generally used more often. The Crystal helm becomes more useful primarily when engaging in PvM activities outside of Slayer tasks."
+ "Ancient staff": {Requirements:[
+    {prefix:"Level 50 Attack",text:null,link:null},
+    {prefix:"Level 50 Magic",text:null,link:null},
+    {prefix:"Completion of ",text:"Desert Treasure 1",link:"https://oldschool.runescape.wiki/w/Desert_Treasure_I"}
+  ], Recommendations:[
+    "Fareed - Bring runes for water blast, ice gloves, gas mask",
+    "Damis - Safespot in North corner (tag a bat and use it to body block), use air blast.",
+    "Dessous - Prayer flick between melee/range (if taking damage keep protect melee up and eat. Stay above 19 hp), use air blast.",
+    "Kamil - Use Fire blast when magic is restored and fire bolt once magic drops too low. After killing trolls tele out, restore stats then go back. Bring super restores from Zogre Flesh Eaters and prayer potions from Underground Pass. Need climbing boots AND spiked boots. Any sweet will suffice for this portion (chocolate bar, slice of cake, 2/3 cake, full cake).",
+    "Pyramid - Bring antipoisons, waterskin, 1 prayer pot (in case bad rng with getting kicked out), and food (mummy max hit is 24.)"
+  ]},
 
-    ]
-},
-"Crystal body": {
-    Requirements: [
-        { prefix: "Level 70 Defence", text: null, link: null },
-        { prefix: "Level 50 Agility", text: null, link: null },
-        { prefix: "Completion of ", text: "Song of the Elves", link: "https://oldschool.runescape.wiki/w/Song_of_the_Elves" },
-        { prefix: "3 Armour seed + 150 Crystal shards", text: null, link: null }
-    ],
-    Recommendations: [
-            "None"
+ "Barrows gloves": {Requirements:[
+    {prefix:"Completion of ",text:"Recipe for Disaster",link:"https://oldschool.runescape.wiki/w/Recipe_for_Disaster"}
+  ], Recommendations:[
+    "1st Fight - Max hit 16. Bring recoils, air blast, karambwans",
+    "2nd Fight - Max hit 28. Bring snares, water blast, ice gloves, lobsters",
+    "3rd Fight - Max hit 20. Use fire bolt and restore when magic drops too low, lobsters",
+    "4th Fight - Max hit 19. Nothing special, lobsters",
+    "5th Fight - Max hit 40. Use blast spells, wear rune platebody/legs, dragonfire shield, combo eat with swordfish/karambwans",
+    "6th Fight - Max hit 25. Bring snares, green d'hide"
+  ]},
 
-    ]
-},
-"Crystal legs": {
-    Requirements: [
-        { prefix: "Level 70 Defence", text: null, link: null },
-        { prefix: "Level 50 Agility", text: null, link: null },
-        { prefix: "Completion of ", text: "Song of the Elves", link: "https://oldschool.runescape.wiki/w/Song_of_the_Elves" },
-        { prefix: "2 Armour seed + 100 Crystal shards", text: null, link: null }
-    ],
-    Recommendations: [
-            "None"
+ "Dragon defender": {Requirements:[
+    {prefix:"Level 60 Defence",text:null,link:null},
+    {prefix:"Combined Attack and Strength level of at least 130",text:null,link:null}
+  ], Recommendations:[
+    "Get level 65 Attack and Strength and then train Defence while going for the defenders"
+  ]},
 
-    ]
-},
-"Bow of Faerdhinen (c)": {
-    Requirements: [
-        { prefix: "Level 80 Ranged", text: null, link: null },
-        { prefix: "Level 70 Agility", text: null, link: null },
-        { prefix: "Completion of ", text: "Song of the Elves", link: "https://oldschool.runescape.wiki/w/Song_of_the_Elves" },
-        { prefix: "Enhanced Crystal Weapon Seed + 2000 Crystal shards", text: null, link: null }
-    ],
-    Recommendations: [
-        "Good luck on your sentence at the Red Prison. Patience will be a virtue required to be successful, as the grind can be long, but the reward is well worth the effort."
-    ]
-},
-"Dragon warhammer": {
-    Requirements: [
-        { prefix: "Level 60 Strength", text: null, link: null }
-    ],
-    Recommendations: [
-        "Utilize the <a href='https://youtu.be/pjgh_JND3wY?si=w2rpJGVCpo7Cpzg7&t=128' target='_blank'>2 alt red X method</a> for approximately 150 KPH.",
-        "If you prefer not to use the Red X method, it's highly recommended to unlock <a href='https://oldschool.runescape.wiki/w/Slayer_Rewards#Unlock' target='_blank'>Reptile Got Ripped</a> for 75 Slayer reward points to be assigned Lizardmen as a task.",
-        "Additionally, completing the <a href='https://oldschool.runescape.wiki/w/Kourend_%26_Kebos_Diary#Hard' target='_blank'>Kourend Hard Diary</a> is recommended, so you can use the Slayer helm instead of the Shayzien helm (5)."
-    ]
-},
-"Ancient icon": {
-    Requirements: [
-        { prefix: "Completion of ", text: "Secrets of the North", link: "https://oldschool.runescape.wiki/w/Secrets_of_the_North" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Phantom_Muspah/Strategies' target='_blank'>Phantom Muspah</a> until the icon drops (1/50 chance)."
-    ]
-},
-"Greater Challenge": {
-    Requirements: [
-        { prefix: "100 Slayer reward points", text: null, link: null }
-    ],
-    Recommendations: [
-        "This will be a useful unlock for grinding Tormented demons on Slayer task later on when chasing Tormented synapse(s) and Burning claws."
-    ]
-},
-"It's Dark in Here": {
-    Requirements: [
-        { prefix: "100 Slayer reward points", text: null, link: null }
-    ],
-    Recommendations: [
-        "This will be a useful unlock for grinding Demonic gorillas on Slayer task later on when chasing uncut zenytes."
-    ]
-},
-"Arclight": {
-    Requirements: [
-        { prefix: "Level 75 Attack", text: null, link: null },
-        { prefix: "Completion of ", text: "Shadow of the Storm", link: "https://oldschool.runescape.wiki/w/Shadow_of_the_Storm" },
-        { prefix: "Completion of ", text: "Demon Slayer", link: "https://oldschool.runescape.wiki/w/Demon_Slayer" }
-    ],
-    Recommendations: [
-        "Burst Dust Devils or Bloodvelds in the Catacombs of Kourend to farm <a href='https://oldschool.runescape.wiki/w/Ancient_shard' target='_blank'>Ancient shards</a> and make the <a href='https://oldschool.runescape.wiki/w/Arclight#Creation' target='_blank'>Arclight</a>."
-    ]
-},
-"Voidwaker": {
-    Requirements: [
-        { prefix: "Level 75 Attack", text: null, link: null },
-        { prefix: "Voidwaker blade, hilt, and gem + 500,000 gp", text: null, link: null }
-    ],
-    Recommendations: [
-        "This grind will have you in the Wilderness where you can be attacked and killed by other players. Strongly recommend using alt accounts for scouting purposes. Turn on <a href='https://oldschool.runescape.wiki/w/Protect_Item' target='_blank'>Protect Item</a>. Enable PK Skull Prevention in Controls Settings. DO NOT BRING ANY ITEM YOU ARE NOT WILLING TO LOSE IF YOU DIE.",
-        "Blade from <a href='https://oldschool.runescape.wiki/w/Calvar%27ion/Strategies' target='_blank'>killing Calvar'ion</a> using Zombie axe/Salve amulet.",
-        "Hilt from <a href='https://oldschool.runescape.wiki/w/Artio/Strategies' target='_blank'>killing Artio</a> using Crystal armour and Bow of Faerdhinen.",
-        "Gem from <a href='https://oldschool.runescape.wiki/w/Spindel/Strategies' target='_blank'>killing Spindle</a> using Crystal armour and Bow of Faerdhinen."
-    ]
-},
-"Ring of suffering": {
-    Requirements: [
-        { prefix: "Level 75 Hitpoints", text: null, link: null },
-        { prefix: "Level 89 Crafting", text: null, link: null },
-        { prefix: "Level 93 Magic", text: null, link: null },
-        { prefix: "1 ", text: "Zenyte", link: "https://oldschool.runescape.wiki/w/Zenyte" }
-    ],
-    Recommendations: [
-        "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
-	"Use a <a href='https://oldschool.runescape.wiki/w/Mushroom_pie' target='_blank'>mushroom pie</a> to boost to 89 crafting and make the Zenyte ring."
-    ]
-},
+ "Bigger and Badder": {Requirements:[
+    {prefix:"50 Slayer reward points",text:null,link:null}
+  ], Recommendations:[
+    "Unlock this as quickly as possible in order to start getting superior slayer monsters which give more XP and a chance of the <a href='https://oldschool.runescape.wiki/w/Imbued_heart' target='_blank'>Imbued heart</a>"
+  ]},
 
-"Necklace of anguish": {
-    Requirements: [
-        { prefix: "Level 75 Hitpoints", text: null, link: null },
-        { prefix: "Level 92 Crafting", text: null, link: null },
-        { prefix: "Level 93 Magic", text: null, link: null },
-        { prefix: "1 ", text: "Zenyte", link: "https://oldschool.runescape.wiki/w/Zenyte" }
-    ],
-    Recommendations: [
-        "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
-	"Get to level 88 Crafting and use a <a href='https://oldschool.runescape.wiki/w/Mushroom_pie' target='_blank'>mushroom pie</a> to boost to 92 Crafting and make the Zenyte necklakce."
-    ]
-},
+ "Black mask (i)": {Requirements:[
+    {prefix:"Level 58 Slayer",text:null,link:null},
+    {prefix:"Completion of ",text:"Cabin Fever",link:"https://oldschool.runescape.wiki/w/Cabin_Fever"}
+  ], Recommendations:[
+    "Complete <a href='https://oldschool.runescape.wiki/w/Making_Friends_with_My_Arm' target='_blank'>Making Friends with My Arm</a> in order to have access to the <a href='https://oldschool.runescape.wiki/w/Fire_of_Eternal_Light' target='_blank'>Fire of Eternal Light</a> for the Mos Le'Harmless Cave.",
+    "Imbue using a <a href='https://oldschool.runescape.wiki/w/Scroll_of_imbuing' target='_blank'>Scroll of imbuing</a> from the PVP arena",
+    "Create the Slayer helm whenever you have the slayer reward points to do so"
+  ]},
 
-"Tormented bracelet": {
-    Requirements: [
-        { prefix: "Level 75 Hitpoints", text: null, link: null },
-        { prefix: "Level 95 Crafting", text: null, link: null },
-        { prefix: "Level 93 Magic", text: null, link: null },
-        { prefix: "1 ", text: "Zenyte", link: "https://oldschool.runescape.wiki/w/Zenyte" }
-    ],
-    Recommendations: [
-        "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
-	"Get to level 91 Crafting and use a <a href='https://oldschool.runescape.wiki/w/Mushroom_pie' target='_blank'>mushroom pie</a> to boost to 95 Crafting and make the Zenyte bracelet."
-    ]
-},
-"Amulet of torture": {
-    Requirements: [
-        { prefix: "Level 75 Hitpoints", text: null, link: null },
-        { prefix: "Level 98 Crafting", text: null, link: null },
-        { prefix: "Level 93 Magic", text: null, link: null },
-        { prefix: "1 ", text: "Zenyte", link: "https://oldschool.runescape.wiki/w/Zenyte" }
-    ],
-    Recommendations: [
-        "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
-	"Get to level 93 Crafting and use an <a href='https://oldschool.runescape.wiki/w/Spicy_stew' target='_blank'>orange stew</a> to boost to 98 Crafting and make the Zenyte necklace."
-    ]
-},
-"Scorching bow": {
-    Requirements: [
-        { prefix: "Level 77 Ranged", text: null, link: null },
-        { prefix: "Level 74 Fletching", text: null, link: null },
-        { prefix: "Completion of ", text: "While Guthix Sleeps", link: "https://oldschool.runescape.wiki/w/While_Guthix_Sleeps" },
-   	{ prefix: "1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 Magic longbow (u)", text: null, link: null }
-    ],
-    Recommendations: [
-        "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
-        "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
-        "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
-    ]
-},
-"Burning claws": {
-    Requirements: [
-        { prefix: "Level 60 Attack", text: null, link: null },
-        { prefix: "Completion of ", text: "While Guthix Sleeps", link: "https://oldschool.runescape.wiki/w/While_Guthix_Sleeps" },
-        { prefix: "2 ", text: "Burning claw", link: "https://oldschool.runescape.wiki/w/Burning_claw" }
-    ],
-    Recommendations: [
-        "Kill tormented demons while on a greater demon slayer task to get the Burning claw (1/501 chance).",
-        "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
-        "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
-    ]
-},
-"Dragon boots": {
-    Requirements: [
-        { prefix: "Level 60 Defence", text: null, link: null },
-        { prefix: "Level 83 Slayer", text: null, link: null }
-    ],
-    Recommendations: [
-        "Grind Slayer to level 83. While you can boost with a <a href='https://oldschool.runescape.wiki/w/Wild_pie' target='_blank'>Wild pie</a> from level 78 Slayer, you need higher Slayer to get the Abyssal whip anyway, so might as well just get 83 for now."
-    ]
-},
-"Abyssal whip": {
-    Requirements: [
-        { prefix: "Level 70 Attack", text: null, link: null },
-	{ prefix: "Level 85 Slayer", text: null, link: null }
+ "Rune pouch": {Requirements:[
+    {prefix:"75 <a href='https://oldschool.runescape.wiki/w/Last_Man_Standing' target='_blank'>Last Man Standing</a> points <b>OR</b> 150 telekinetic, 150 graveyard, 1500 enchantment, and 200 alchemist <a href='https://oldschool.runescape.wiki/w/Pizazz_points' target='_blank'>Pizazz points</a> <b>OR</b> 750 Slayer reward points",text:null,link:null}
+  ], Recommendations:[
+    "Kill bots in LMS on an Australian world or get pizzazz points through the Mage Training Arena. Do NOT spend 750 Slayer reward points on this."
+  ]},
 
-    ],
-    Recommendations: [
-        "While you can use a <a href='https://oldschool.runescape.wiki/w/Wild_pie' target='_blank'>Wild pie</a> boost from level 80 and burst/barrage Abyssal Demons in the Kourend catacombs for quick kills, hoping you get lucky before the boost runs out, it's highly recommended to wait until you're level 83 Slayer so that your boost lasts longer."
-    ]
-},
-"Void ranger helm": {
-    Requirements: [
-        { prefix: "Level 42 in ALL combat stats and Level 22 Prayer", text: null, link: null },
-        { prefix: "200 ", text: "Commendation points", link: "https://oldschool.runescape.wiki/w/Void_Knight_commendation_points" }
-    ],
-    Recommendations: [
-        "Use the Veteran boat to maximize base point potential.",
-        "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
-    ]
-},
+ "Black d'hide body": {Requirements:[
+    {prefix:"Level 70 Ranged",text:null,link:null},
+    {prefix:"Level 40 Defence",text:null,link:null}
+  ], Recommendations:[
+    "Complete HARD clues which should be dropped during slayer"
+  ]},
 
-"Void knight gloves": {
-    Requirements: [
-        { prefix: "Level 42 in ALL combat stats and Level 22 Prayer", text: null, link: null },
-        { prefix: "150 ", text: "Commendation points", link: "https://oldschool.runescape.wiki/w/Void_Knight_commendation_points" }
-    ],
-    Recommendations: [
-        "Use the Veteran boat to maximize base point potential.",
-        "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
-    ]
-},
-"Elite void top": {
-    Requirements: [
-        { prefix: "Level 42 in ALL combat stats and Level 22 Prayer", text: null, link: null },
-        { prefix: "Completion of <a href='https://oldschool.runescape.wiki/w/Western_Provinces_Diary' target='_blank'> Wester Provinces Hard Diary</a>", text: null, link: null }, 
-        { prefix: "200 <a href='https://oldschool.runescape.wiki/w/Void_Knight_commendation_points' target='_blank'>Commendation points</a> + <a href='https://oldschool.runescape.wiki/w/Void_knight_top' target='_blank'>Void knight top</a>", text: null, link: null }
-    ],
-    Recommendations: [
-        "Use the Veteran boat to maximize base point potential.",
-        "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
-    ]
-},
-"Elite void robe": {
-    Requirements: [
-        { prefix: "Level 42 in ALL combat stats and Level 22 Prayer", text: null, link: null },
-        { prefix: "Completion of <a href='https://oldschool.runescape.wiki/w/Western_Provinces_Diary' target='_blank'> Wester Provinces Hard Diary</a>", text: null, link: null }, 
-        { prefix: "200 <a href='https://oldschool.runescape.wiki/w/Void_Knight_commendation_points' target='_blank'>Commendation points</a> + <a href='https://oldschool.runescape.wiki/w/Void_knight_robe' target='_blank'>Void knight robe</a>", text: null, link: null }
-    ],
-    Recommendations: [
-        "Use the Veteran boat to maximize base point potential.",
-        "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
-    ]
-},
-"Avernic treads": {
-    Requirements: [
-        { prefix: "Level 80 Defence, Strength, Ranged, and Magic", text: null, link: null },
-        { prefix: "Completion of ", text: "The Final Dawn", link: "https://oldschool.runescape.wiki/w/The_Final_Dawn" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Doom_of_Mokhaiotl/Strategies' target='_blank'>Doom of Mokhaiotl</a> at delve level 4 or deeper for a (1/1350 – 1/540 chance)."
-    ]
-},
+ "Black d'hide chaps": {Requirements:[
+    {prefix:"Level 70 Ranged",text:null,link:null}
+  ], Recommendations:[
+    "Complete HARD clues which should be dropped during slayer"
+  ]},
 
-"Eye of Ayak": {
-    Requirements: [
-        { prefix: "Level 83 Magic", text: null, link: null },
-        { prefix: "Completion of ", text: "The Final Dawn", link: "https://oldschool.runescape.wiki/w/The_Final_Dawn" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Doom_of_Mokhaiotl/Strategies' target='_blank'>Doom of Mokhaiotl</a> at delve level 3 or deeper for a (1/2000 – 1/540 chance)."
-    ]
-},
+ "Adamant bolts": {Requirements:[
+    {prefix:"Total level 500+",text:null,link:null},
+    {prefix:"40+ Combat",text:null,link:null}
+  ], Recommendations:[
+    "Join Soul Wars worlds where there are 'point boosting' <b>OR</b> duo with an alt account/friend.",
+    "Use a <a href='https://oldschool.runescape.wiki/w/Salve_amulet_(ei)' target='_blank'>Salve amulet (ei)</a> from completing the <a href='https://oldschool.runescape.wiki/w/Haunted_Mine' target='_blank'>Haunted Mine</a> quest to increase DPS.",
+    "Open crates to get adamant and runite bolts."
+  ]},
 
-"Mokhaiotl cloth": {
-    Requirements: [
-        { prefix: "Level 83 Magic", text: null, link: null },
-        { prefix: "Completion of ", text: "The Final Dawn", link: "https://oldschool.runescape.wiki/w/The_Final_Dawn" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Doom_of_Mokhaiotl/Strategies' target='_blank'>Doom of Mokhaiotl</a> at delve level 2 or deeper for a (1/2500 – 1/540 chance).",
-        "You will also need 10,000 <a href='https://oldschool.runescape.wiki/w/Demon_tear' target='_blank'>Demon tears</a> when you go to combine the Mokhaiotl cloth with the Tormented bracelet, creating the <a href='https://oldschool.runescape.wiki/w/Confliction_gauntlets' target='_blank'>Confliction gauntlets</a>"
-    ]
-},
-"Occult necklace": {
-    Requirements: [
-        { prefix: "Level 93 Slayer", text: null, link: null }
-    ],
-    Recommendations: [
-        "Grind Slayer tasks to 93 Slayer, prioritizing XP by focusing on burst/barrage and cannonable tasks."
-    ]
-},
-"Serpentine helm": {
-    Requirements: [
-        { prefix: "Level 75 Defence", text: null, link: null },
-        { prefix: "Level 52 Crafting", text: null, link: null },
-        { prefix: "Completion of ", text: "Regicide", link: "https://oldschool.runescape.wiki/w/Regicide" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Zulrah/Strategies' target='_blank'>Zulrah</a> for a (2 × 1/1,024 chance).",
-        "If you get a Magic fang, dismantle it for 20,000 Zulrah's scales since we will not use it."
-    ]
-},
-"Toxic blowpipe": {
-    Requirements: [
-        { prefix: "Level 75 Ranged", text: null, link: null },
-        { prefix: "Level 78 Fletching", text: null, link: null },
-        { prefix: "Completion of ", text: "Regicide", link: "https://oldschool.runescape.wiki/w/Regicide" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Zulrah/Strategies' target='_blank'>Zulrah</a> for a (2 × 1/1,024 chance).",
-        "If you get a Magic fang, dismantle it for 20,000 Zulrah's scales since we will not use it."
-    ]
-},
-"Osmumten's fang": {
-    Requirements: [
-        { prefix: "Level 82 Attack", text: null, link: null },
-        { prefix: "Completion of ", text: "Beneath Cursed Sands", link: "https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> at raid level 300 or lower to maximize potential for Osmumten's fang and Lightbearer drops."
-    ]
-},
-"Lightbearer": {
-    Requirements: [
-        { prefix: "Completion of ", text: "Beneath Cursed Sands", link: "https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> at raid level 300 or lower to maximize potential for Osmumten's fang and Lightbearer drops."
-    ]
-},
-"Thread of elidinis": {
-    Requirements: [
-        { prefix: "Level 75 Crafting + Rune pouch", text: null, link: null },
-	{ prefix: "Completion of ", text: "Beneath Cursed Sands", link: "https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands" }
-    ],
-    Recommendations: [
-        "While grinding <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> for Osmumten's fang and Lightbearer you will eventually get this item along the way at a (1/10 - 1/3.33 chance depending on dryness)."
-    ]
-},
-"Rigour": {
-    Requirements: [
-        { prefix: "Level 74 Prayer", text: null, link: null },
-        { prefix: "Level 70 Defence", text: null, link: null }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Chambers_of_Xeric/Strategies' target='_blank'>Chambers of Xeric</a> until you get the Dexterous prayer scroll."
-    ]
-},
-"Augury": {
-    Requirements: [
-        { prefix: "Level 77 Prayer", text: null, link: null },
-        { prefix: "Level 70 Defence", text: null, link: null }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Chambers_of_Xeric/Strategies' target='_blank'>Chambers of Xeric</a> until you get the Arcane prayer scroll."
-    ]
-},
-"Purging staff": {
-    Requirements: [
-        { prefix: "Level 77 Magic and 50 Attack", text: null, link: null },
-        { prefix: "Level 74 Crafting and 55 Smithing", text: null, link: null },
-        { prefix: "Completion of ", text: "While Guthix Sleeps", link: "https://oldschool.runescape.wiki/w/While_Guthix_Sleeps" },
-   	{ prefix: "1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 battlestaff and 1 iron bar", text: null, link: null }
-    ],
-    Recommendations: [
-        "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
-        "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
-        "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
-    ]
-},
-"Emberlight": {
-    Requirements: [
-        { prefix: "Level 77 Attack", text: null, link: null },
-        { prefix: "Level 74 Smithing", text: null, link: null },
-        { prefix: "Completion of ", text: "While Guthix Sleeps", link: "https://oldschool.runescape.wiki/w/While_Guthix_Sleeps" },
-   	{ prefix: "1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 Arclight either fully charged (10,000 charges) or <a href='https://oldschool.runescape.wiki/w/Arclight#Infusion' target='_blank'>infused</a>, or a combination thereof.", text: null, link: null }
-    ],
-    Recommendations: [
-        "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
-        "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
-        "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
-    ]
-},
-"Oathplate helm": {
-    Requirements: [
-        { prefix: "Level 78 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "A Kingdom Divided", link: "https://oldschool.runescape.wiki/w/A_Kingdom_Divided" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Yama/Strategies' target='_blank'>Yama</a> with a duo partner. Aim to consistently contribute ~50% of the damage each kill to secure your drop chance (1/1200 per player)."
-    ]
-},
-"Oathplate chest": {
-    Requirements: [
-        { prefix: "Level 78 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "A Kingdom Divided", link: "https://oldschool.runescape.wiki/w/A_Kingdom_Divided" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Yama/Strategies' target='_blank'>Yama</a> with a duo partner. Aim to consistently contribute ~50% of the damage each kill to secure your drop chance (1/1200 per player)."
-    ]
-},
-"Oathplate legs": {
-    Requirements: [
-        { prefix: "Level 78 Defence", text: null, link: null },
-        { prefix: "Completion of ", text: "A Kingdom Divided", link: "https://oldschool.runescape.wiki/w/A_Kingdom_Divided" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Yama/Strategies' target='_blank'>Yama</a> with a duo partner. Aim to consistently contribute ~50% of the damage each kill to secure your drop chance (1/1200 per player)."
-    ]
-},
-"Rite of vile transference": {
-    Requirements: [
-        { prefix: "Level 80 Magic", text: null, link: null },
-        { prefix: "Completion of ", text: "A Kingdom Divided", link: "https://oldschool.runescape.wiki/w/A_Kingdom_Divided" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Yama/Strategies' target='_blank'>Yama</a> with a duo partner. Aim to consistently contribute ~50% of the damage each kill to secure your drop chance (1/361 per player) but the rite possesses a bad luck mitigation mechanic where the first dossier the player opens after reaching 100 Yama victories will guarantee the rite as loot. As the dossier can be deposited into the bank, wary players can opt to hold off on opening a dossier until they reach 100 victories."
-    ]
-},
-"Inferno Cape": {
-    Requirements: [
-         { prefix: "A fire cape you are willing to sacrifice (only needs to be done once)", text: null, link: null },
-	 { prefix: "Defeat ", text: "TzKal-Zuk", link: "https://oldschool.runescape.wiki/w/TzKal-Zuk" }
-    ],
-    Recommendations: [
-        `Review recommended gear and inventory for the <a href='https://oldschool.runescape.wiki/w/Inferno/Strategies' target='_blank'>Inferno</a>`
-    ]
-},
-"Dizana's quiver": {
-    Requirements: [
-         { prefix: "75 Ranged", text: null, link: null },
-	 { prefix: "Completion of ", text: "Children of the Sun", link: "https://oldschool.runescape.wiki/w/Children_of_the_Sun" },
- 	 { prefix: "Defeat ", text: "Sol Heredit", link: "https://oldschool.runescape.wiki/w/Sol_Heredit" }
-    ],
-    Recommendations: [
-        `Review recommended gear and inventory setup for the <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies' target='_blank'>Fortis Colosseum</a>`
-    ]
-},
-"Araxyte fang": {
-    Requirements: [
-        { prefix: "Level 90 Hitpoints", text: null, link: null },
-        { prefix: "Level 92 Slayer", text: null, link: null },
-        { prefix: "Level 86 Crafting", text: null, link: null },
-        { prefix: "Completion of ", text: "Priest in Peril", link: "https://oldschool.runescape.wiki/w/Priest_in_Peril" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Araxxor/Strategies' target='_blank'>Araxxor</a> on an Araxyte or Spider Slayer task to obtain the Araxyte fang (1/600 chance).",
-	"To create the <a href='https://oldschool.runescape.wiki/w/Amulet_of_rancour' target='_blank'>Amulet of rancour</a> combine the Araxyte fang with the Amulet of torture."
-    ]
-},
-"Noxious halberd": {
-    Requirements: [
-        { prefix: "Level 80 Attack", text: null, link: null },
-        { prefix: "Level 92 Slayer", text: null, link: null },
-        { prefix: "Level 72 Crafting & Smithing", text: null, link: null },
-        { prefix: "Completion of ", text: "Priest in Peril", link: "https://oldschool.runescape.wiki/w/Priest_in_Peril" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Araxxor/Strategies' target='_blank'>Araxxor</a> on an Araxyte or Spider Slayer task to obtain the Noxious point, blade, and pommel all of which have a (1/200 chance) then combine all three pieces to make the halberd."
-    ]
-},
-"Ferocious gloves": {
-    Requirements: [
-        { prefix: "Level 80 Attack", text: null, link: null },
-        { prefix: "Level 80 Defence", text: null, link: null },
-        { prefix: "Level 95 Slayer", text: null, link: null },
-        { prefix: "Completion of ", text: "Dragon Slayer II", link: "https://oldschool.runescape.wiki/w/Dragon_Slayer_II" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Alchemical_Hydra/Strategies' target='_blank'>Alchemical Hydra</a> while on a Hydra Slayer task to obtain the Hydra leather (1/514 chance)."
-    ]
-},
-"Avernic treads (max)": {
-    Requirements: [
-        { prefix: "Level 80 Defence, Strength, Ranged, and Magic", text: null, link: null },
-	{ prefix: "Level 91 Slayer", text: null, link: null },
-        { prefix: "Completion of ", text: "The Final Dawn", link: "https://oldschool.runescape.wiki/w/The_Final_Dawn" }
-        
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Cerberus/Strategies' target='_blank'>Cerberus</a> while on a Hellhounds Slayer task to get the Primordial, Pegasian, and Eternal crystals (each has a 1/520 chance).",
-        "Complete medium clue scrolls to obtain Ranger boots to use the Pegasian crystal.",
-        "Earn 120 Telekinetic, Alchemy, Graveyard, and 1200 Enchantment pizzaz points to purchase the Infinity boots to use the Eternal crystal."
-    ]
-},
-"Ultor ring": {
-    Requirements: [
-        { prefix: "Level 90 Magic", text: null, link: null },
-        { prefix: "Level 80 Crafting", text: null, link: null },
-        { prefix: "3 Chromium ingots", text: null, link: null },
-        { prefix: "Completion of ", text: "Desert Treasure II", link: "https://oldschool.runescape.wiki/w/Desert_Treasure_II_-_The_Fallen_Empire" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Vardorvis/Strategies' target='_blank'>Vardovis</a> for a (1/1088 chance) to obtain the Ultor vestige which is used to upgrade the Berserker ring."
-    ]
-},
-"Magus ring": {
-    Requirements: [
-        { prefix: "Level 90 Magic", text: null, link: null },
-        { prefix: "Level 80 Crafting", text: null, link: null },
-        { prefix: "3 Chromium ingots", text: null, link: null },
-        { prefix: "Completion of ", text: "Desert Treasure II", link: "https://oldschool.runescape.wiki/w/Desert_Treasure_II_-_The_Fallen_Empire" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Duke_Sucellus/Strategies' target='_blank'>Duke Sucellus</a> for a (1/720 chance) to obtain the Magus vestige which is used to upgrade the Seers ring.",
-	"You will then need to grind <a href='https://oldschool.runescape.wiki/w/Dagannoth_Kings/Strategiestarget='_blank'>Dagannoth Prime</a> for a (1/128 chance) to obtain the Seers ring."
-    ]
-},
-"Chambers of Xeric": {
-    Requirements: [],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Chambers_of_Xeric/Strategies' target='_blank'>Chambers of Xeric</a> along with the other two raids until you obtain the megarares and any other items you'd like."
-    ]
-},
-"Theatre of Blood": {
-    Requirements: [
-        { prefix: "Completion of ", text: "Priest in Peril", link: "https://oldschool.runescape.wiki/w/Priest_in_Peril" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Theatre_of_Blood/Strategies' target='_blank'>Theatre of Blood</a> along with the other two raids until you obtain the megarares and any other items you'd like."
-    ]
-},
-"Tombs of Amascut": {
-    Requirements: [
-        { prefix: "Completion of ", text: "Beneath Cursed Sands", link: "https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands" }
-    ],
-    Recommendations: [
-        "Grind <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> along with the other two raids until you obtain the megarares and any other items you'd like."
-    ]
-}
+ "Crystal shield": {Requirements:[
+    {prefix:"Level 70 Defence",text:null,link:null},
+    {prefix:"Level 50 Agility",text:null,link:null},
+    {prefix:"Completion of ",text:"Roving Elves",link:"https://oldschool.runescape.wiki/w/Roving_Elves"}
+  ], Recommendations:[
+    "Choose the shield after completing Roving Elves, we can get a crystal weapon seed to make the bow later on"
+  ]},
+ 
+ "Imbued zamorak cape": {Requirements:[
+    {prefix:"Level 75 Magic",text:null,link:null},
+    {prefix:"Completion of ",text:"Mage Arena II",link:"https://oldschool.runescape.wiki/w/Mage_Arena_II"}
+  ], Recommendations:[
+    'At level 75 Magic, you can go to the <a href="https://oldschool.runescape.wiki/w/Nightmare_Zone" target="_blank">Nightmare Zone</a> and use a Super Magic Potion to boost over level 80, cast <a href="https://oldschool.runescape.wiki/w/Charge" target="_blank">Charge</a>, and then head to the wilderness. <b>Important note:</b> Charge only lasts for 7 minutes, so you should find the demon before you boost in order to maximize the time.',
+    '<b>OR</b> Get at least 77+ Magic so that you can use a Wizard\'s mind bomb and boost to level 80 Magic to case Charge.'
+  ]},
+
+ "Ava's assembler": {Requirements:[
+    {prefix:"Level 70 Ranged",text:null,link:null},
+    {prefix:"Completion of ",text:"Dragon Slayer II",link:"https://oldschool.runescape.wiki/w/Dragon_Slayer_II"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Vorkath/Strategies' target='_blank'>Vorkath</a> until the head drops (1/50 chance) but guaranteed on the 50th kill."
+  ]},
+
+ "Bolt pouch": {Requirements:[
+    {prefix:"Partial completion of ",text:"The Giant Dwarf",link:"https://oldschool.runescape.wiki/w/The_Giant_Dwarf"}
+  ], Recommendations:[
+    "Use whenever bringing more than 1 set of bolts to a boss."
+  ]},
+ 
+ "Mixed hide boots": {Requirements:[
+    {prefix:"Level 60 Ranged",text:null,link:null},
+    {prefix:"Level 50 Defence",text:null,link:null},
+    {prefix:"Level 69 Crafting",text:null,link:null},
+    {prefix:"Level 72 Hunter",text:null,link:null}
+  ], Recommendations:[
+    "<b>The Crafting level can be bypassed by paying 17,500 gp to Pellem at the Hunter Guild.</b>"
+  ]},
+
+ "Hot Stuff": {Requirements:[
+    {prefix:"100 Slayer reward points",text:null,link:null}
+  ], Recommendations:[
+    "None"
+  ]},
+
+ "Fire cape": {Requirements:[
+    {prefix:"Defeat ",text:"TzTok-Jad",link:"https://oldschool.runescape.wiki/w/TzTok-Jad"}
+  ], Recommendations:[
+    "Review recommended gear and inventory setup for the <a href='https://oldschool.runescape.wiki/w/TzHaar_Fight_Cave/Strategies#Early-game_iron' target='_blank'>Fight Caves</a>",
+    "Bring Ancient staff, an Imbued god cape, and a Rune pouch filled with blood spells for emergency healing."
+  ]},
+
+ "Tank body": {Requirements:[
+    {prefix:"Level 70 Defence",text:null,link:null}
+  ], Recommendations:[
+    "Looking for Dharok, Guthan, or Torag chest slot armor.",
+    "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
+  ]},
+
+ "Tank legs": {Requirements:[
+    {prefix:"Level 70 Defence",text:null,link:null}
+  ], Recommendations:[
+    "Looking for Dharok, Guthan, or Torag leg slot armor.",
+    "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
+  ]},
+
+ "Colossal blade": {Requirements:[
+    {prefix:"Level 60 Attack",text:null,link:null},
+    {prefix:"5000 ",text:"Foundry Reputation",link:"https://oldschool.runescape.wiki/w/Giants'_Foundry"}
+  ], Recommendations:[
+    "Very useful item to use during Eclipse Moon's Clones phase."
+  ]},
+
+ "Berserker ring (i)": {Requirements:[
+    {prefix:"None",text:null,link:null}
+  ], Recommendations:[
+    "Bring super antipoisons, tank gear, and blood spells to <a href='https://oldschool.runescape.wiki/w/Dagannoth_Rex#/media/File:Dagannoth_Rex_safespot.png' target='_blank'>safespot Dagannoth Rex</a>.",
+    "Imbue using a <a href='https://oldschool.runescape.wiki/w/Scroll_of_imbuing' target='_blank'>Scroll of imbuing</a> from the PVP arena"
+  ]},
+
+ "Zombie axe": {Requirements:[
+    {prefix:"Level 65 Attack",text:null,link:null},
+    {prefix:"Level 70 Smithing",text:null,link:null},
+    {prefix:"Partial completion of ",text:"Defender of Varrock",link:"https://oldschool.runescape.wiki/w/Defender_of_Varrock"}
+  ], Recommendations:[
+    "Use burst or barrage spells to increase DPS and KPH when going for the axe."
+  ]},
+
+ "Amulet of fury": {Requirements:[
+    {prefix:"Level 90 Crafting",text:null,link:null},
+    {prefix:"Level 87 Magic",text:null,link:null},
+    {prefix:"1 Onyx",text:null,link:null}
+  ], Recommendations:[
+    "Purchase an Onyx at <a href='https://oldschool.runescape.wiki/w/TzHaar-Hur-Lek%27s_Ore_and_Gem_Store' target='_blank'>TzHaar-Hur-Lek's Ore and Gem Store</a> while having any pair of <a href='https://oldschool.runescape.wiki/w/Karamja_Diary' target='_blank'>Karamja gloves</a> in your inventory for 260,000 Tokkul.",
+    "Get to level 85 Crafting and use an <a href='https://oldschool.runescape.wiki/w/Spicy_stew' target='_blank'>orange stew</a> to boost to 90 Crafting and make the Onyx amulet.",
+    "Get to level 84 Magic and use a Wizard's mind domb to boost to 87 Magic."
+  ]},
+
+ "Blood moon armour set": {Requirements:[
+    {prefix:"Level 75 Strength",text:null,link:null},
+    {prefix:"Level 50 Defence",text:null,link:null},
+    {prefix:"Completion of ",text:"Perilous Moons",link:"https://oldschool.runescape.wiki/w/Perilous_Moons"}
+  ], Recommendations:[
+    "Use a slash weapon (Zombie axe <b>OR</b> Dragon Scimitar) and your Dragon dagger specs should be utilized on this boss to increase DPS as much as possible.",
+    "Use the <a href='https://oldschool.runescape.wiki/w/File:Blood_Moon_step_under_technique_16-9.mp4' target='_blank'>Step Under Technique</a> to negate the Curse of the Moon healing effect significantly, decreasing the time to kill.",
+    "Dodge the <a href='https://oldschool.runescape.wiki/w/File:Blood_Moon_-_dodging_blood_jaguars.mp4' target='_blank'>blood jaguars</a> to reduce another healing effect of the boss."
+  ]},
+
+ "Eclipse moon armour set": {Requirements:[
+    {prefix:"Level 75 Ranged",text:null,link:null},
+    {prefix:"Level 50 Defence",text:null,link:null},
+    {prefix:"Completion of ",text:"Perilous Moons",link:"https://oldschool.runescape.wiki/w/Perilous_Moons"}
+  ], Recommendations:[
+    "Use Zombie axe during the main phases of the boss, but do not worry about DPS during the main phases.",
+    "For the main DPS use your Colossal blade (or other slow attack speed weapon like the Zombie axe) during the <a href='https://oldschool.runescape.wiki/w/File:Eclipse_Moon_-_Mimic_attack.mp4' target='_blank'>Clone phase</a>. Just click the circle under the clone as it appears to not misclick the direction."
+  ]},
+
+ "Blue moon armour set": {Requirements:[
+    {prefix:"Level 75 Magic",text:null,link:null},
+    {prefix:"Level 50 Defence",text:null,link:null},
+    {prefix:"Completion of ",text:"Perilous Moons",link:"https://oldschool.runescape.wiki/w/Perilous_Moons"}
+  ], Recommendations:[
+    "Just sit back and relax with the Zombie axe on crush.",
+    "During the Weapon Freeze, if you fail to break the ice block you can take up to 28 damage, so utilize a <a href='https://oldschool.runescape.wiki/w/File:Blue_Moon_-_Weapon_Freeze_attack.mp4' target='_blank'>double hit technique</a>.", 
+    "During the Frost Storm the boss can heal up to 100 hp, so determine if its worth lighting the braziers to negate this affect."
+  ]},
+
+ "Deadeye": {Requirements:[
+    {prefix:"Level 62 Prayer",text:null,link:null}
+  ], Recommendations:[
+    "Kill the Royal Titans, but prioritize looting <a href='https://oldschool.runescape.wiki/w/Eldric_the_Ice_King' target='_blank'>Eldric the Ice King</a> <b>first</b> for the Deadeye Prayer Scroll, since Deadeye will be useful when going for the Mystic vigour prayer scroll and optionally the Twinflame staff pieces.",
+    "Use bone shards from the Perilous Moons grind to level your Prayer. Highly suggest using a <a href='https://oldschool.runescape.wiki/w/Jug_of_blessed_sunfire_wine' target='_blank'>Jug of Blessed Sunfire Wine</a> when offering the bone shards to increase XP. You can get 80 Sunfire Splinters every 2-3 minutes by farming <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies#/media/File:Wave_Break_Down_-_Cheat_Sheet.png' target='_blank'>Wave 1</a> of the Colosseum."
+  ]},
+
+ "Mystic Vigour": {Requirements:[
+    {prefix:"Level 63 Prayer",text:null,link:null}
+  ], Recommendations:[
+    "Kill the Royal Titans, and loot <a href='https://oldschool.runescape.wiki/w/Branda_the_Fire_Queen' target='_blank'>Branda the Fire Queen</a> <b>AFTER</b> you have the Deadeye Prayer Scroll, since Deadeye will be useful when going for the Mystic vigour prayer scroll and optionally the Twinflame staff pieces.",
+    "Use bone shards from the Perilous Moons grind to level your Prayer. Highly suggest using a <a href='https://oldschool.runescape.wiki/w/Jug_of_blessed_sunfire_wine' target='_blank'>Jug of Blessed Sunfire Wine</a> when offering the bone shards to increase XP. You can get 80 Sunfire Splinters every 2-3 minutes by farming <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies#/media/File:Wave_Break_Down_-_Cheat_Sheet.png' target='_blank'>Wave 1</a> of the Colosseum."
+  ]},
+
+ "Piety": {Requirements:[
+    {prefix:"Level 70 Prayer",text:null,link:null},
+    {prefix:"Level 70 Defence",text:null,link:null},
+    {prefix:"Completion of ",text:"King's Ransom",link:"https://oldschool.runescape.wiki/w/King%27s_Ransom"},
+    {prefix:"Completion of ",text:"Knight Waves Training Grounds",link:"https://oldschool.runescape.wiki/w/Knight_Waves_Training_Grounds"}
+  ], Recommendations:[
+    "Utilize the flinching method by standing near one of the target dummies and waiting for the Knights' HP bar to disappear. Then, attack and step back into the safespot.",
+    "Use a Zombie axe for all of the fights, just change the attack style: 1st, 2nd, 3rd, 6th, 8th knights: <b>SLASH</b> and 4th, 5th, 7th knights: <b>CRUSH</b>",
+    "Use bone shards from the Perilous Moons grind to level your Prayer. Highly suggest using a <a href='https://oldschool.runescape.wiki/w/Jug_of_blessed_sunfire_wine' target='_blank'>Jug of Blessed Sunfire Wine</a> when offering the bone shards to increase XP. You can get 80 Sunfire Splinters every 2-3 minutes by farming <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies#/media/File:Wave_Break_Down_-_Cheat_Sheet.png' target='_blank'>Wave 1</a> of the Colosseum."
+  ]},
+
+ "Twinflame staff": {Requirements:[
+    {prefix:"Level 60 Magic",text:null,link:null}
+  ], Recommendations:[
+    "Item is optional because you have a chance of getting it while grinding for the Deadeye and Mystic Vigour prayer scrolls.",
+    "It is a nice weapon to have when using magic against enemies that have <a href='https://oldschool.runescape.wiki/w/Elemental_weakness#List_of_NPCs_with_elemental_weaknesses' target='_blank'>Elemental weaknesses</a>."
+  ]},
+
+ "Crystal helm": {Requirements:[
+    {prefix:"Level 70 Defence",text:null,link:null},
+    {prefix:"Level 50 Agility",text:null,link:null},
+    {prefix:"Completion of ",text:"Song of the Elves",link:"https://oldschool.runescape.wiki/w/Song_of_the_Elves"},
+    {prefix:"1 Armour seed + 50 Crystal shards",text:null,link:null}
+  ], Recommendations:[
+    "It's recommended to craft the Crystal helm only after you have made the Crystal body and Crystal legs, as the Slayer helm is generally used more often. The Crystal helm becomes more useful primarily when engaging in PvM activities outside of Slayer tasks."
+  ]},
+
+ "Crystal body": {Requirements:[
+    {prefix:"Level 70 Defence",text:null,link:null},
+    {prefix:"Level 50 Agility",text:null,link:null},
+    {prefix:"Completion of ",text:"Song of the Elves",link:"https://oldschool.runescape.wiki/w/Song_of_the_Elves"},
+    {prefix:"3 Armour seed + 150 Crystal shards",text:null,link:null}
+  ], Recommendations:[
+    "None"
+  ]},
+
+ "Crystal legs": {Requirements:[
+    {prefix:"Level 70 Defence",text:null,link:null},
+    {prefix:"Level 50 Agility",text:null,link:null},
+    {prefix:"Completion of ",text:"Song of the Elves",link:"https://oldschool.runescape.wiki/w/Song_of_the_Elves"},
+    {prefix:"2 Armour seed + 100 Crystal shards",text:null,link:null}
+  ], Recommendations:[
+    "None"
+  ]},
+
+ "Bow of Faerdhinen (c)": {Requirements:[
+    {prefix:"Level 80 Ranged",text:null,link:null},
+    {prefix:"Level 70 Agility",text:null,link:null},
+    {prefix:"Completion of ",text:"Song of the Elves",link:"https://oldschool.runescape.wiki/w/Song_of_the_Elves"},
+    {prefix:"Enhanced Crystal Weapon Seed + 2000 Crystal shards",text:null,link:null}
+  ], Recommendations:[
+    "Good luck on your sentence at the Red Prison. Patience will be a virtue required to be successful, as the grind can be long, but the reward is well worth the effort."
+  ]},
+
+ "Dragon warhammer": {Requirements:[
+    {prefix:"Level 60 Strength",text:null,link:null}
+  ], Recommendations:[
+    "Utilize the <a href='https://youtu.be/pjgh_JND3wY?si=w2rpJGVCpo7Cpzg7&t=128' target='_blank'>2 alt red X method</a> for approximately 150 KPH.",
+    "If you prefer not to use the Red X method, it's highly recommended to unlock <a href='https://oldschool.runescape.wiki/w/Slayer_Rewards#Unlock' target='_blank'>Reptile Got Ripped</a> for 75 Slayer reward points to be assigned Lizardmen as a task.",
+    "Additionally, completing the <a href='https://oldschool.runescape.wiki/w/Kourend_%26_Kebos_Diary#Hard' target='_blank'>Kourend Hard Diary</a> is recommended, so you can use the Slayer helm instead of the Shayzien helm (5)."
+  ]},
+ 
+ "Ancient icon": {Requirements:[
+    {prefix:"Completion of ",text:"Secrets of the North",link:"https://oldschool.runescape.wiki/w/Secrets_of_the_North"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Phantom_Muspah/Strategies' target='_blank'>Phantom Muspah</a> until the icon drops (1/50 chance)."
+  ]},
+
+ "Greater Challenge": {Requirements:[
+    {prefix:"100 Slayer reward points",text:null,link:null}
+  ], Recommendations:[
+    "This will be a useful unlock for grinding Tormented demons on Slayer task later on when chasing Tormented synapse(s) and Burning claws."
+  ]},
+
+ "It's Dark in Here": {Requirements:[
+    {prefix:"100 Slayer reward points",text:null,link:null}
+  ], Recommendations:[
+    "This will be a useful unlock for grinding Demonic gorillas on Slayer task later on when chasing uncut zenytes."
+  ]},
+
+ "Arclight": {Requirements:[
+    {prefix:"Level 75 Attack",text:null,link:null},
+    {prefix:"Completion of ",text:"Shadow of the Storm",link:"https://oldschool.runescape.wiki/w/Shadow_of_the_Storm"},
+    {prefix:"Completion of ",text:"Demon Slayer",link:"https://oldschool.runescape.wiki/w/Demon_Slayer"}
+  ], Recommendations:[
+    "Burst Dust Devils or Bloodvelds in the Catacombs of Kourend to farm <a href='https://oldschool.runescape.wiki/w/Ancient_shard' target='_blank'>Ancient shards</a> and make the <a href='https://oldschool.runescape.wiki/w/Arclight#Creation' target='_blank'>Arclight</a>."
+  ]},
+
+ "Voidwaker": {Requirements:[
+    {prefix:"Level 75 Attack",text:null,link:null},
+    {prefix:"Voidwaker blade, hilt, and gem + 500,000 gp",text:null,link:null}
+  ], Recommendations:[
+    "This grind will have you in the Wilderness where you can be attacked and killed by other players. Strongly recommend using alt accounts for scouting purposes. Turn on <a href='https://oldschool.runescape.wiki/w/Protect_Item' target='_blank'>Protect Item</a>. Enable PK Skull Prevention in Controls Settings. DO NOT BRING ANY ITEM YOU ARE NOT WILLING TO LOSE IF YOU DIE.",
+    "Blade from <a href='https://oldschool.runescape.wiki/w/Calvar%27ion/Strategies' target='_blank'>killing Calvar'ion</a> using Zombie axe/Salve amulet.",
+    "Hilt from <a href='https://oldschool.runescape.wiki/w/Artio/Strategies' target='_blank'>killing Artio</a> using Crystal armour and Bow of Faerdhinen.",
+    "Gem from <a href='https://oldschool.runescape.wiki/w/Spindel/Strategies' target='_blank'>killing Spindle</a> using Crystal armour and Bow of Faerdhinen."
+  ]},
+
+ "Ring of suffering": {Requirements:[
+    {prefix:"Level 75 Hitpoints",text:null,link:null},
+    {prefix:"Level 89 Crafting",text:null,link:null},
+    {prefix:"Level 93 Magic",text:null,link:null},
+    {prefix:"1 ",text:"Zenyte",link:"https://oldschool.runescape.wiki/w/Zenyte"}
+  ], Recommendations:[
+    "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
+    "Use a <a href='https://oldschool.runescape.wiki/w/Mushroom_pie' target='_blank'>mushroom pie</a> to boost to 89 crafting and make the Zenyte ring."
+  ]},
+
+ "Necklace of anguish": {Requirements:[
+    {prefix:"Level 75 Hitpoints",text:null,link:null},
+    {prefix:"Level 92 Crafting",text:null,link:null},
+    {prefix:"Level 93 Magic",text:null,link:null},
+    {prefix:"1 ",text:"Zenyte",link:"https://oldschool.runescape.wiki/w/Zenyte"}
+  ], Recommendations:[
+    "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
+    "Get to level 88 Crafting and use a <a href='https://oldschool.runescape.wiki/w/Mushroom_pie' target='_blank'>mushroom pie</a> to boost to 92 Crafting and make the Zenyte necklace."
+  ]},
+ 
+ "Tormented bracelet": {Requirements:[
+    {prefix:"Level 75 Hitpoints",text:null,link:null},
+    {prefix:"Level 95 Crafting",text:null,link:null},
+    {prefix:"Level 93 Magic",text:null,link:null},
+    {prefix:"1 ",text:"Zenyte",link:"https://oldschool.runescape.wiki/w/Zenyte"}
+  ], Recommendations:[
+    "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
+    "Get to level 91 Crafting and use a <a href='https://oldschool.runescape.wiki/w/Mushroom_pie' target='_blank'>mushroom pie</a> to boost to 95 Crafting and make the Zenyte bracelet."
+  ]},
+
+ "Amulet of torture": {Requirements:[
+    {prefix:"Level 75 Hitpoints",text:null,link:null},
+    {prefix:"Level 98 Crafting",text:null,link:null},
+    {prefix:"Level 93 Magic",text:null,link:null},
+    {prefix:"1 ",text:"Zenyte",link:"https://oldschool.runescape.wiki/w/Zenyte"}
+  ], Recommendations:[
+    "Kill demonic gorillas while on a black demon slayer task to get the Zenyte shard (1/300 chance).",
+    "Get to level 93 Crafting and use an <a href='https://oldschool.runescape.wiki/w/Spicy_stew' target='_blank'>orange stew</a> to boost to 98 Crafting and make the Zenyte necklace."
+  ]},
+
+  "Scorching bow": {Requirements:[
+    {prefix:"Level 77 Ranged",text:null,link:null},
+    {prefix:"Level 74 Fletching",text:null,link:null},
+    {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
+    {prefix:"1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 Magic longbow (u)", text:null, link:null}
+  ], Recommendations:[
+    "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
+    "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
+    "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
+  ]},
+
+  "Burning claws": {Requirements:[
+    {prefix:"Level 60 Attack",text:null,link:null},
+    {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
+    {prefix:"2 ",text:"Burning claw",link:"https://oldschool.runescape.wiki/w/Burning_claw"}
+  ], Recommendations:[
+    "Kill tormented demons while on a greater demon slayer task to get the Burning claw (1/501 chance).",
+    "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
+    "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
+  ]},
+
+  "Dragon boots": {Requirements:[
+    {prefix:"Level 60 Defence",text:null,link:null},
+    {prefix:"Level 83 Slayer",text:null,link:null}
+  ], Recommendations:[
+    "Grind Slayer to level 83. While you can boost with a <a href='https://oldschool.runescape.wiki/w/Wild_pie' target='_blank'>Wild pie</a> from level 78 Slayer, you need higher Slayer to get the Abyssal whip anyway, so might as well just get 83 for now."
+  ]},
+
+  "Abyssal whip": {Requirements:[
+    {prefix:"Level 70 Attack",text:null,link:null},
+    {prefix:"Level 85 Slayer",text:null,link:null}
+  ], Recommendations:[
+    "While you can use a <a href='https://oldschool.runescape.wiki/w/Wild_pie' target='_blank'>Wild pie</a> boost from level 80 and burst/barrage Abyssal Demons in the Kourend catacombs for quick kills, hoping you get lucky before the boost runs out, it's highly recommended to wait until you're level 83 Slayer so that your boost lasts longer."
+  ]},
+
+  "Void ranger helm": {Requirements:[
+    {prefix:"Level 42 in ALL combat stats and Level 22 Prayer",text:null,link:null},
+    {prefix:"200 ",text:"Commendation points",link:"https://oldschool.runescape.wiki/w/Void_Knight_commendation_points"}
+  ], Recommendations:[
+    "Use the Veteran boat to maximize base point potential.",
+    "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
+  ]},
+
+  "Void knight gloves": {Requirements:[
+    {prefix:"Level 42 in ALL combat stats and Level 22 Prayer",text:null,link:null},
+    {prefix:"150 ",text:"Commendation points",link:"https://oldschool.runescape.wiki/w/Void_Knight_commendation_points"}
+  ], Recommendations:[
+    "Use the Veteran boat to maximize base point potential.",
+    "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
+  ]},
+
+  "Elite void top": {Requirements:[
+    {prefix:"Level 42 in ALL combat stats and Level 22 Prayer",text:null,link:null},
+    {prefix:"Completion of <a href='https://oldschool.runescape.wiki/w/Western_Provinces_Diary' target='_blank'> Wester Provinces Hard Diary</a>",text:null,link:null},
+    {prefix:"200 <a href='https://oldschool.runescape.wiki/w/Void_Knight_commendation_points' target='_blank'>Commendation points</a> + <a href='https://oldschool.runescape.wiki/w/Void_knight_top' target='_blank'>Void knight top</a>",text:null,link:null}
+  ], Recommendations:[
+    "Use the Veteran boat to maximize base point potential.",
+    "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
+  ]},
+
+  "Elite void robe": {Requirements:[
+    {prefix:"Level 42 in ALL combat stats and Level 22 Prayer",text:null,link:null},
+    {prefix:"Completion of <a href='https://oldschool.runescape.wiki/w/Western_Provinces_Diary' target='_blank'> Wester Provinces Hard Diary</a>",text:null,link:null},
+    {prefix:"200 <a href='https://oldschool.runescape.wiki/w/Void_Knight_commendation_points' target='_blank'>Commendation points</a> + <a href='https://oldschool.runescape.wiki/w/Void_knight_robe' target='_blank'>Void knight robe</a>",text:null,link:null}
+  ], Recommendations:[
+    "Use the Veteran boat to maximize base point potential.",
+    "Complete the easy <b>AND / OR</b> medium <b>AND / OR</b> hard <a href='https://oldschool.runescape.wiki/w/Combat_Achievements' target='_blank'>Combat Achievements</a> to earn an additional 1, 2, and 3 points respectively per Pest Control victory."
+  ]},
+
+  "Avernic treads": {Requirements:[
+    {prefix:"Level 80 Defence, Strength, Ranged, and Magic",text:null,link:null},
+    {prefix:"Completion of ",text:"The Final Dawn",link:"https://oldschool.runescape.wiki/w/The_Final_Dawn"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Doom_of_Mokhaiotl/Strategies' target='_blank'>Doom of Mokhaiotl</a> at delve level 4 or deeper for a (1/1350 – 1/540 chance)."
+  ]},
+
+  "Eye of Ayak": {Requirements:[
+    {prefix:"Level 83 Magic",text:null,link:null},
+    {prefix:"Completion of ",text:"The Final Dawn",link:"https://oldschool.runescape.wiki/w/The_Final_Dawn"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Doom_of_Mokhaiotl/Strategies' target='_blank'>Doom of Mokhaiotl</a> at delve level 3 or deeper for a (1/2000 – 1/540 chance)."
+  ]},
+
+  "Mokhaiotl cloth": {Requirements:[
+    {prefix:"Level 83 Magic",text:null,link:null},
+    {prefix:"Completion of ",text:"The Final Dawn",link:"https://oldschool.runescape.wiki/w/The_Final_Dawn"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Doom_of_Mokhaiotl/Strategies' target='_blank'>Doom of Mokhaiotl</a> at delve level 2 or deeper for a (1/2500 – 1/540 chance).",
+    "You will also need 10,000 <a href='https://oldschool.runescape.wiki/w/Demon_tear' target='_blank'>Demon tears</a> when you go to combine the Mokhaiotl cloth with the Tormented bracelet, creating the <a href='https://oldschool.runescape.wiki/w/Confliction_gauntlets' target='_blank'>Confliction gauntlets</a>"
+  ]},
+
+  "Occult necklace": {Requirements:[{prefix:"Level 93 Slayer",text:null,link:null}], Recommendations:[
+    "Grind Slayer tasks to 93 Slayer, prioritizing XP by focusing on burst/barrage and cannonable tasks."
+  ]},
+
+  "Serpentine helm": {Requirements:[
+    {prefix:"Level 75 Defence",text:null,link:null},
+    {prefix:"Level 52 Crafting",text:null,link:null},
+    {prefix:"Completion of ",text:"Regicide",link:"https://oldschool.runescape.wiki/w/Regicide"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Zulrah/Strategies' target='_blank'>Zulrah</a> for a (2 × 1/1,024 chance).",
+    "If you get a Magic fang, dismantle it for 20,000 Zulrah's scales since we will not use it."
+  ]},
+
+  "Toxic blowpipe": {Requirements:[
+    {prefix:"Level 75 Ranged",text:null,link:null},
+    {prefix:"Level 78 Fletching",text:null,link:null},
+    {prefix:"Completion of ",text:"Regicide",link:"https://oldschool.runescape.wiki/w/Regicide"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Zulrah/Strategies' target='_blank'>Zulrah</a> for a (2 × 1/1,024 chance).",
+    "If you get a Magic fang, dismantle it for 20,000 Zulrah's scales since we will not use it."
+  ]},
+
+  "Osmumten's fang": {Requirements:[
+    {prefix:"Level 82 Attack",text:null,link:null},
+    {prefix:"Completion of ",text:"Beneath Cursed Sands",link:"https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> at raid level 300 or lower to maximize potential for Osmumten's fang and Lightbearer drops."
+  ]},
+
+  "Lightbearer": {Requirements:[
+    {prefix:"Completion of ",text:"Beneath Cursed Sands",link:"https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> at raid level 300 or lower to maximize potential for Osmumten's fang and Lightbearer drops."
+  ]},
+
+  "Thread of elidinis": {Requirements:[
+    {prefix:"Level 75 Crafting + Rune pouch",text:null,link:null},
+    {prefix:"Completion of ",text:"Beneath Cursed Sands",link:"https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands"}
+  ], Recommendations:[
+    "While grinding <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> for Osmumten's fang and Lightbearer you will eventually get this item along the way at a (1/10 - 1/3.33 chance depending on dryness)."
+  ]},
+
+  "Rigour": {Requirements:[
+    {prefix:"Level 74 Prayer",text:null,link:null},
+    {prefix:"Level 70 Defence",text:null,link:null}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Chambers_of_Xeric/Strategies' target='_blank'>Chambers of Xeric</a> until you get the Dexterous prayer scroll."
+  ]},
+
+  "Augury": {Requirements:[
+    {prefix:"Level 77 Prayer",text:null,link:null},
+    {prefix:"Level 70 Defence",text:null,link:null}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Chambers_of_Xeric/Strategies' target='_blank'>Chambers of Xeric</a> until you get the Arcane prayer scroll."
+  ]},
+
+  "Purging staff": {Requirements:[
+    {prefix:"Level 77 Magic and 50 Attack",text:null,link:null},
+    {prefix:"Level 74 Crafting and 55 Smithing",text:null,link:null},
+    {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
+    {prefix:"1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 battlestaff and 1 iron bar",text:null,link:null}
+  ], Recommendations:[
+    "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
+    "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
+    "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
+  ]},
+
+  "Emberlight": {Requirements:[
+    {prefix:"Level 77 Attack",text:null,link:null},
+    {prefix:"Level 74 Smithing",text:null,link:null},
+    {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
+    {prefix:"1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 Arclight either fully charged (10,000 charges) or <a href='https://oldschool.runescape.wiki/w/Arclight#Infusion' target='_blank'>infused</a>, or a combination thereof.",text:null,link:null}
+  ], Recommendations:[
+    "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
+    "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
+    "For <a href='https://youtu.be/TgWNIkkUpdg?si=MINxxJogDev2e7g4&t=478' target='_blank'>punishing hits</a> bring a Rune crossbow and either a Dharok's greataxe (if you got one during your Barrows grind) or get a <a href='https://oldschool.runescape.wiki/w/Tzhaar-ket-om' target='_blank'>TzHaar-ket-om</a>."
+  ]},
+
+  "Inferno Cape": {Requirements:[
+    {prefix:"A fire cape you are willing to sacrifice (only needs to be done once)", text:null, link:null},
+    {prefix:"Defeat ", text:"TzKal-Zuk", link:"https://oldschool.runescape.wiki/w/TzKal-Zuk"}
+  ], Recommendations:[
+    "Review recommended gear and inventory for the <a href='https://oldschool.runescape.wiki/w/Inferno/Strategies' target='_blank'>Inferno</a>"
+  ]},
+
+  "Dizana's quiver": {Requirements:[
+    {prefix:"75 Ranged",text:null,link:null},
+    {prefix:"Completion of ",text:"Children of the Sun",link:"https://oldschool.runescape.wiki/w/Children_of_the_Sun"},
+    {prefix:"Defeat ",text:"Sol Heredit",link:"https://oldschool.runescape.wiki/w/Sol_Heredit"}
+  ], Recommendations:[
+    "Review recommended gear and inventory setup for the <a href='https://oldschool.runescape.wiki/w/Fortis_Colosseum/Strategies' target='_blank'>Fortis Colosseum</a>"
+  ]},
+
+  "Araxyte fang": {Requirements:[
+    {prefix:"Level 90 Hitpoints",text:null,link:null},
+    {prefix:"Level 92 Slayer",text:null,link:null},
+    {prefix:"Level 86 Crafting",text:null,link:null},
+    {prefix:"Completion of ",text:"Priest in Peril",link:"https://oldschool.runescape.wiki/w/Priest_in_Peril"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Araxxor/Strategies' target='_blank'>Araxxor</a> on an Araxyte or Spider Slayer task to obtain the Araxyte fang (1/600 chance).",
+    "To create the <a href='https://oldschool.runescape.wiki/w/Amulet_of_rancour' target='_blank'>Amulet of rancour</a> combine the Araxyte fang with the Amulet of torture."
+  ]},
+
+  "Noxious halberd": {Requirements:[
+    {prefix:"Level 80 Attack",text:null,link:null},
+    {prefix:"Level 92 Slayer",text:null,link:null},
+    {prefix:"Level 72 Crafting & Smithing",text:null,link:null},
+    {prefix:"Completion of ",text:"Priest in Peril",link:"https://oldschool.runescape.wiki/w/Priest_in_Peril"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Araxxor/Strategies' target='_blank'>Araxxor</a> on an Araxyte or Spider Slayer task to obtain the Noxious point, blade, and pommel all of which have a (1/200 chance) then combine all three pieces to make the halberd."
+  ]},
+
+  "Ferocious gloves": {Requirements:[
+    {prefix:"Level 80 Attack",text:null,link:null},
+    {prefix:"Level 80 Defence",text:null,link:null},
+    {prefix:"Level 95 Slayer",text:null,link:null},
+    {prefix:"Completion of ",text:"Dragon Slayer II",link:"https://oldschool.runescape.wiki/w/Dragon_Slayer_II"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Alchemical_Hydra/Strategies' target='_blank'>Alchemical Hydra</a> while on a Hydra Slayer task to obtain the Hydra leather (1/514 chance)."
+  ]},
+
+  "Avernic treads (max)": {Requirements:[
+    {prefix:"Level 80 Defence, Strength, Ranged, and Magic",text:null,link:null},
+    {prefix:"Level 91 Slayer",text:null,link:null},
+    {prefix:"Completion of ",text:"The Final Dawn",link:"https://oldschool.runescape.wiki/w/The_Final_Dawn"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Cerberus/Strategies' target='_blank'>Cerberus</a> while on a Hellhounds Slayer task to get the Primordial, Pegasian, and Eternal crystals (each has a 1/520 chance).",
+    "Complete medium clue scrolls to obtain Ranger boots to use the Pegasian crystal.",
+    "Earn 120 Telekinetic, Alchemy, Graveyard, and 1200 Enchantment pizzaz points to purchase the Infinity boots to use the Eternal crystal."
+  ]},
+
+  "Ultor ring": {Requirements:[
+    {prefix:"Level 90 Magic",text:null,link:null},
+    {prefix:"Level 80 Crafting",text:null,link:null},
+    {prefix:"3 Chromium ingots",text:null,link:null},
+    {prefix:"Completion of ",text:"Desert Treasure II",link:"https://oldschool.runescape.wiki/w/Desert_Treasure_II_-_The_Fallen_Empire"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Vardorvis/Strategies' target='_blank'>Vardovis</a> for a (1/1088 chance) to obtain the Ultor vestige which is used to upgrade the Berserker ring."
+  ]},
+
+  "Magus ring": {Requirements:[
+    {prefix:"Level 90 Magic",text:null,link:null},
+    {prefix:"Level 80 Crafting",text:null,link:null},
+    {prefix:"3 Chromium ingots",text:null,link:null},
+    {prefix:"Completion of ",text:"Desert Treasure II",link:"https://oldschool.runescape.wiki/w/Desert_Treasure_II_-_The_Fallen_Empire"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Duke_Sucellus/Strategies' target='_blank'>Duke Sucellus</a> for a (1/720 chance) to obtain the Magus vestige which is used to upgrade the Seers ring.",
+    "You will then need to grind <a href='https://oldschool.runescape.wiki/w/Dagannoth_Kings/Strategies' target='_blank'>Dagannoth Prime</a> for a (1/128 chance) to obtain the Seers ring."
+  ]},
+
+  "Chambers of Xeric": {Requirements:[], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Chambers_of_Xeric/Strategies' target='_blank'>Chambers of Xeric</a> along with the other two raids until you obtain the megarares and any other items you'd like."
+  ]},
+
+  "Theatre of Blood": {Requirements:[
+    {prefix:"Completion of ",text:"Priest in Peril",link:"https://oldschool.runescape.wiki/w/Priest_in_Peril"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Theatre_of_Blood/Strategies' target='_blank'>Theatre of Blood</a> along with the other two raids until you obtain the megarares and any other items you'd like."
+  ]},
+
+  "Tombs of Amascut": {Requirements:[
+    {prefix:"Completion of ",text:"Beneath Cursed Sands",link:"https://oldschool.runescape.wiki/w/Beneath_Cursed_Sands"}
+  ], Recommendations:[
+    "Grind <a href='https://oldschool.runescape.wiki/w/Tombs_of_Amascut/Strategies' target='_blank'>Tombs of Amascut</a> along with the other two raids until you obtain the megarares and any other items you'd like."
+  ]}
 };
 
-const optionalItems = ["Bolt pouch","Colossal blade","Twinflame staff","Voidwaker","Noxious halberd"];
-
+const optionalItems=["Bolt pouch","Colossal blade","Twinflame staff","Voidwaker","Noxious halberd"];
 const imageOverrides = {
     "Helm of Neitiznot": "https://oldschool.runescape.wiki/images/Helm_of_neitiznot.png",
     "Hot Stuff": "https://oldschool.runescape.wiki/images/Tok-Xil_%28Construction%29_icon.png",
@@ -1146,39 +954,44 @@ const imageOverrides = {
     "Inferno Cape": "https://oldschool.runescape.wiki/images/Infernal_cape.png",
     "Ferocious gloves": "https://oldschool.runescape.wiki/images/Ferocious_gloves.png",
     "Chambers of Xeric": "https://oldschool.runescape.wiki/images/thumb/Chambers_of_Xeric_logo.png/250px-Chambers_of_Xeric_logo.png",
-    "Theatre of Blood": "https://oldschool.runescape.wiki/images/thumb/Theatre_of_Blood_logo.png/250px-Theatre_of_Blood_logo.png",
-    };
+    "Theatre of Blood": "https://oldschool.runescape.wiki/images/thumb/Theatre_of_Blood_logo.png/250px-Theatre_of_Blood_logo.png"
+};
 
 function getItemImage(name) {
     if (imageOverrides[name]) return imageOverrides[name];
-    const safe = name.replace(/[^\w%()'-]/g,'_').replace(/__+/g,'_');
+    
+    const safe = name.replace(/[^\w%()'-]/g, '_').replace(/__+/g, '_');
     return `https://oldschool.runescape.wiki/images/thumb/${safe}.png/40px-${safe}.png`;
 }
 
 function createItemBox(name) {
     const box = document.createElement('div');
     box.className = 'item-box';
+
     const img = document.createElement('img');
     img.src = getItemImage(name);
     img.alt = name;
-    img.onerror = () => { img.src = 'https://via.placeholder.com/40?text=?'; };
+    img.onerror = () => img.src = 'https://via.placeholder.com/40?text=?';
+
     const tooltip = document.createElement('div');
     tooltip.className = 'tooltip';
     tooltip.textContent = name;
-    box.appendChild(img);
-    box.appendChild(tooltip);
+
+    box.append(img, tooltip);
 
     if (optionalItems.includes(name)) {
         const badge = document.createElement('div');
+        Object.assign(badge.style, {
+            position: 'absolute',
+            bottom: '4px',
+            right: '4px',
+            fontSize: '10px',
+            color: '#ffd98a',
+            background: 'rgba(0,0,0,0)',
+            padding: '1px 3px',
+            borderRadius: '3px'
+        });
         badge.textContent = 'Optional';
-        badge.style.position = 'absolute';
-        badge.style.bottom = '4px';
-        badge.style.right = '4px';
-        badge.style.fontSize = '10px';
-        badge.style.color = '#ffd98a';
-        badge.style.background = 'rgba(0, 0, 0, 0)';
-        badge.style.padding = '1px 3px';
-        badge.style.borderRadius = '3px';
         box.appendChild(badge);
     }
 
@@ -1186,223 +999,200 @@ function createItemBox(name) {
 }
 
 function renderProgression() {
-    const container = document.getElementById('progression');
-    const maxPerRow = 6;
-    let rowContainer = null;
-    let sectionsInRow = 0;
-    let rowCount = 0;
+    container.innerHTML = '';
 
-    sections.forEach((items, sIndex) => {
-    if (sectionsInRow === 0) {
-        rowContainer = document.createElement('div');
-        rowContainer.style.display = 'flex';
-        rowContainer.style.gap = '10px';
-        rowContainer.style.alignItems = 'flex-start';
-        rowContainer.style.marginBottom = '50px';
-        container.appendChild(rowContainer);
-        rowCount++;
-    }
+    if (isMobile()) {
+        sections.forEach(items => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'section';
+            sectionDiv.style.display = 'flex';
+            sectionDiv.style.flexDirection = 'column';
+            sectionDiv.style.gap = '8px';
+            sectionDiv.style.marginBottom = '20px';
 
-    const sectionDiv = document.createElement('div');
-    sectionDiv.className = 'section';
+            const row = document.createElement('div');
+            Object.assign(row.style, {
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
+                justifyContent: 'center'
+            });
 
-    const row1 = document.createElement('div');
-    row1.className = 'row';
-    const row2 = document.createElement('div');
-    row2.className = 'row';
+            items.forEach(i => row.appendChild(createItemBox(i)));
+            sectionDiv.append(row);
 
-    if (items.length === 2 || sIndex === sections.length - 1) {
-        items.forEach(item => {
-            row1.appendChild(createItemBox(item));
+            const arrow = document.createElement('div');
+            arrow.className = 'arrow';
+            arrow.textContent = '⬇';
+            sectionDiv.appendChild(arrow);
+
+            container.appendChild(sectionDiv);
         });
     } else {
-        const mid = Math.ceil(items.length / 2);
-        items.forEach((item, i) => {
-            const box = createItemBox(item);
-            if (i < mid) row1.appendChild(box);
-            else row2.appendChild(box);
+        let rowContainer = null;
+        let sectionsInRow = 0;
+        const maxPerRow = 6;
+
+        sections.forEach((items, sIndex) => {
+            if (sectionsInRow === 0) {
+                rowContainer = document.createElement('div');
+                Object.assign(rowContainer.style, {
+                    display: 'flex',
+                    gap: '10px',
+                    alignItems: 'flex-start',
+                    marginBottom: '50px'
+                });
+                container.appendChild(rowContainer);
+            }
+
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'section';
+
+            const row1 = document.createElement('div');
+            row1.className = 'row';
+            const row2 = document.createElement('div');
+            row2.className = 'row';
+
+            if (items.length === 2 || sIndex === sections.length - 1) {
+                items.forEach(i => row1.appendChild(createItemBox(i)));
+            } else {
+                const mid = Math.ceil(items.length / 2);
+                items.forEach((i, idx) => (idx < mid ? row1 : row2).appendChild(createItemBox(i)));
+            }
+
+            sectionDiv.append(row1);
+            if (row2.children.length > 0) sectionDiv.append(row2);
+            rowContainer.appendChild(sectionDiv);
+
+            sectionsInRow++;
+            if (sectionsInRow < maxPerRow && sIndex < sections.length - 1) {
+                const arrow = document.createElement('div');
+                arrow.className = 'arrow';
+                arrow.textContent = '➡';
+                rowContainer.appendChild(arrow);
+            }
+            if (sectionsInRow === maxPerRow) sectionsInRow = 0;
         });
     }
-
-    sectionDiv.appendChild(row1);
-    if (row2.children.length > 0) sectionDiv.appendChild(row2);
-    rowContainer.appendChild(sectionDiv);
-    sectionsInRow++;
-
-    if (sectionsInRow < maxPerRow && sIndex < sections.length - 1) {
-        const arrow = document.createElement('div');
-        arrow.className = 'arrow';
-        arrow.textContent = '➡';
-        rowContainer.appendChild(arrow);
-    }
-
-    if (sectionsInRow === maxPerRow) sectionsInRow = 0;
-});
 }
 
 renderProgression();
 
-document.addEventListener("DOMContentLoaded", () => {
-    const saved = JSON.parse(localStorage.getItem("osrsProgress") || "{}");
-    for (const [itemName, isDone] of Object.entries(saved)) {
-        if (isDone) {
-            const box = [...document.querySelectorAll('.item-box')]
-                .find(b => b.querySelector('.tooltip').textContent === itemName);
-            if (box) box.style.background = 'green';
-        }
-    }
+const savedProgress = JSON.parse(localStorage.getItem("osrsProgress") || "{}");
 
-    document.querySelectorAll('.item-box').forEach(box => {
-        box.addEventListener('click', e => {
-            e.preventDefault();
-            const name = box.querySelector('.tooltip').textContent;
-            const saved = JSON.parse(localStorage.getItem("osrsProgress") || "{}");
-            const isGreen = box.style.background === 'green';
-            box.style.background = isGreen ? 'rgba(255,255,255,0.05)' : 'green';
-            saved[name] = !isGreen;
-            localStorage.setItem("osrsProgress", JSON.stringify(saved));
-        });
+document.querySelectorAll('.item-box').forEach(box => {
+    const name = box.querySelector('.tooltip').textContent;
+    if (savedProgress[name]) box.style.background = 'green';
+
+    box.addEventListener('click', () => {
+        const isGreen = box.style.background === 'green';
+        box.style.background = isGreen ? 'rgba(255,255,255,0.05)' : 'green';
+        savedProgress[name] = !isGreen;
+        localStorage.setItem("osrsProgress", JSON.stringify(savedProgress));
     });
 });
 
-const contextMenu = document.getElementById("contextMenu");
-const viewWikiOption = document.getElementById("viewWiki");
-const viewTipsOption = document.getElementById("viewTips");
-
-let currentItem = null;
-
 document.addEventListener("contextmenu", e => {
-    const box = e.target.closest(".item-box");
-    if (box) {
+    const box = e.target.closest('.item-box');
+    if (box && !isMobile()) {
         e.preventDefault();
         currentItem = box.querySelector('.tooltip').textContent;
-        contextMenu.style.display = "block";
-        contextMenu.style.left = e.pageX + "px";
-        contextMenu.style.top = e.pageY + "px";
-    } else {
-        contextMenu.style.display = "none";
-    }
+        Object.assign(contextMenu.style, { display: 'block', left: e.pageX + 'px', top: e.pageY + 'px' });
+    } else contextMenu.style.display = 'none';
 });
-viewWikiOption.addEventListener("click", () => {
-    if (currentItem) {
-        const query = encodeURIComponent(currentItem);
-        window.open(`https://oldschool.runescape.wiki/w/${query}`, "_blank");
-        contextMenu.style.display = "none";
-    }
-});
-viewTipsOption.addEventListener("click", (event) => {
-    event.stopPropagation();
 
+viewWikiOption.addEventListener('click', () => {
+    if (currentItem) window.open(`https://oldschool.runescape.wiki/w/${encodeURIComponent(currentItem)}`, '_blank');
+    contextMenu.style.display = 'none';
+});
+
+viewTipsOption.addEventListener('click', e => {
+    e.stopPropagation();
     if (!currentItem || !tips[currentItem]) return;
 
-    const modalHeader = document.getElementById("modalHeader");
-    const modalBody = document.getElementById("modalBody");
     const itemTips = tips[currentItem];
-
     modalHeader.innerHTML = '';
-    modalHeader.style.textAlign = 'center';
     modalBody.innerHTML = '';
 
     const img = document.createElement('img');
     img.src = getItemImage(currentItem);
     img.alt = currentItem;
-    img.style.width = '64px';
-    img.style.height = '64px';
-    img.style.display = 'block';
-    img.style.margin = '0 auto';
-    img.onerror = () => { img.src = 'https://via.placeholder.com/64?text=?'; };
+    Object.assign(img.style, { width: '64px', height: '64px', display: 'block', margin: '0 auto' });
+    img.onerror = () => img.src = 'https://via.placeholder.com/64?text=?';
     modalHeader.appendChild(img);
 
-    const spacer = document.createElement('div');
-    spacer.style.height = '15px';
-    modalHeader.appendChild(spacer);
+    modalHeader.appendChild(Object.assign(document.createElement('div'), { style: 'height:15px' }));
 
-    if (itemTips.Requirements && itemTips.Requirements.length > 0) {
+    if (itemTips.Requirements?.length) {
         const reqTitle = document.createElement('div');
         reqTitle.textContent = 'Requirements:';
-        reqTitle.style.textAlign = 'center';
-        reqTitle.style.fontWeight = 'bold';
-        reqTitle.style.fontSize = '18px';
-        reqTitle.style.marginBottom = '5px';
+        Object.assign(reqTitle.style, { textAlign: 'center', fontWeight: 'bold', fontSize: '18px', marginBottom: '5px' });
         modalBody.appendChild(reqTitle);
 
-        itemTips.Requirements.forEach(req => {
-            const div = document.createElement('div');
-            div.style.textAlign = 'left';
-            div.style.fontSize = '14px';
-            div.style.lineHeight = '1.6';
-            div.style.marginLeft = '20px';
-
-            if (req.prefix) div.innerHTML = req.prefix;  
-            if (req.text && req.link) {
+        itemTips.Requirements.forEach(r => {
+            const d = document.createElement('div');
+            Object.assign(d.style, { textAlign: 'left', fontSize: '14px', lineHeight: '1.6', marginLeft: '20px' });
+            if (r.prefix) d.innerHTML = r.prefix;
+            if (r.text && r.link) {
                 const a = document.createElement('a');
-                a.href = req.link;
-                a.target = "_blank";
-                a.textContent = req.text;
-                a.style.color = "#7ca7ff";
-                a.style.textDecoration = "underline";
-                div.appendChild(a);
+                a.href = r.link;
+                a.target = '_blank';
+                a.textContent = r.text;
+                Object.assign(a.style, { color: '#7ca7ff', textDecoration: 'underline' });
+                d.appendChild(a);
             }
-
-            div.querySelectorAll('a').forEach(a => {
-                a.style.color = "#7ca7ff";
-                a.style.textDecoration = "underline";
-            });
-
-            modalBody.appendChild(div);
+            modalBody.appendChild(d);
         });
 
-        modalBody.innerHTML += `<div style="height: 20px;"></div>`;
+        modalBody.innerHTML += '<div style="height:20px"></div>';
     }
 
-    if (itemTips.Recommendations && itemTips.Recommendations.length > 0) {
+    if (itemTips.Recommendations?.length) {
         const recTitle = document.createElement('div');
         recTitle.textContent = 'General Recommendations:';
-        recTitle.style.textAlign = 'center';
-        recTitle.style.fontWeight = 'bold';
-        recTitle.style.fontSize = '18px';
-        recTitle.style.marginBottom = '5px';
+        Object.assign(recTitle.style, { textAlign: 'center', fontWeight: 'bold', fontSize: '18px', marginBottom: '5px' });
         modalBody.appendChild(recTitle);
 
         const ul = document.createElement('ul');
-        ul.style.marginLeft = '20px';
-        ul.style.fontSize = '14px';
-        ul.style.lineHeight = '1.6';
-        ul.style.textAlign = 'left';
+        Object.assign(ul.style, { marginLeft: '20px', fontSize: '14px', lineHeight: '1.6', textAlign: 'left' });
 
-        itemTips.Recommendations.forEach(rec => {
+        itemTips.Recommendations.forEach(r => {
             const li = document.createElement('li');
-            li.innerHTML = rec;
-            li.querySelectorAll('a').forEach(a => {
-                a.style.color = "#7ca7ff";
-                a.style.textDecoration = "underline";
-            });
+            li.innerHTML = r;
+            li.querySelectorAll('a').forEach(a => Object.assign(a.style, { color: '#7ca7ff', textDecoration: 'underline' }));
             ul.appendChild(li);
         });
 
         modalBody.appendChild(ul);
-        modalBody.innerHTML += `<div style="height: 20px;"></div>`;
+        modalBody.innerHTML += '<div style="height:20px"></div>';
     }
 
-    document.getElementById("myModal").style.display = "block";
-    contextMenu.style.display = "none";
+    modal.style.display = 'block';
+    contextMenu.style.display = 'none';
 });
 
+modal.addEventListener('click', e => e.stopPropagation());
 
-
-document.getElementById("myModal").addEventListener("click", (e) => {
-    e.stopPropagation();
+document.addEventListener('click', () => {
+    modal.style.display = 'none';
+    contextMenu.style.display = 'none';
 });
 
-document.addEventListener("click", () => {
-    document.getElementById("myModal").style.display = "none";
-    contextMenu.style.display = "none";
+closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
 });
 
-document.getElementById("closeModal").addEventListener("click", () => {
-    document.getElementById("myModal").style.display = "none";
+document.addEventListener('touchstart', e => {
+    const box = e.target.closest('.item-box');
+    if (!box) return;
+    currentItem = box.querySelector('.tooltip').textContent;
+    pressTimer = setTimeout(() => {
+        Object.assign(contextMenu.style, { display: 'block', left: e.touches[0].pageX + 'px', top: e.touches[0].pageY + 'px' });
+    }, 600);
 });
+
+document.addEventListener('touchend', () => clearTimeout(pressTimer));
 
 </script>
-
-</body></html>
+</body>
+</html>
