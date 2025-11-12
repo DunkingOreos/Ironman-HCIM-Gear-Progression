@@ -1090,7 +1090,7 @@ function applyProgressColors() {
 applyProgressColors();
 
 let lastTap = 0;
-let suppressClick = false;
+let tapTimeout;
 
 document.addEventListener("touchend", e => {
     const box = e.target.closest(".item-box");
@@ -1100,7 +1100,7 @@ document.addEventListener("touchend", e => {
     const timeSinceLastTap = now - lastTap;
 
     if (timeSinceLastTap < 300) {
-        suppressClick = true;
+        clearTimeout(tapTimeout);
         currentItem = box.querySelector(".tooltip").textContent;
         Object.assign(contextMenu.style, {
             display: "block",
@@ -1108,16 +1108,13 @@ document.addEventListener("touchend", e => {
             top: e.changedTouches[0].pageY + "px"
         });
     } else {
-        setTimeout(() => {
-            if (!suppressClick) {
-                const name = box.querySelector(".tooltip").textContent;
-                const isGreen = box.style.background === "green";
-                box.style.background = isGreen ? "rgba(255,255,255,0.05)" : "green";
-                savedProgress[name] = !isGreen;
-                localStorage.setItem("osrsProgress", JSON.stringify(savedProgress));
-            }
-            suppressClick = false;
-        }, 250);
+        tapTimeout = setTimeout(() => {
+            const name = box.querySelector(".tooltip").textContent;
+            const isGreen = box.style.background === "green";
+            box.style.background = isGreen ? "rgba(255,255,255,0.05)" : "green";
+            savedProgress[name] = !isGreen;
+            localStorage.setItem("osrsProgress", JSON.stringify(savedProgress));
+        }, 300);
     }
 
     lastTap = now;
@@ -1125,12 +1122,7 @@ document.addEventListener("touchend", e => {
 
 document.addEventListener("click", e => {
     const box = e.target.closest('.item-box');
-    if (!box) return;
-
-    if (isMobile() && suppressClick) {
-        suppressClick = false;
-        return;
-    }
+    if (!box || isMobile()) return;
 
     const name = box.querySelector('.tooltip').textContent;
     const isGreen = box.style.background === 'green';
