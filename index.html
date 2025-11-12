@@ -1097,7 +1097,9 @@ document.addEventListener("touchend", e => {
     if (!isMobile() || !box) return;
 
     const now = Date.now();
-    if (now - lastTap < 300) {
+    const timeSinceLastTap = now - lastTap;
+
+    if (timeSinceLastTap < 300) {
         suppressClick = true;
         currentItem = box.querySelector(".tooltip").textContent;
         Object.assign(contextMenu.style, {
@@ -1105,12 +1107,24 @@ document.addEventListener("touchend", e => {
             left: e.changedTouches[0].pageX + "px",
             top: e.changedTouches[0].pageY + "px"
         });
+    } else {
+        setTimeout(() => {
+            if (!suppressClick) {
+                const name = box.querySelector(".tooltip").textContent;
+                const isGreen = box.style.background === "green";
+                box.style.background = isGreen ? "rgba(255,255,255,0.05)" : "green";
+                savedProgress[name] = !isGreen;
+                localStorage.setItem("osrsProgress", JSON.stringify(savedProgress));
+            }
+            suppressClick = false;
+        }, 250);
     }
+
     lastTap = now;
 });
 
 document.addEventListener("click", e => {
-    const box = e.target.closest(".item-box");
+    const box = e.target.closest('.item-box');
     if (!box) return;
 
     if (isMobile() && suppressClick) {
@@ -1118,9 +1132,9 @@ document.addEventListener("click", e => {
         return;
     }
 
-    const name = box.querySelector(".tooltip").textContent;
-    const isGreen = box.style.background === "green";
-    box.style.background = isGreen ? "rgba(255,255,255,0.05)" : "green";
+    const name = box.querySelector('.tooltip').textContent;
+    const isGreen = box.style.background === 'green';
+    box.style.background = isGreen ? 'rgba(255,255,255,0.05)' : 'green';
     savedProgress[name] = !isGreen;
     localStorage.setItem("osrsProgress", JSON.stringify(savedProgress));
 });
