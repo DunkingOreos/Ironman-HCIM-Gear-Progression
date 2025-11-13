@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DunkingOreos & Bear's Ironman Gear Progression — November 2025</title>
+<title>DunkingOreos & Bear's Ironman Gear Progression</title>
 <style>
 body {
     margin: 0;
@@ -160,26 +160,127 @@ h2 {
 .modal-footer button:hover {
     background-color: #6495ed;
 }
+
+.update-badge {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.8em;
+    padding: 6px 10px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.update-badge:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+    
+.footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 40px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.info-container {
+    text-align: center;
+    margin: 25px auto 0;
+    max-width: 800px;
+}
+
+.info-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.9em;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.info-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.info-toggle::after {
+    content: '';
+    display: inline-block;
+    margin-left: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    padding: 4px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+}
+
+.info-toggle.open::after {
+    transform: rotate(-135deg);
+}
+
+.info-content {
+    max-width: 750px;
+    margin: 15px auto 0;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9em;
+    line-height: 1.6em;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+    transition: height 0.4s ease, opacity 0.4s ease, margin-bottom 0.3s ease, padding 0.4s ease;
+}
+    
 </style>
 </head>
 <body>
-<h2>DunkingOreos & Bear's Ironman Gear Progression — November 2025</h2>
+<h2>DunkingOreos & Bear's Ironman Gear Progression</h2>
 
-<div class="info">
+<div class="update-badge">Last updated November 2025</div>
+    
+<div class="info-container">
+  <button id="infoToggle" class="info-toggle">📘 How to Use & Disclaimer</button>
+
+  <div id="infoContent" class="info-content">
     <p>
-        This gear progression was put together by <b>DunkingOreos</b> and <b>Bear</b>. 
-        Users can track their progress by left clicking the item when you obtain it. 
-        For more information on the item itself you can right click and select "View on OSRS Wiki" 
-        and for tips or recommendations select the "View Tips" option.
+      <b>Desktop users:</b> Left-click to mark an item as obtained. Right-click to open a menu where you can view its OSRS Wiki page or see its requirements and recommendations.
     </p>
 
     <p>
-        <b>Disclaimer:</b> We understand putting together a gear progression is subjective to a point, 
-        some people can do Inferno at level 37 without needing overheads, 
-        some can beat the Colosseum without taking a single hit of damage, 
-        but we believe this progression set to be optimized and efficient for the <b>average player</b>.
+      <b>Mobile users:</b> Single tap to mark an item as obtained. Double tap to open a menu where you can view its OSRS Wiki page or see its requirements and recommendations.
     </p>
+
+    <p>
+      <b>Disclaimer:</b> We understand that creating a gear progression is somewhat subjective—some players can complete the Inferno at level 37 without overheads, and others can clear the Colosseum without taking a single hit. However, we believe this progression path is optimized and efficient for the <b>average player</b>.
+    </p>
+  </div>
 </div>
+
 
 <div class="chart-container">
     <div class="progression" id="progression"></div>
@@ -619,7 +720,7 @@ const tips = {
  "It's Dark in Here": {Requirements:[
     {prefix:"100 Slayer reward points",text:null,link:null}
   ], Recommendations:[
-    "This will be a useful unlock for grinding Demonic gorillas on Slayer task later on when chasing uncut zenytes."
+    "This will be a useful unlock for grinding Demonic gorillas on Slayer task later on when chasing Zenyte shards."
   ]},
 
  "Arclight": {Requirements:[
@@ -1228,5 +1329,62 @@ closeModal.addEventListener('click', () => {
 });
 
 </script>
+
+<script>
+const infoToggle = document.getElementById('infoToggle');
+const infoContent = document.getElementById('infoContent');
+
+const savedState = localStorage.getItem('infoSectionOpen');
+const isOpenByDefault = savedState === null ? true : savedState === 'true';
+
+function toggleInfo(open) {
+  if (open) {
+    const fullHeight = infoContent.scrollHeight + "px";
+    infoContent.style.height = fullHeight;
+    infoContent.style.opacity = 1;
+    infoContent.style.padding = "20px";
+    infoContent.style.marginBottom = "40px";
+  } else {
+    infoContent.style.height = "0px";
+    infoContent.style.opacity = 0;
+    infoContent.style.padding = "0 20px";
+    infoContent.style.marginBottom = "0";
+  }
+}
+
+toggleInfo(isOpenByDefault);
+infoToggle.textContent = isOpenByDefault ? 'Hide Info' : 'How to Use & Disclaimer';
+infoToggle.classList.toggle('open', isOpenByDefault);
+
+infoToggle.addEventListener('click', () => {
+  const isCurrentlyOpen = infoContent.style.height !== "0px";
+  const newState = !isCurrentlyOpen;
+
+  toggleInfo(newState);
+
+  infoToggle.textContent = newState ? 'Hide Info' : 'How to Use & Disclaimer';
+
+  infoToggle.classList.toggle('open', newState);
+
+  localStorage.setItem('infoSectionOpen', newState);
+});
+
+</script>
+
+
+<footer class="footer">
+  <p>
+    All images used in this tool are sourced from the 
+    <a href="https://oldschool.runescape.wiki/" target="_blank" rel="noopener noreferrer">
+      Old School RuneScape Wiki,
+    </a>and are licensed under the 
+    <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="noopener noreferrer">
+      Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
+    </a>.
+    © 2013–2024 Jagex Ltd. All rights reserved.
+  </p>
+</footer>
+    
 </body>
 </html>
+
