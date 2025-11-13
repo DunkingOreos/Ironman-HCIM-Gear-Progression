@@ -162,9 +162,7 @@ h2 {
 }
 
 .update-badge {
-    position: fixed;
-    top: 15px;
-    right: 20px;
+    display: inline-block;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: rgba(255, 255, 255, 0.85);
@@ -172,9 +170,11 @@ h2 {
     padding: 6px 10px;
     border-radius: 8px;
     backdrop-filter: blur(6px);
-    z-index: 1000;
-    transition: background 0.3s ease;
+    float: right;   /* aligns it to the top-right */
+    margin-top: -45px;
+    margin-right: 20px;
 }
+
 
 .update-badge:hover {
     background: rgba(255, 255, 255, 0.15);
@@ -1387,4 +1387,3 @@ infoToggle.addEventListener('click', () => {
     
 </body>
 </html>
-
