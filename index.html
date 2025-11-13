@@ -169,18 +169,19 @@ h2 {
     padding: 6px 10px;
     border-radius: 8px;
     backdrop-filter: blur(6px);
-    float: right; 
-    margin-top: -45px; 
-    margin-right: 20px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1000;
 }
 @media (max-width: 767px) {
     .update-badge {
-        float: none;
-        display: block;
-        text-align: right;
-        margin-top: 0;
-        margin-bottom: 10px;
-        font-size: 0.75em;
+        position: static;      
+        display: inline-block;  
+        margin: 0 auto 15px auto;
+    }
+    .update-badge-wrapper {
+        text-align: center;
     }
 }
 .update-badge:hover {
@@ -260,7 +261,9 @@ h2 {
 <body>
 <h2>DunkingOreos & Bear's Ironman Gear Progression</h2>
 
-<div class="update-badge">Last updated November 2025</div>
+<div class="update-badge-wrapper">
+    <div class="update-badge">Last updated November 2025</div>
+</div>
     
 <div class="info-container">
   <button id="infoToggle" class="info-toggle">📘 How to Use & Disclaimer</button>
