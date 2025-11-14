@@ -321,12 +321,12 @@ const sections = [
     ["Rune crossbow","Ancient staff","Barrows gloves","Dragon defender"],
     ["Rune pouch","Bigger and Badder","Black mask (i)","Black d'hide body","Black d'hide chaps","Adamant bolts"],
     ["Crystal shield","Imbued zamorak cape","Mixed hide boots","Ava's assembler","Hot Stuff","Bolt pouch"],
-    ["Fire cape","Tank body","Tank legs","Colossal blade","Berserker ring (i)","Zombie axe","Amulet of fury",],
+    ["Fire cape","Tank body","Tank legs","Zombie axe","Berserker ring (i)","Amulet of fury","Belle's folly","Colossal blade"],
     ["Blood moon armour set","Eclipse moon armour set","Blue moon armour set"],
     ["Deadeye","Mystic Vigour","Piety","Twinflame staff"],
     ["Crystal helm","Crystal body","Bow of Faerdhinen (c)","Crystal legs"],
-    ["Dragon warhammer","Ancient icon"],
-    ["Greater Challenge","It's Dark in Here","Arclight","Voidwaker"],
+    ["Voidwaker","Ancient icon"],
+    ["Greater Challenge","It's Dark in Here","Arclight","Crystal halberd"],
     ["Ring of suffering","Necklace of anguish","Scorching bow","Burning claws","Tormented bracelet","Amulet of torture","Dragon boots","Abyssal whip"],
     ["Void ranger helm","Elite void top","Void knight gloves","Elite void robe"],
     ["Avernic treads","Eye of Ayak","Mokhaiotl cloth","Occult necklace"],
@@ -335,7 +335,7 @@ const sections = [
     ["Rigour","Augury","Purging staff","Emberlight"],
     ["Oathplate helm","Oathplate chest","Rite of vile transference","Oathplate legs"],
     ["Inferno Cape","Dizana's quiver"],
-    ["Araxyte fang","Ferocious gloves","Noxious halberd","Avernic treads (max)"],
+    ["Araxyte fang","Ferocious gloves","Avernic treads (max)","Noxious halberd","Dragon warhammer"],
     ["Ultor ring","Magus ring"],
     ["Chambers of Xeric","Theatre of Blood","Tombs of Amascut"]
 ];
@@ -525,7 +525,8 @@ const tips = {
     {prefix:"Level 70 Ranged",text:null,link:null},
     {prefix:"Completion of ",text:"Dragon Slayer II",link:"https://oldschool.runescape.wiki/w/Dragon_Slayer_II"}
   ], Recommendations:[
-    "Grind <a href='https://oldschool.runescape.wiki/w/Vorkath/Strategies' target='_blank'>Vorkath</a> until the head drops (1/50 chance) but guaranteed on the 50th kill."
+    "Grind <a href='https://oldschool.runescape.wiki/w/Vorkath/Strategies' target='_blank'>Vorkath</a> until the head drops (1/50 chance) but guaranteed on the 50th kill.",
+    "Kills will be slow just using rune crossbow and ruby/diamond bolts but it is a worthwhile upgrade." 
   ]},
 
  "Bolt pouch": {Requirements:[
@@ -570,11 +571,21 @@ const tips = {
     "Dueling ring teleport to Ferox Enclave to restore stats > Ardougne cloak teleport to the Monastery and run to fairy ring > Teleport to BKR and run South East to boat > Board boat to Mort'ton > kill Barrows Brothers and loot chest > Repeat"
   ]},
 
+ "Belle's folly": {Requirements:[
+    {prefix:"Level 65 Attack",text:null,link:null},
+    {prefix:"Level 70 Smithing Attack",text:null,link:null},
+    {prefix:"Level 51 Slayer",text:null,link:null},
+    {prefix:"Level 45 Sailing",text:null,link:null}
+   ], Recommendations:[
+    "Item is OPTIONAL because it requires sailing and higher slayer level to unlock",
+    "Will be a great stab weapon for enemies with weakness to stab (Eclipse moon, Dragons, Wyverns, Tombs of Amascut, etc)."
+  ]},
+
  "Colossal blade": {Requirements:[
     {prefix:"Level 60 Attack",text:null,link:null},
     {prefix:"5000 ",text:"Foundry Reputation",link:"https://oldschool.runescape.wiki/w/Giants'_Foundry"}
   ], Recommendations:[
-    "Very useful item to use during Eclipse Moon's Clones phase."
+    "Item is OPTIONAL because it is really only used during Eclipse moon's Clones phase. If you got a Dharok's greataxe when going for your tank gear, then use that instead of Colossal blade. Otherwise, the Colossal blade is BIS for the phase, and you will earn enough Giants Foundry reputation when getting to 70 Smithing anyways."
   ]},
 
  "Berserker ring (i)": {Requirements:[
@@ -659,7 +670,7 @@ const tips = {
  "Twinflame staff": {Requirements:[
     {prefix:"Level 60 Magic",text:null,link:null}
   ], Recommendations:[
-    "Item is optional because you have a chance of getting it while grinding for the Deadeye and Mystic Vigour prayer scrolls.",
+    "You have a high likelihood of getting the staff pieces while grinding for the Deadeye and Mystic Vigour prayer scrolls.",
     "It is a nice weapon to have when using magic against enemies that have <a href='https://oldschool.runescape.wiki/w/Elemental_weakness#List_of_NPCs_with_elemental_weaknesses' target='_blank'>Elemental weaknesses</a>."
   ]},
 
@@ -699,17 +710,20 @@ const tips = {
     "Good luck on your sentence at the Red Prison. Patience will be a virtue required to be successful, as the grind can be long, but the reward is well worth the effort."
   ]},
 
- "Dragon warhammer": {Requirements:[
-    {prefix:"Level 60 Strength",text:null,link:null}
+ "Crystal halberd": {Requirements:[
+    {prefix:"Level 70 Attack",text:null,link:null},
+    {prefix:"Level 50 Agility",text:null,link:null},
+    {prefix:"35 Strength",text:null,link:null},
+    {prefix:"Completion of ",text:"Hard Western Provinces Diary",link:"https://oldschool.runescape.wiki/w/Western_Provinces_Diary#Hard"},
   ], Recommendations:[
-    "Utilize the <a href='https://youtu.be/pjgh_JND3wY?si=w2rpJGVCpo7Cpzg7&t=128' target='_blank'>2 alt red X method</a> for approximately 150 KPH.",
-    "If you prefer not to use the Red X method, it's highly recommended to unlock <a href='https://oldschool.runescape.wiki/w/Slayer_Rewards#Unlock' target='_blank'>Reptile Got Ripped</a> for 75 Slayer reward points to be assigned Lizardmen as a task.",
-    "Additionally, completing the <a href='https://oldschool.runescape.wiki/w/Kourend_%26_Kebos_Diary#Hard' target='_blank'>Kourend Hard Diary</a> is recommended, so you can use the Slayer helm instead of the Shayzien helm (5)."
+    "Item will be a great <b>special attack</b> weapon on large enemies (Tormented demons, Doom of Mokhaiotl, Hespori, Zulrah, etc).",
+    "Item will be a great <b>special attack</b> weapon during during AoE combat since the special attack can hit up to 10 enemies in a multi-combat area in a 3x1 section."
   ]},
  
  "Ancient icon": {Requirements:[
     {prefix:"Completion of ",text:"Secrets of the North",link:"https://oldschool.runescape.wiki/w/Secrets_of_the_North"}
   ], Recommendations:[
+    "Item is optional as it will be good for burst/barrage slayer tasks by providing an additional 5% Magic damage bonus, however, grinding Muspah isn't enjoyable and the sceptre is really only worth it after getting <a href='https://oldschool.runescape.wiki/w/Quartz' target='_blank'>quartz</a> from Desert Treasure II bosses.",
     "Grind <a href='https://oldschool.runescape.wiki/w/Phantom_Muspah/Strategies' target='_blank'>Phantom Muspah</a> until the icon drops (1/50 chance)."
   ]},
 
@@ -787,7 +801,7 @@ const tips = {
     {prefix:"Level 77 Ranged",text:null,link:null},
     {prefix:"Level 74 Fletching",text:null,link:null},
     {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
-    {prefix:"1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 Magic longbow (u)", text:null, link:null}
+    {prefix:"1 Magic longbow (u) and 1 ",text:"Tormented synapse",link:"https://oldschool.runescape.wiki/w/Tormented_synapse"}
   ], Recommendations:[
     "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
     "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
@@ -934,7 +948,7 @@ const tips = {
     {prefix:"Level 77 Magic and 50 Attack",text:null,link:null},
     {prefix:"Level 74 Crafting and 55 Smithing",text:null,link:null},
     {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
-    {prefix:"1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 battlestaff and 1 iron bar",text:null,link:null}
+    {prefix:"1 battlestaff, 1 iron bar, and 1 ",text:"Tormented synapse",link:"https://oldschool.runescape.wiki/w/Tormented_synapse"}
   ], Recommendations:[
     "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
     "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
@@ -945,7 +959,7 @@ const tips = {
     {prefix:"Level 77 Attack",text:null,link:null},
     {prefix:"Level 74 Smithing",text:null,link:null},
     {prefix:"Completion of ",text:"While Guthix Sleeps",link:"https://oldschool.runescape.wiki/w/While_Guthix_Sleeps"},
-    {prefix:"1 <a href='https://oldschool.runescape.wiki/w/Tormented_synapse' target='_blank'>Tormented synapse</a> + 1 Arclight either fully charged (10,000 charges) or <a href='https://oldschool.runescape.wiki/w/Arclight#Infusion' target='_blank'>infused</a>, or a combination thereof.",text:null,link:null}
+    {prefix:"1 Arclight either fully charged (10,000 charges) or infused and 1 ",text:"Tormented synapse",link:"https://oldschool.runescape.wiki/w/Tormented_synapse"}
   ], Recommendations:[
     "Kill tormented demons while on a greater demon slayer task to get the Tormented synapse (1/500 chance).",
     "Use a <a href='https://oldschool.runescape.wiki/w/Tormented_Demon/Strategies#Budget_Melee/Mage' target='_blank'>Melee/Mage setup</a>.",
@@ -1005,6 +1019,15 @@ const tips = {
     "Earn 120 Telekinetic, Alchemy, Graveyard, and 1200 Enchantment pizzaz points to purchase the Infinity boots to use the Eternal crystal."
   ]},
 
+ "Dragon warhammer": {Requirements:[
+    {prefix:"Level 60 Strength",text:null,link:null}
+  ], Recommendations:[
+    "Item is OPTIONAL because defense reduction isn't as important as it once was, also many people already have a DWH or Elder maul that can handle the defense reduction if needed.",
+    "Utilize the <a href='https://youtu.be/pjgh_JND3wY?si=w2rpJGVCpo7Cpzg7&t=128' target='_blank'>2 alt red X method</a> for approximately 150 KPH.",
+    "If you prefer not to use the Red X method, it's highly recommended to unlock <a href='https://oldschool.runescape.wiki/w/Slayer_Rewards#Unlock' target='_blank'>Reptile Got Ripped</a> for 75 Slayer reward points to be assigned Lizardmen as a task.",
+    "Additionally, completing the <a href='https://oldschool.runescape.wiki/w/Kourend_%26_Kebos_Diary#Hard' target='_blank'>Kourend Hard Diary</a> is recommended, so you can use the Slayer helm instead of the Shayzien helm (5)."
+  ]},
+
   "Ultor ring": {Requirements:[
     {prefix:"Level 90 Magic",text:null,link:null},
     {prefix:"Level 80 Crafting",text:null,link:null},
@@ -1041,7 +1064,7 @@ const tips = {
   ]}
 };
 
-const optionalItems=["Bolt pouch","Colossal blade","Twinflame staff","Voidwaker","Noxious halberd"];
+const optionalItems=["Bolt pouch","Belle's folly","Colossal blade","Dragon warhammer","Ancient icon","Voidwaker","Noxious halberd"];
 const imageOverrides = {
     "Helm of Neitiznot": "https://oldschool.runescape.wiki/images/Helm_of_neitiznot.png",
     "Hot Stuff": "https://oldschool.runescape.wiki/images/Tok-Xil_%28Construction%29_icon.png",
